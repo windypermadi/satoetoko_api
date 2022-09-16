@@ -8,7 +8,7 @@
 	$data = mysqli_fetch_object($conn->query("SELECT *, (login_at + INTERVAL '1' MONTH) as tanggal_login FROM data_user WHERE id_login = '$id_user' AND status_aktif = 'Y' AND status_remove = 'N'"));
 	$sekarang = mysqli_query($conn, "SELECT NOW() as sekarang")->fetch_assoc();
 	if ($sekarang['sekarang'] <= $data->tanggal_login) {
-		$data1['id_login']         = $data->id_login;
+		$data1['id_user']         = $data->id_login;
 		$data1['nama_user']        = $data->nama_user;
 		$data1['email']            = $data->email;
 		$data1['notelp']           = $data->notelp;
