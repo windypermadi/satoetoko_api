@@ -3,19 +3,15 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$query = mysqli_query($conn, "SELECT * FROM banner_promo WHERE tanggal_mulai >= NOW() AND 
-tanggal_selesai <= NOW() AND status_aktif = 'Y' ORDER BY tanggal_mulai ASC");
+$query = mysqli_query($conn, "SELECT * FROM kategori_sub ORDER BY nama_kategori ASC");
 
 $result = array();
 while($row = mysqli_fetch_array($query)){
 	array_push($result,array(
-		'idbanner'			=> $row['idbanner'],
-		'nama_banner'		=> $row['nama_banner'],
-		'deskripsi_banner'	=> $row['deskripsi_banner'],
-		'link_banner'		=> $row['link_banner'],
-		'tanggal_mulai'		=> $row['tanggal_mulai'],
-		'tanggal_selesai'	=> $row['tanggal_selesai'],
-		'gambar_banner '    => $urlpromo.$row['gambar_banner '],
+		'id_sub'			=> $row['id_sub'],
+		'kode_kategori'		=> $row['kode_kategori'],
+		'nama_kategori'	    => $row['nama_kategori'],
+		'icon'		        => $row['icon'],
 	));
 }
 

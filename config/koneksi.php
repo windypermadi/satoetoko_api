@@ -1,8 +1,8 @@
 <?php
 
-static $password_db = 'a123123123b@';
+static $password_db = '';
 static $IP = 'localhost';
-static $user_db = 'satoetoko_user';
+static $user_db = 'root';
 
 define('HOST',$IP);
 define('USER',$user_db);
