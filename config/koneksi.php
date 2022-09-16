@@ -1,20 +1,20 @@
 <?php
 
-static $password_db = '';
+static $password_db = 'a123123123b@';
 static $IP = 'localhost';
-static $user_db = 'root';
+static $user_db = 'satoetoko_user';
 
 define('HOST',$IP);
 define('USER',$user_db);
 define('PASS',$password_db);
-define('DB','sertidemi_db');
+define('DB','satoetoko_deve');
 $conn = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
 
 //database object adi
 $hostsi = $IP;
 $usersi = $user_db;
 $passsi = $password_db;
-$dbsi   = "andipubl_sertidemi";
+$dbsi   = "satoetoko_deve";
 $db = new mysqli($hostsi,$usersi,$passsi,$dbsi);
 if ($db->connect_errno) {
 	printf("Connect DB failed: %s\n", $db->connect_error);
