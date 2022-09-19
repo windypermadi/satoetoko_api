@@ -15,7 +15,8 @@
 		$response->json();
 		die();
 	} else {
-		$cek_password = mysqli_query($conn, "SELECT password FROM data_user WHERE (email = '$email_login' OR notelp = '$email_login') AND status_aktif  = 'Y' AND status_remove  = 'N'")->fetch_assoc();
+		$cek_password = mysqli_query($conn, "SELECT id_login,password FROM data_user WHERE (email = '$email_login' OR notelp = '$email_login') AND status_aktif  = 'Y' AND status_remove  = 'N'")->fetch_assoc();
+		$id_login = $cek_password['id_login'];
 		if (password_verify($pass_login, $cek_password['password'])) {
 			$update = mysqli_query($conn, "UPDATE data_user SET login_at = NOW() WHERE id_login = '$id_login' AND status_aktif  = 'Y' AND status_remove  = 'N'");
 			if ($update) {
