@@ -11,7 +11,7 @@ while($row = mysqli_fetch_array($query)){
 		'id_sub'			=> $row['id_sub'],
 		'kode_kategori'		=> $row['kode_kategori'],
 		'nama_kategori'	    => $row['nama_kategori'],
-		'icon'		        => $row['icon'],
+		'icon'		        => $geticonkategori.$row['icon'],
 	));
 }
 

@@ -1,5 +1,9 @@
 <?php
-
+// local
+// static $password_db = '';
+// static $IP = 'localhost';
+// static $user_db = 'root';
+// server
 static $password_db = 'a123123123b@';
 static $IP = 'localhost';
 static $user_db = 'satoetoko_user';
@@ -40,7 +44,6 @@ define('GETWA', '628112845216'); // NOMOR WHATSAPP ADMIN
 // $urlmain = "http://103.137.254.78/andibook";
 $urlimg = "http://103.137.254.78/andibook/image";
 $urlpdf = "http://103.137.254.78/andibook/pdfs";
-$urlpromo = "http://andipublisher.com/images/promo/";
 $urliklan = "http://andipublisher.com/images/iklan/";
 // $urladmin = "http://103.137.254.78/andibook/admin/";
 $getprofile = "http://andipublisher.com/images/user/profile/";
@@ -56,6 +59,13 @@ $getimagesponsor = "https://devsertidemi.andipublisher.com/image/sponsor/";
 $getimagesertifikat = "https://devsertidemi.andipublisher.com/image/sertifikat/";
 
 $getkategoriicon = "https://devsertidemi.andipublisher.com/image/kategori/";
+//satoetoko local
+$urlbanner = "localhost/assets/images/banner/";
+$geticonkategori = "localhost/assets/images/icon_kategori/";
+
+//satoetoko server
+// $urlbanner = "http://dev.satoetoko.com/assets/images/banner/";
+// $geticonkategori = "http://dev.satoetoko.com/assets/images/icon_kategori/";
 
 date_default_timezone_set("ASIA/JAKARTA");
 
