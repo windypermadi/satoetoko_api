@@ -3,13 +3,13 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$tag = $_POST['tag'];
+$tag = $_GET['tag'];
 
 switch ($tag) {
     case "list":
-        $id_user = $_POST['id_user'];
-        $limit = $_POST['limit'];
-        $offset = $_POST['offset'];
+        $id_user = $_GET['id_user'];
+        $limit = $_GET['limit'];
+        $offset = $_GET['offset'];
 
         $datalist = array();
         $data = $conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
@@ -90,35 +90,9 @@ switch ($tag) {
             die();
         }
         break;
-    case "add":
-        $id_master = $_POST['id_master'];
-        $id_user = $_POST['id_user'];
-
-        $cekdata = $conn->query("SELECT * FROM ebook_whislist WHERE id_master = '$id_master' AND id_login = '$id_user'")->num_rows;
-        if ($cekdata > 0) {
-            $data = $conn->query("DELETE FROM ebook_whislist WHERE id_master = '$id_master' AND id_login = '$id_user'");
-            $pesan = 'Berhasil menghapus dari favorit';
-        } else {
-            $data = $conn->query("INSERT INTO ebook_whislist SET id_whislist = UUID_SHORT(),id_master = '$id_master', id_login = '$id_user'");
-            $pesan = 'Berhasil menambahkan ke favorit';
-        }
-
-        if ($data) {
-            $response->code = 200;
-            $response->message = $pesan;
-            $response->data = '';
-            $response->json();
-            die();
-        } else {
-            $response->code = 400;
-            $response->data = '';
-            $response->json();
-            die();
-        }
-        break;
     case "detail":
-        $id_master = $_POST['id_master'];
-        $id_user = $_POST['id_user'];
+        $id_master = $_GET['id_master'];
+        $id_user = $_GET['id_user'];
 
         $cekdata = $conn->query("SELECT * FROM ebook_whislist WHERE id_master = '$id_master' AND id_login = '$id_user'")->num_rows;
         if ($cekdata > 0) {
