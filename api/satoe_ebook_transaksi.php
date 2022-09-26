@@ -12,9 +12,9 @@ switch ($tag) {
         $id_master          = $_POST['id_master'];
         $status             = $_POST['status_pembelian'];
         $jumlahbayar        = $_POST['jumlahbayar'];
-        $harga_normal       = $_POST['harga_normal'];
-        $diskon             = $_POST['diskon'];
-        $harga_diskon       = $_POST['harga_diskon'];
+        // $harga_normal       = $_POST['harga_normal'];
+        // $diskon             = $_POST['diskon'];
+        // $harga_diskon       = $_POST['harga_diskon'];
 
         //1 beli ebook, 2 sewa ebook
         $data = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
@@ -23,14 +23,14 @@ switch ($tag) {
         JOIN master_ebook_detail b ON a.id_master = b.id_master
         JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
         
-        if ($status_pembelian == '1') {
+        if ($status == '1') {
             $diskon_persen = $data->diskon_persen;
             $diskon_rupiah = $data->diskon_rupiah;
             $harga_produk = $data->harga_master;
         } else {
-            $diskon_persen = $data->diskon_persen;
+            $diskon_persen = $data->diskon_sewa_persen;
             $diskon_rupiah = $data->diskon_sewa_rupiah;
-            $harga_produk = $data->harga_master;
+            $harga_produk = $data->harga_sewa;
         }
 
         $listebook = array();
@@ -70,24 +70,17 @@ switch ($tag) {
         // }
 
 
-        $data = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
-		a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
-		b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
-		JOIN master_ebook_detail b ON a.id_master = b.id_master
-		JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
-
-
         $data1['produk'] = $listebook;
         $data1['kupon'] = [];
         $data1['metode_pembayaran'] = $listmetode;
-        $data1['harga_produk'] = $harga_normal;
-        $data1['diskon_rupiah'] = $diskon;
-        $data1['diskon_persen'] = $diskon;
-        $data1['diskon'] = $diskon;
-        $data1['diskon'] = $diskon;
-        $data1['diskon'] = $diskon;
-        $data1['diskon'] = $diskon;
-        $data1['diskon'] = $diskon;
+        $data1['harga_produk'] = (int)$harga_produk;
+        $data1['diskon_rupiah'] = (int)$diskon_rupiah;
+        $data1['diskon_persen'] = (int)$diskon_persen;
+        $data1['voucher'] = 0;
+        $data1['ppn_persen'] = '10%';
+        $data1['ppn_rupiah'] = $jumlahbayar*0.1;
+        $data1['biaya_admin'] = 0;
+        $data1['total'] = (int)$harga_produk;
 
         if ($data) {
             $response->code = 200;
