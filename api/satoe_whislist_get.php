@@ -108,7 +108,7 @@ switch ($tag) {
             $response->json();
             die();
         } else {
-            $response->code = 400;
+            $response->code = 200;
             $response->data = $data;
             $response->json();
             die();
