@@ -54,7 +54,7 @@ switch ($tag) {
 
 		$data1['id_master']    = $data->id_master;
 		$data1['judul_master'] = $data->judul_master;
-		$data1['image_master'] = $data->image_master;
+		$data1['image_master'] = $getimageproduk.$data->image_master;
 		$data1['status_ebook'] = $data->status_ebook;
 		$data1['rating_ebook'] = 0;
 		$data1['nama_kategori'] = $data->nama_kategori;
@@ -144,7 +144,7 @@ switch ($tag) {
 			array_push($datalist, array(
 				'id_master' => $value['id_master'],
 				'judul_master' => $value['judul_master'],
-				'image_master' => $value['image_master'],
+				'image_master' => $getimageproduk.$value['image_master'],
 				'status_ebook' => $value['status_ebook'],
 				'rating_ebook' => 0,
 				'nama_kategori' => $value['nama_kategori'],

@@ -60,12 +60,14 @@ $getimagesertifikat = "https://devsertidemi.andipublisher.com/image/sertifikat/"
 
 $getkategoriicon = "https://devsertidemi.andipublisher.com/image/kategori/";
 //satoetoko local
-$urlbanner = "localhost/assets/images/banner/";
-$geticonkategori = "localhost/assets/images/icon_kategori/";
+// $urlbanner = "localhost/assets/images/banner/";
+// $geticonkategori = "localhost/assets/images/icon_kategori/";
+// $getimageproduk = "localhost/assets/images/products/ebook/";
 
 //satoetoko server
-// $urlbanner = "http://dev.satoetoko.com/assets/images/banner/";
-// $geticonkategori = "http://dev.satoetoko.com/assets/images/icon_kategori/";
+$urlbanner = "http://dev.satoetoko.com/assets/images/banner/";
+$geticonkategori = "http://dev.satoetoko.com/assets/images/icon_kategori/";
+$getimageproduk = "http://dev.satoetoko.com/assets/images/products/ebook/";
 
 date_default_timezone_set("ASIA/JAKARTA");
 
