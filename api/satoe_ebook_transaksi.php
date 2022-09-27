@@ -32,8 +32,8 @@ switch ($tag) {
             $harga_produk = $data->harga_sewa;
         } else {
             $response->code = 400;
-            $response->message = mysqli_error($conn);
-            $response->data = 'status pembelian tidak ada.';
+            $response->message = 'status pembelian tidak ada.';
+            $response->data = '';
             $response->json();
             die();
         }
