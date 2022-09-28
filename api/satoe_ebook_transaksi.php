@@ -39,7 +39,7 @@ switch ($tag) {
         }
 
         $listebook = array();
-        $ebooks = $conn->query("SELECT * FROM master_item a JOIN kategori_sub b ON a.id_sub_kategori = b.id_sub 
+        $ebooks = $conn->query("SELECT * FROM master_item a LEFT JOIN kategori_sub b ON a.id_sub_kategori = b.id_sub 
         WHERE a.id_master = '$id_master'");
         foreach ($ebooks as $key => $value) {
             array_push($listebook, array(
