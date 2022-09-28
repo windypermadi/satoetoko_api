@@ -166,6 +166,7 @@ switch ($tag) {
             $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
 
             $result['batas_pembayaran'] = $exp_date;
+            $result['id_transaksi'] = $$transaction->id;
             $result['invoice'] = $invoice;
             $result['id_payment'] = $id_payment;
             $result['icon_payment'] = $icon_payment;
