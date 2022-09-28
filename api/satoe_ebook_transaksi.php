@@ -193,6 +193,25 @@ switch ($tag) {
             die();
         }
         break;
+    case "cancel_transaksi":
+        $id_user            = $_POST['id_user'];
+        $id_transaksi       = $_POST['id_transaksi'];
+
+        $query = mysqli_query($conn, "UPDATE ebook_transaksi SET status_transaksi = '9' WHERE id_transaksi = '$id_transaksi' AND id_user = '$id_user'");
+        if ($query) {
+            $response->code = 200;
+            $response->message = 'Transaksi berhasil dibatalkan';
+            $response->data = '';
+            $response->json();
+            die();
+        } else {
+            $response->code = 400;
+            $response->message = 'Transaksi gagal dibatalkan';
+            $response->data = '';
+            $response->json();
+            die();
+        }
+        break;
     case "addtransaction_direct":
         $id_user            = $_POST['id_user'];
         $id_buku            = $_POST['id_buku'];
