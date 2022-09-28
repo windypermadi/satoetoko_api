@@ -83,7 +83,7 @@ switch ($tag) {
         $data1['diskon_persen'] = (int)$diskon_persen;
         $data1['voucher'] = 0;
         $data1['ppn_persen'] = '10%';
-        $data1['ppn_rupiah'] = $jumlahbayar * 0.1;
+        $data1['ppn_rupiah'] = $harga_produk * 0.1;
         $data1['biaya_admin'] = 0;
         $data1['total'] = (int)$harga_produk;
 
@@ -100,60 +100,12 @@ switch ($tag) {
             $response->json();
             die();
         }
-
-        $exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
-
-        $conn->begin_transaction();
-
-        $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
-        $idtransaksi = createID('id_transaksi', 'ba_transaksi_ebook', 'TR');
-        $invoice = id_ke_struk($idtransaksi);
-
-        $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET id_transaksi = '$transaction->id',
-        invoice = '$invoice',
-        id_user = 'event',
-        tgl_pembelian = NOW(),
-        status_transaksi = '1',
-        status_payment = '0',
-        batas_pembayaran = '$exp_date',
-        total_pembayaran = '$harga_normal'");
-
-        $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET id_transaksi_detail = UUID_SHORT(),
-        id_transaksi = '$transaction->id',
-        id_user = '$id_user',
-        id_master = '$id_master',
-        harga_normal = '$harga_normal',
-        diskon = '$event->diskon',
-        harga_diskon = '$harga_diskon',
-        status_pembelian = '$event->diskon',
-        tgl_create = NOW()");
-
-        if (in_array(false, $data)) {
-            $response->code = 400;
-            $response->message = mysqli_error($conn);
-            $response->data = '';
-            $response->json();
-            die();
-        } else {
-            $trans_data = mysqli_fetch_object($conn->query("SELECT tanggal_input, payment_type FROM transaksi WHERE idtransaksi = '$transaction->id';"));
-            $result['id_transaksi'] = $transaction->id;
-            $result['no_invoice'] = $invoice;
-            $result['total'] = $totalbayar;
-            $result['metode_pembayaran'] = empty($trans_data->payment_type) ? 'free' : $trans_data->payment_type;
-            $result['nama_event'] = $event->nama_event;
-            $result['created_at'] = $trans_data->tanggal_input;
-
-            $conn->commit();
-            $response->code = 200;
-            $response->message = 'done';
-            $response->data = $result;
-            $response->json();
-            die();
-        }
         break;
     case "addtransaksi":
         $id_user            = $_POST['id_user'];
         $id_master          = $_POST['id_master'];
+        $id_voucher         = $_POST['id_voucher'] ?? '';
+        $id_payment         = $_POST['id_payment'];
         $status             = $_POST['status_pembelian'];
         $jumlahbayar        = $_POST['jumlahbayar'];
         $harga_normal       = $_POST['harga_normal'];
@@ -166,27 +118,42 @@ switch ($tag) {
         $conn->begin_transaction();
 
         $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
-        $idtransaksi = createID('id_transaksi', 'ba_transaksi_ebook', 'TR');
+        $idtransaksi = createID('invoice', 'ebook_transaksi', 'TR');
         $invoice = id_ke_struk($idtransaksi);
 
-        $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET id_transaksi = '$transaction->id',
-        invoice = '$invoice',
+        $data2 = mysqli_fetch_object($conn->query("SELECT b.lama_sewa FROM master_item a 
+        JOIN master_ebook_detail b ON a.id_master = b.id_master
+        JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
+
+        $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET 
+        id_transaksi = '$transaction->id',
+        invoice = '$idtransaksi',
         id_user = 'event',
         tgl_pembelian = NOW(),
         status_transaksi = '1',
         status_payment = '0',
         batas_pembayaran = '$exp_date',
-        total_pembayaran = '$jumlahbayar'");
+        total_pembayaran = '$jumlahbayar',
+        kode_voucher = '$id_voucher',
+        payment_type = '$id_payment'");
 
-        $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET id_transaksi_detail = UUID_SHORT(),
+        $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET 
+        id_transaksi_detail = UUID_SHORT(),
         id_transaksi = '$transaction->id',
         id_user = '$id_user',
         id_master = '$id_master',
         harga_normal = '$harga_normal',
-        diskon = '$event->diskon',
+        diskon = '$diskon',
         harga_diskon = '$harga_diskon',
-        status_pembelian = '$event->diskon',
-        tgl_create = NOW()");
+        status_pembelian = '$status',
+        tgl_create = NOW(),
+        tgl_expired = DATE_ADD(NOW(), INTERVAL + $data2->lama_sewa DAY)");
+
+        $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$id_payment'")->fetch_assoc();
+        $icon_payment = $query['icon_payment'];
+        $metode_pembayaran = $query['metode_pembayaran'];
+        $nomor_payment = $query['nomor_payment'];
+        $penerima_payment = $query['penerima_payment'];
 
         if (in_array(false, $data)) {
             $response->code = 400;
@@ -195,13 +162,28 @@ switch ($tag) {
             $response->json();
             die();
         } else {
-            $trans_data = mysqli_fetch_object($conn->query("SELECT tanggal_input, payment_type FROM transaksi WHERE idtransaksi = '$transaction->id';"));
-            $result['id_transaksi'] = $transaction->id;
-            $result['no_invoice'] = $invoice;
-            $result['total'] = $totalbayar;
-            $result['metode_pembayaran'] = empty($trans_data->payment_type) ? 'free' : $trans_data->payment_type;
-            $result['nama_event'] = $event->nama_event;
-            $result['created_at'] = $trans_data->tanggal_input;
+
+            $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
+
+            $result['batas_pembayaran'] = $exp_date;
+            $result['invoice'] = $invoice;
+            $result['id_payment'] = $id_payment;
+            $result['icon_payment'] = $icon_payment;
+            $result['metode_pembayaran'] = $metode_pembayaran;
+            $result['nomor_payment'] = $nomor_payment;
+            $result['penerima_payment'] = $penerima_payment;
+            $result['total_harga'] = (int)$jumlahbayar;
+            $result['nomor_konfirmasi'] = GETWA;
+            $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
+            mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
+                \nNomor Invoice : *$invoice*
+                \nJumlah     : *$total_format*
+                \nBank Transfer : *$metode_pembayaran*
+                \nNo Rekening : *$nomor_payment*
+                \nAtas Nama : *$penerima_payment*
+                \n\nJika ada pertanyaan lebih lanjut, anda dapat membalas langsung pesan ini.
+                \n\nTerimakasih\nHormat Kami, 
+                \n\nTim SatoeToko";
 
             $conn->commit();
             $response->code = 200;
