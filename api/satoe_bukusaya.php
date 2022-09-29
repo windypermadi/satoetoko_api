@@ -27,7 +27,7 @@ switch ($status) {
                 'image_master'   => $urlimg . $row['image_master'],
                 'url_pdf' => $urlpdf . $row['url_pdf'],
                 'nama_kategori'     => $row['nama_kategori'],
-                'tgl_expired'     => $row['tgl_expired'],
+                'tgl_expired'     => '',
             ));
         }
 
