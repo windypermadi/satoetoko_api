@@ -213,47 +213,118 @@ switch ($tag) {
             die();
         }
         break;
-    case "addtransaction_direct":
-        $id_user            = $_POST['id_user'];
-        $id_buku            = $_POST['id_buku'];
-        $status             = $_POST['status'];
-        $jumlahbayar        = $_POST['jumlahbayar'];
-        $harga_normal       = $_POST['harga_normal'];
-        $diskon             = $_POST['diskon'];
-        $harga_diskon       = $_POST['harga_diskon'];
+    case "list_ongoing":
+        $id_user = $_GET['id_user'];
 
-        $cek_transaksi = mysqli_query($conn, "SELECT * FROM ba_transaksi_ebook_detail WHERE id_user = '$id_user' AND id_buku = '$id_buku' AND tgl_exp >= NOW()")->num_rows;
-
-        if ($cek_transaksi > 0) {
-            http_response_code(400);
-            $respon['pesan'] = "Kamu masih punya ebook ini lho, dibaca jangan dianggurin yaa!\nKlik `Mengerti` untuk menutup pesan ini";
-            die(json_encode($respon));
-        } else {
-            $idtransaksi = createID('id_transaksi', 'ba_transaksi_ebook', 'TR');
-            $invoice = id_ke_struk($idtransaksi);
-            $query = mysqli_query($conn, "INSERT INTO ba_transaksi_ebook (id_transaksi, invoice, id_user, batas_pembayaran, total_pembayaran) 
-        VALUES ('$idtransaksi', '$invoice', '$id_user', DATE_ADD(NOW(), INTERVAL + 2 DAY), '$jumlahbayar')");
-
-            if ($query) {
-                $queryselect = mysqli_query($conn, "INSERT INTO ba_transaksi_ebook_detail (id_transaksi_detail, id_transaksi, id_user, id_buku, status_pembelian, harga_normal, diskon, harga_diskon)
-            VALUES (UUID(), '$idtransaksi', '$id_user', '$id_buku', '$status', '$harga_normal', '$diskon', '$harga_diskon')");
-
-                if ($queryselect) {
-                    $response['pesan'] = "Berhasil menambahkan transaksi! ";
-                    $response['id_transaksi'] = $idtransaksi;
-                    $response['no_invoice'] = id_ke_struk($idtransaksi);
-                    $response['total'] = $jumlahbayar;
-                    die(json_encode($response));
-                } else {
-                    http_response_code(400);
-                    $response['pesan'] = "Id buku tidak masuk di detail transaksi";
-                    die(json_encode($response));
-                }
+        $query = mysqli_query($conn, "SELECT a.id_transaksi, a.invoice, a.tgl_pembelian, a.status_transaksi, a.total_pembayaran, a.total_akhir_pembayaran FROM ebook_transaksi a 
+        JOIN ebook_transaksi_detail b ON a.id_transaksi = b.id_transaksi
+        WHERE a.status_transaksi = '1' AND a.id_user = '$id_user' ORDER BY a.tgl_pembelian DESC;");
+        $result = array();
+        while ($row = mysqli_fetch_array($query)) {
+            $status_transaksi = $row['status_transaksi'];
+            if ($status_transaksi == '1') {
+                $keterangan = 'Menunggu Pembayaran';
+            } else if ($status_transaksi == '2') {
+                $keterangan = 'Menunggu Verifikasi Pembayaran';
+            } else if ($status_transaksi == '3') {
+                $keterangan = 'Pembayaran Berhasil';
+            } else if ($status_transaksi == '4') {
+                $keterangan = 'Pembayaran Tidak Lengkap';
+            } else if ($status_transaksi == '5') {
+                $keterangan = 'Dikirim';
+            } else if ($status_transaksi == '6') {
+                $keterangan = 'Diterima';
+            } else if ($status_transaksi == '7') {
+                $keterangan = 'Transaksi Selesai';
+            } else if ($status_transaksi == '8') {
+                $keterangan = 'Expired';
+            } else if ($status_transaksi == '9') {
+                $keterangan = 'Dibatalkan';
+            } else if ($status_transaksi == '10') {
+                $keterangan = 'Pembayaran Ditolak';
             } else {
-                http_response_code(400);
-                $response['pesan'] = "Gagal menambahkan transaksi!";
-                die(json_encode($response));
+                $keterangan = 'Pengembalian Barang';
             }
+
+            array_push($result, array(
+                'id_transaksi'              => $row['id_transaksi'],
+                'invoice'                => $row['invoice'],
+                'tgl_pembelian'                => date('d F Y h:i:s A', strtotime($row['tgl_pembelian'])),
+                'status_transaksi'              => $row['status_transaksi'],
+                'keterangan_status'              => $keterangan,
+                'total_pembayaran'              => $row['total_pembayaran'],
+            ));
+        }
+
+        if (isset($result[0])) {
+            $response->code = 200;
+            $response->message = 'result';
+            $response->data = $result;
+            $response->json();
+            die();
+        } else {
+            $response->code = 200;
+            $response->message = 'Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini';
+            $response->data = [];
+            $response->json();
+            die();
+        }
+        break;
+    case "list_riwayat":
+        $id_user = $_GET['id_user'];
+
+        $query = mysqli_query($conn, "SELECT a.id_transaksi, a.invoice, a.tgl_pembelian, a.status_transaksi, a.total_pembayaran, a.total_akhir_pembayaran FROM ebook_transaksi a 
+            JOIN ebook_transaksi_detail b ON a.id_transaksi = b.id_transaksi
+            WHERE a.status_transaksi != '1' AND a.id_user = '$id_user' ORDER BY a.tgl_pembelian DESC;");
+        $result = array();
+        while ($row = mysqli_fetch_array($query)) {
+            $status_transaksi = $row['status_transaksi'];
+            if ($status_transaksi == '1') {
+                $keterangan = 'Menunggu Pembayaran';
+            } else if ($status_transaksi == '2') {
+                $keterangan = 'Menunggu Verifikasi Pembayaran';
+            } else if ($status_transaksi == '3') {
+                $keterangan = 'Pembayaran Berhasil';
+            } else if ($status_transaksi == '4') {
+                $keterangan = 'Pembayaran Tidak Lengkap';
+            } else if ($status_transaksi == '5') {
+                $keterangan = 'Dikirim';
+            } else if ($status_transaksi == '6') {
+                $keterangan = 'Diterima';
+            } else if ($status_transaksi == '7') {
+                $keterangan = 'Transaksi Selesai';
+            } else if ($status_transaksi == '8') {
+                $keterangan = 'Expired';
+            } else if ($status_transaksi == '9') {
+                $keterangan = 'Dibatalkan';
+            } else if ($status_transaksi == '10') {
+                $keterangan = 'Pembayaran Ditolak';
+            } else {
+                $keterangan = 'Pengembalian Barang';
+            }
+
+            array_push($result, array(
+                'id_transaksi'              => $row['id_transaksi'],
+                'invoice'                => $row['invoice'],
+                'tgl_pembelian'                => date('d F Y h:i:s A', strtotime($row['tgl_pembelian'])),
+                'status_transaksi'              => $row['status_transaksi'],
+                'keterangan_status'              => $keterangan,
+                'total_pembayaran'              => $row['total_pembayaran'],
+            ));
+        }
+
+        if (isset($result[0])) {
+            $response->code = 200;
+            $response->message = 'result';
+            $response->data = $result;
+            $response->json();
+            die();
+        } else {
+            $response->code = 200;
+            $response->message = 'Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini';
+            $response->data = [];
+            $response->json();
+            die();
         }
         break;
     case "listbarang_transaction":
@@ -300,54 +371,6 @@ switch ($tag) {
                 'penulis'              => $row['penulis'],
                 'cover'                => $urlimg . "/" . $row['cover'],
                 'nama_kategori'        => $row['nama_kategori'],
-            ));
-        }
-
-        if (isset($result[0])) {
-            echo json_encode($result);
-        } else {
-            http_response_code(400);
-            $respon['pesan'] = "Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini";
-            echo json_encode($respon);
-        }
-        break;
-    case "listtransaction":
-        $id_user = $_POST['id_user'];
-        $query = mysqli_query($conn, "SELECT * FROM ba_transaksi_ebook WHERE status_pembelian = '1' AND id_user = '$id_user' ORDER BY tgl_beli DESC");
-        $result = array();
-        while ($row = mysqli_fetch_array($query)) {
-            $status_transaksi = $row['status_transaksi'];
-            if ($status_transaksi == '1') {
-                $keterangan = 'Menunggu Pembayaran';
-            } else if ($status_transaksi == '2') {
-                $keterangan = 'Menunggu Verifikasi Pembayaran';
-            } else if ($status_transaksi == '3') {
-                $keterangan = 'Pembayaran Berhasil';
-            } else if ($status_transaksi == '4') {
-                $keterangan = 'Pembayaran Tidak Lengkap';
-            } else if ($status_transaksi == '5') {
-                $keterangan = 'Dikirim';
-            } else if ($status_transaksi == '6') {
-                $keterangan = 'Diterima';
-            } else if ($status_transaksi == '7') {
-                $keterangan = 'Transaksi Selesai';
-            } else if ($status_transaksi == '8') {
-                $keterangan = 'Expired';
-            } else if ($status_transaksi == '9') {
-                $keterangan = 'Dibatalkan';
-            } else if ($status_transaksi == '10') {
-                $keterangan = 'Pembayaran Ditolak';
-            } else {
-                $keterangan = 'Pengembalian Barang';
-            }
-
-            array_push($result, array(
-                'id_transaksi'              => $row['id_transaksi'],
-                'invoice'                => $row['invoice'],
-                'tgl_beli'                => date('d F Y h:i:s A', strtotime($row['tgl_beli'])),
-                'status_transaksi'              => $row['status_transaksi'],
-                'keterangan_status'              => $keterangan,
-                'total_pembayaran_format'        => "Rp" . number_format($row['total_pembayaran'], 0, ',', '.'),
             ));
         }
 
