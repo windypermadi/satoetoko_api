@@ -133,7 +133,7 @@ switch ($tag) {
         $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET 
         id_transaksi = '$transaction->id',
         invoice = '$idtransaksi',
-        id_user = 'event',
+        id_user = '$id_user',
         tgl_pembelian = NOW(),
         status_transaksi = '1',
         status_payment = '0',
