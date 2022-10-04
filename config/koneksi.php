@@ -42,8 +42,8 @@ define('MTRANS_URL', 'https://app.midtrans.com/snap/v1/transactions'); //PROD
 define('GETWA', '628112845216'); // NOMOR WHATSAPP ADMIN
 
 // $urlmain = "http://103.137.254.78/andibook";
-$urlimg = "http://103.137.254.78/andibook/image";
-$urlpdf = "http://103.137.254.78/andibook/pdfs";
+$urlimg = "http://103.137.254.78/andibook/image/";
+$urlpdf = "http://103.137.254.78/andibook/pdfs/";
 $urliklan = "http://andipublisher.com/images/iklan/";
 // $urladmin = "http://103.137.254.78/andibook/admin/";
 $getprofile = "http://andipublisher.com/images/user/profile/";
