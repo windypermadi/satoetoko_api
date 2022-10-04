@@ -22,6 +22,9 @@ switch ($tag) {
         JOIN master_ebook_detail b ON a.id_master = b.id_master
         LEFT JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
+        $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
+        $ppn = $cekppn->pajak;
+
         if ($status == '1') {
             $diskon_persen = $data->diskon_persen;
             $diskon_rupiah = $data->diskon_rupiah;
@@ -75,6 +78,8 @@ switch ($tag) {
             ));
         }
 
+        $totalppn = $harga_produk * ((int)$ppn / 100);
+
         $data1['produk'] = $listebook;
         $data1['kupon'] = $listvoucher;
         $data1['metode_pembayaran'] = $listmetode;
@@ -82,10 +87,10 @@ switch ($tag) {
         $data1['diskon_rupiah'] = (int)$diskon_rupiah;
         $data1['diskon_persen'] = (int)$diskon_persen;
         $data1['voucher'] = 0;
-        $data1['ppn_persen'] = '10%';
-        $data1['ppn_rupiah'] = $harga_produk * 0.1;
+        $data1['ppn_persen'] = (int)$ppn;
+        $data1['ppn_rupiah'] = (int)$totalppn;
         $data1['biaya_admin'] = 0;
-        $data1['total'] = (int)$harga_produk;
+        $data1['total'] = (int)$harga_produk + (int)$totalppn;
 
         if ($data) {
             $response->code = 200;
