@@ -87,7 +87,7 @@ switch ($tag) {
         $data1['diskon_rupiah'] = (int)$diskon_rupiah;
         $data1['diskon_persen'] = (int)$diskon_persen;
         $data1['voucher'] = 0;
-        $data1['ppn_persen'] = (int)$ppn;
+        $data1['ppn_persen'] = $ppn."%";
         $data1['ppn_rupiah'] = (int)$totalppn;
         $data1['biaya_admin'] = 0;
         $data1['total'] = (int)$harga_produk + (int)$totalppn;
