@@ -252,7 +252,7 @@ switch ($tag) {
                 'tgl_pembelian'                => date('d F Y h:i:s A', strtotime($row['tgl_pembelian'])),
                 'status_transaksi'              => $row['status_transaksi'],
                 'keterangan_status'              => $keterangan,
-                'total_pembayaran'              => $row['total_pembayaran'],
+                'total_pembayaran'              => (int)$row['total_pembayaran'],
             ));
         }
 
@@ -309,7 +309,7 @@ switch ($tag) {
                 'tgl_pembelian'                => date('d F Y h:i:s A', strtotime($row['tgl_pembelian'])),
                 'status_transaksi'              => $row['status_transaksi'],
                 'keterangan_status'              => $keterangan,
-                'total_pembayaran'              => $row['total_pembayaran'],
+                'total_pembayaran'              => (int)$row['total_pembayaran'],
             ));
         }
 

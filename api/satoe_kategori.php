@@ -3,7 +3,9 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$query = mysqli_query($conn, "SELECT * FROM kategori_sub ORDER BY nama_kategori ASC");
+$query = mysqli_query($conn, "SELECT * FROM kategori_sub a 
+JOIN kategori b ON a.parent_kategori = b.id_kategori
+WHERE b.jenis_kategori = '1' ORDER BY a.nama_kategori ASC");
 
 $result = array();
 while($row = mysqli_fetch_array($query)){
