@@ -15,95 +15,104 @@ switch ($tag) {
         $diskon             = $_POST['diskon'];
         $harga_diskon       = $_POST['harga_diskon'];
 
-        //1 beli ebook, 2 sewa ebook
-        $data = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
+        $cektransaksi = $conn->query("SELECT * FROM ebook_transaksi_detail WHERE id_user = '$id_user' AND id_master = '$id_master' AND tgl_expired >= NOW()")->nums_row;
+
+        if ($cektransaksi > 0) {
+            $response->code = 400;
+            $response->message = 'Kamu masih punya ebook ini lho, dibaca jangan dianggurin yaa!\nKlik `Mengerti` untuk menutup pesan ini';
+            $response->data = '';
+            $response->json();
+            die();
+        } else {
+            $data = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
         a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
         b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
         JOIN master_ebook_detail b ON a.id_master = b.id_master
         LEFT JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
-        $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
-        $ppn = $cekppn->pajak;
+            $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
+            $ppn = $cekppn->pajak;
 
-        if ($status == '1') {
-            $diskon_persen = $data->diskon_persen;
-            $diskon_rupiah = $data->diskon_rupiah;
-            $harga_produk = $data->harga_master;
-        } else if ($status == '2') {
-            $diskon_persen = $data->diskon_sewa_persen;
-            $diskon_rupiah = $data->diskon_sewa_rupiah;
-            $harga_produk = $data->harga_sewa;
-        } else {
-            $response->code = 400;
-            $response->message = 'status pembelian tidak ada.';
-            $response->data = '';
-            $response->json();
-            die();
-        }
+            if ($status == '1') {
+                $diskon_persen = $data->diskon_persen;
+                $diskon_rupiah = $data->diskon_rupiah;
+                $harga_produk = $data->harga_master;
+            } else if ($status == '2') {
+                $diskon_persen = $data->diskon_sewa_persen;
+                $diskon_rupiah = $data->diskon_sewa_rupiah;
+                $harga_produk = $data->harga_sewa;
+            } else {
+                $response->code = 400;
+                $response->message = 'status pembelian tidak ada.';
+                $response->data = '';
+                $response->json();
+                die();
+            }
 
-        $listebook = array();
-        $ebooks = $conn->query("SELECT * FROM master_item a LEFT JOIN kategori_sub b ON a.id_sub_kategori = b.id_sub 
+            $listebook = array();
+            $ebooks = $conn->query("SELECT * FROM master_item a LEFT JOIN kategori_sub b ON a.id_sub_kategori = b.id_sub 
         WHERE a.id_master = '$id_master'");
-        foreach ($ebooks as $key => $value) {
-            array_push($listebook, array(
-                'id_master' => $value['id_master'],
-                'judul_master' => $value['judul_master'],
-                'image_master' => $getimageproduk . $value['image_master'],
-                'nama_kategori' => $value['nama_kategori'],
-            ));
-        }
+            foreach ($ebooks as $key => $value) {
+                array_push($listebook, array(
+                    'id_master' => $value['id_master'],
+                    'judul_master' => $value['judul_master'],
+                    'image_master' => $getimageproduk . $value['image_master'],
+                    'nama_kategori' => $value['nama_kategori'],
+                ));
+            }
 
-        $listmetode = array();
-        $payments = $conn->query("SELECT * FROM metode_pembayaran WHERE status_aktif = 'Y' ORDER BY id_payment ASC");
-        foreach ($payments as $key => $value) {
-            array_push($listmetode, array(
-                'id_payment' => $value['id_payment'],
-                'icon_payment' => $value['icon_payment'],
-                'metode_pembayaran' => $value['metode_pembayaran'],
-                'nomor_payment' => $value['nomor_payment'],
-                'penerima_payment' => $value['penerima_payment']
-            ));
-        }
+            $listmetode = array();
+            $payments = $conn->query("SELECT * FROM metode_pembayaran WHERE status_aktif = 'Y' ORDER BY id_payment ASC");
+            foreach ($payments as $key => $value) {
+                array_push($listmetode, array(
+                    'id_payment' => $value['id_payment'],
+                    'icon_payment' => $value['icon_payment'],
+                    'metode_pembayaran' => $value['metode_pembayaran'],
+                    'nomor_payment' => $value['nomor_payment'],
+                    'penerima_payment' => $value['penerima_payment']
+                ));
+            }
 
-        $listvoucher = array();
-        $vouchers = $conn->query("SELECT * FROM voucher WHERE tgl_berakhir >= NOW()");
-        foreach ($vouchers as $key => $value) {
-            array_push($listvoucher, array(
-                'idvoucher' => $value['idvoucher'],
-                'nama_voucher' => $value['nama_voucher'],
-                'deskripsi_voucher' => $value['deskripsi_voucher'],
-                'nilai_voucher' => $value['nilai_voucher'],
-                'minimal_transaksi' => $value['minimal_transaksi'],
-                'maksimal_diskon' => $value['maksimal_diskon'],
-            ));
-        }
+            $listvoucher = array();
+            $vouchers = $conn->query("SELECT * FROM voucher WHERE tgl_berakhir >= NOW()");
+            foreach ($vouchers as $key => $value) {
+                array_push($listvoucher, array(
+                    'idvoucher' => $value['idvoucher'],
+                    'nama_voucher' => $value['nama_voucher'],
+                    'deskripsi_voucher' => $value['deskripsi_voucher'],
+                    'nilai_voucher' => $value['nilai_voucher'],
+                    'minimal_transaksi' => $value['minimal_transaksi'],
+                    'maksimal_diskon' => $value['maksimal_diskon'],
+                ));
+            }
 
-        $totalppn = $harga_produk * ((int)$ppn / 100);
+            $totalppn = $harga_produk * ((int)$ppn / 100);
 
-        $data1['produk'] = $listebook;
-        $data1['kupon'] = $listvoucher;
-        $data1['metode_pembayaran'] = $listmetode;
-        $data1['harga_produk'] = (int)$harga_produk;
-        $data1['diskon_rupiah'] = (int)$diskon_rupiah;
-        $data1['diskon_persen'] = (int)$diskon_persen;
-        $data1['voucher'] = 0;
-        $data1['ppn_persen'] = $ppn . "%";
-        $data1['ppn_rupiah'] = (int)$totalppn;
-        $data1['biaya_admin'] = 0;
-        $data1['total'] = (int)$harga_produk + (int)$totalppn;
+            $data1['produk'] = $listebook;
+            $data1['kupon'] = $listvoucher;
+            $data1['metode_pembayaran'] = $listmetode;
+            $data1['harga_produk'] = (int)$harga_produk;
+            $data1['diskon_rupiah'] = (int)$diskon_rupiah;
+            $data1['diskon_persen'] = (int)$diskon_persen;
+            $data1['voucher'] = 0;
+            $data1['ppn_persen'] = $ppn . "%";
+            $data1['ppn_rupiah'] = (int)$totalppn;
+            $data1['biaya_admin'] = 0;
+            $data1['total'] = (int)$harga_produk + (int)$totalppn;
 
-        if ($data) {
-            $response->code = 200;
-            $response->message = 'success';
-            $response->data = $data1;
-            $response->json();
-            die();
-        } else {
-            $response->code = 200;
-            $response->message = mysqli_error($conn);
-            $response->data = [];
-            $response->json();
-            die();
+            if ($data) {
+                $response->code = 200;
+                $response->message = 'success';
+                $response->data = $data1;
+                $response->json();
+                die();
+            } else {
+                $response->code = 200;
+                $response->message = mysqli_error($conn);
+                $response->data = [];
+                $response->json();
+                die();
+            }
         }
         break;
     case "addtransaksi":
