@@ -87,7 +87,7 @@ switch ($tag) {
         $data1['diskon_rupiah'] = (int)$diskon_rupiah;
         $data1['diskon_persen'] = (int)$diskon_persen;
         $data1['voucher'] = 0;
-        $data1['ppn_persen'] = $ppn."%";
+        $data1['ppn_persen'] = $ppn . "%";
         $data1['ppn_rupiah'] = (int)$totalppn;
         $data1['biaya_admin'] = 0;
         $data1['total'] = (int)$harga_produk + (int)$totalppn;
@@ -332,66 +332,16 @@ switch ($tag) {
             die();
         }
         break;
-    case "listbarang_transaction":
-        $id_transaksi = $_POST['id_transaksi'];
-        $query = mysqli_query($conn, "SELECT a.id_buku,b.judul,b.penulis,b.edisi,b.tahun_terbit,b.cover,b.penerbit,
-        b.bisa_beli,b.bisa_sewa,a.harga_normal,a.diskon,a.harga_diskon,c.nama_kategori,a.status_pembelian AS status FROM ba_transaksi_ebook_detail a 
-        LEFT JOIN ba_buku b ON a.id_buku = b.id_buku
-        LEFT JOIN itemkategorinew c ON b.kd_kategori = c.id_kategori WHERE a.id_transaksi = '$id_transaksi'");
-        $result = array();
-        while ($row = mysqli_fetch_array($query)) {
+    case "detail":
+        $id_transaksi = $_GET['id_transaksi'];
 
-            //         if ($row['status'] == '1'){
-            // 			if ($row['diskon_beli'] != 0){
-            //                 $harga = $row['harga'];
-            //                 $diskon = $row['diskon_beli'];
-            //                 $harga_setelah = $row['harga_beli_setelah_diskon'];
-            //             } else {
-            //                 $harga = $row['harga'];
-            //                 $diskon = 0;
-            //                 $harga_setelah = 0;
-            //             }
-            // 		} else if ($row['status'] == '2'){
-            // 			if ($row['diskon_sewa'] != 0){
-            //                 $harga = $row['harga_sewa'];
-            //                 $diskon = $row['diskon_sewa'];
-            //                 $harga_setelah = $row['harga_sewa_setelah_diskon'];
-            //             } else {
-            //                 $harga = $row['harga_sewa'];
-            //                 $diskon = 0;
-            //                 $harga_setelah = 0;
-            //             }
-            // 		}
-            $harga = $row['harga_normal'];
-            $diskon = $row['diskon'];
-            $harga_setelah = $row['harga_diskon'];
-            array_push($result, array(
-                'id_buku'              => $row['id_buku'],
-                'harga'                => $harga,
-                'harga_format'         => "Rp" . number_format($harga, 0, ',', '.'),
-                'harga_potongan'       => $harga_setelah,
-                'harga_potongan_format' => "Rp" . number_format($harga_setelah, 0, ',', '.'),
-                'jumlah_diskon'        => $diskon,
-                'judul'                => $row['judul'],
-                'penulis'              => $row['penulis'],
-                'cover'                => $urlimg . "/" . $row['cover'],
-                'nama_kategori'        => $row['nama_kategori'],
-            ));
-        }
+        $data = mysqli_fetch_object($conn->query("SELECT * FROM ebook_transaksi_detail a
+        JOIN ebook_transaksi e ON a.id_transaksi = e.id_transaksi WHERE a.id_transaksi = '$id_transaksi';"));
 
-        if (isset($result[0])) {
-            echo json_encode($result);
-        } else {
-            http_response_code(400);
-            $respon['pesan'] = "Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini";
-            echo json_encode($respon);
-        }
-        break;
-    case "listtransaction_detail":
-        $id_transaksi = $_POST['id_transaksi'];
+        $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
+        $ppn = $cekppn->pajak;
+        $status_transaksi = $data->status_transaksi;
 
-        $query2 = mysqli_query($conn, "SELECT * FROM ba_transaksi_ebook WHERE status_pembelian = '1' AND id_transaksi = '$id_transaksi' ORDER BY tgl_beli DESC")->fetch_assoc();
-        $status_transaksi = $query2['status_transaksi'];
         if ($status_transaksi == '1') {
             $keterangan = 'Menunggu Pembayaran';
         } else if ($status_transaksi == '2') {
@@ -416,60 +366,69 @@ switch ($tag) {
             $keterangan = 'Pengembalian Barang';
         }
 
-        if ($query2['status_payment'] == '2') {
-            $query3 = mysqli_query($conn, "SELECT * FROM ba_transaksi_ebook a LEFT JOIN ba_payment_manual b ON a.payment_type = b.id_payment WHERE a.id_transaksi = '$id_transaksi'")->fetch_assoc();
-            $data['metode_pembayaran']         = $query3['metode_pembayaran'];
-            $data['nomor_payment']         = $query3['nomor_payment'];
-            $data['penerima_payment']         = $query3['penerima_payment'];
-            $data['pesan'] = "";
-            $data['nomor_telp']         = GETWA;
-            $data['icon_payment']         = $geticonkategori . $query3['icon_payment'];
-        }
+        $invoice = id_ke_struk($data->invoice);
+        $tgl_pembelian = date('d F Y h:i:s A', strtotime($data->tgl_pembelian));
+        $subtotal = (int)$data->harga_normal;
+        $potongan_voucher = (int)$data->potongan_voucher;
+        $diskon = $data->diskon;
+        $harga_diskon = (int)$data->harga_diskon;
+        $status_pembelian = $data->status_pembelian;
+        $total = $subtotal - ($potongan_voucher + $harga_diskon);
 
-        $data['invoice']         = $query2['invoice'];
-        $data['tgl_beli']         = date('d F Y h:i:s A', strtotime($query2['tgl_beli']));
-        $data['status_transaksi']         = $query2['status_transaksi'];
-        $data['status_payment']         = $query2['status_payment'];
-        $data['keterangan_status']         = $keterangan;
-        $data['total_pembayaran_format']        = "Rp" . number_format($query2['total_pembayaran'], 0, ',', '.');
-        $data['url_payment']         = $query2['url_payment'];
-        $data['payment_type']         = $query2['payment_type'];
-        $data['token_payment']         = $query2['token_payment'];
-        $data['tanggal_dibayar']         = date('d F Y h:i:s A', strtotime($query2['tanggal_dibayar']));
-
-        $query = mysqli_query($conn, "SELECT a.id_buku,b.judul,b.penulis,b.edisi,b.tahun_terbit,b.cover,b.penerbit,
-        b.bisa_beli,b.bisa_sewa,a.harga_normal,a.diskon,a.harga_diskon,c.nama_kategori,a.status_pembelian AS status FROM ba_transaksi_ebook_detail a 
-        LEFT JOIN ba_buku b ON a.id_buku = b.id_buku
-        LEFT JOIN itemkategorinew c ON b.kd_kategori = c.id_kategori WHERE a.id_transaksi = '$id_transaksi'");
-        $result = array();
-        while ($row = mysqli_fetch_array($query)) {
-            $harga = $row['harga_normal'];
-            $diskon = $row['diskon'];
-            $harga_setelah = $row['harga_diskon'];
-            array_push($result, array(
-                'id_buku'              => $row['id_buku'],
-                'harga'                => $harga,
-                'harga_format'         => "Rp" . number_format($harga, 0, ',', '.'),
-                'harga_potongan'       => $harga_setelah,
-                'harga_potongan_format' => "Rp" . number_format($harga_setelah, 0, ',', '.'),
-                'jumlah_diskon'        => $diskon,
-                'judul'                => $row['judul'],
-                'penulis'              => $row['penulis'],
-                'cover'                => $urlimg . "/" . $row['cover'],
-                'nama_kategori'        => $row['nama_kategori'],
+        $listebook = array();
+        $ebooks = $conn->query("SELECT b.judul_master, c.nama_kategori, b.image_master, b.harga_master, b.harga_sewa, a.status_pembelian, b.diskon_persen, b.diskon_rupiah FROM ebook_transaksi_detail a
+        JOIN master_item b ON a.id_master = b.id_master
+        JOIN kategori_sub c ON b.id_sub_kategori = c.id_sub
+        JOIN kategori d ON c.parent_kategori = d.id_kategori WHERE a.id_transaksi = '$id_transaksi';");
+        foreach ($ebooks as $key => $value) {
+            if ($value['status_pembelian'] == '1') {
+                $harga = $value['harga_master'];
+                $diskon_rupiah = $value['diskon_rupiah'];
+                $diskon_persen = $value['diskon_persen'];
+            } else {
+                $harga = $value['harga_sewa'];
+                $diskon_rupiah = $value['diskon_sewa_rupiah'];
+                $diskon_persen = $value['diskon_sewa_persen'];
+            }
+            array_push($listebook, array(
+                'judul_master' => $value['judul_master'],
+                'image_master' => $getimageproduk . $value['image_master'],
+                'nama_kategori' => $value['nama_kategori'],
+                'harga_master' => (int)$harga,
+                'diskon_rupiah' => (int)$diskon_rupiah,
+                'diskon_persen' => $diskon_persen . "%",
+                'harga_master_total' => (int)$harga - (int)$diskon_rupiah,
             ));
         }
 
-        if (isset($result[0])) {
+        $totalppn = $total * ((int)$ppn / 100);
 
-            $result1['data_transaksi'] = $data;
-            $result1['result'] = $result;
+        $data1['invoice'] = $invoice;
+        $data1['tgl_pembelian'] = $tgl_pembelian;
+        $data1['status_transaksi'] = $status_transaksi;
+        $data1['keterangan'] = $keterangan;
+        $data1['subtotal'] = (int)$subtotal;
+        $data1['harga_diskon'] = $harga_diskon;
+        $data1['diskon'] = $diskon;
+        $data1['voucher'] = $potongan_voucher;
+        $data1['ppn_persen'] = $ppn . "%";
+        $data1['ppn_rupiah'] = (int)$totalppn;
+        $data1['biaya_admin'] = 0;
+        $data1['total'] = (int)$total + (int)$totalppn;
+        $data1['produk'] = $listebook;
 
-            echo json_encode($result1);
+        if ($data) {
+            $response->code = 200;
+            $response->message = 'success';
+            $response->data = $data1;
+            $response->json();
+            die();
         } else {
-            http_response_code(400);
-            $respon['pesan'] = "Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini";
-            echo json_encode($respon);
+            $response->code = 200;
+            $response->message = mysqli_error($conn);
+            $response->data = [];
+            $response->json();
+            die();
         }
         break;
     case "update_payment_manual":
