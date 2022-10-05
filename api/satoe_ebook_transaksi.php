@@ -415,6 +415,7 @@ switch ($tag) {
         $data1['invoice'] = $invoice;
         $data1['tgl_pembelian'] = $tgl_pembelian;
         $data1['status_transaksi'] = $status_transaksi;
+        $data1['status_penilaian'] = 'N';
         $data1['keterangan'] = $keterangan;
         $data1['subtotal'] = (int)$subtotal;
         $data1['harga_diskon'] = $harga_diskon;
