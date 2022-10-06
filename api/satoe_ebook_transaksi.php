@@ -412,6 +412,7 @@ switch ($tag) {
 
         $totalppn = $total * ((int)$ppn / 100);
 
+        $data1['id_transaksi'] = $id_transaksi;
         $data1['invoice'] = $invoice;
         $data1['tgl_pembelian'] = $tgl_pembelian;
         $data1['status_transaksi'] = $status_transaksi;
