@@ -442,7 +442,7 @@ switch ($tag) {
         }
         break;
     case "payment_transaksi":
-        $id_transaksi       = $_GET['id_transaksi'];
+        $id_transaksi       = $_POST['id_transaksi'];
 
         $data = mysqli_fetch_object($conn->query("SELECT * FROM ebook_transaksi_detail a
         JOIN ebook_transaksi e ON a.id_transaksi = e.id_transaksi WHERE a.id_transaksi = '$id_transaksi'"));
