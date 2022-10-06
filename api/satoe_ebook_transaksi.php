@@ -441,35 +441,66 @@ switch ($tag) {
             die();
         }
         break;
-    case "update_payment_manual":
-        $idtransaksi           = $_POST['no_invoice'];
-        $payment_type          = $_POST['payment_type'];
-        $total                 = $_POST['total'];
-        $status_payment        = $_POST['status_payment'];
-        $total_format          = "Rp" . number_format($total, 0, ',', '.');
-        $invoice               = id_ke_struk($idtransaksi);
+    case "payment_transaksi":
+        $id_transaksi       = $_GET['id_transaksi'];
 
-        $query = mysqli_query($conn, "SELECT * FROM ba_payment_manual WHERE id_payment = '$payment_type'")->fetch_assoc();
+        $data = mysqli_fetch_object($conn->query("SELECT * FROM ebook_transaksi_detail a
+        JOIN ebook_transaksi e ON a.id_transaksi = e.id_transaksi WHERE a.id_transaksi = '$id_transaksi'"));
+
+        $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
+        $ppn = $cekppn->pajak;
+        $status_transaksi = $data->status_transaksi;
+
+        $subtotal = (int)$data->harga_normal;
+        $potongan_voucher = (int)$data->potongan_voucher;
+        $diskon = $data->diskon;
+        $harga_diskon = (int)$data->harga_diskon;
+        $status_pembelian = $data->status_pembelian;
+
+        $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$data->payment_type'")->fetch_assoc();
+        $icon_payment = $query['icon_payment'];
         $metode_pembayaran = $query['metode_pembayaran'];
         $nomor_payment = $query['nomor_payment'];
         $penerima_payment = $query['penerima_payment'];
 
-        // if ($status_payment != '1' OR $status_payment != '2'){
-        //     $status_payment = '0';
-        // } else {
-        //     $status_payment = $_POST['status_payment'];
-        // }
+        $tgl_expired = $data->tgl_expired;
+        $id_transaksi = $id_transaksi;
+        $invoice = id_ke_struk($data->invoice);
+        $id_payment = $data->payment_type;
+        $icon_payment = $icon_payment;
+        $metode_pembayaran = $metode_pembayaran;
+        $nomor_payment = $nomor_payment;
+        $penerima_payment = $penerima_payment;
+        $total = $subtotal - ($potongan_voucher + $harga_diskon);
+        $totalppn = $total * ((int)$ppn / 100);
+        $totalakhir = $total + $totalppn;
+        $total_format = "Rp" . number_format($totalakhir, 0, ',', '.');
 
-        $query2 = mysqli_query($conn, "UPDATE ba_transaksi_ebook SET status_payment = '$status_payment', payment_type = '$payment_type' WHERE id_transaksi = '$idtransaksi'");
-        if ($query2) {
-            $response['pesan'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : \nNomor Invoice : *$invoice*\nJumlah     : *$total_format*\nBank Transfer : *$metode_pembayaran*\nNo Rekening : *$nomor_payment*\nAtas Nama : *$penerima_payment*\n\nJika ada pertanyaan lebih lanjut, anda dapat membalas langsung pesan ini.\n\nTerimakasih\nHormat Kami, \n\nTim Bahana Digital";
-            $response['nomor_telp']         = GETWA;
-            die(json_encode($response));
-        } else {
-            http_response_code(400);
-            $response['pesan'] = "Gagal 500";
-            die(json_encode($response));
-        }
+        $result['batas_pembayaran'] = $tgl_expired;
+        $result['id_transaksi'] = $id_transaksi;
+        $result['invoice'] = $invoice;
+        $result['id_payment'] = $id_payment;
+        $result['icon_payment'] = $icon_payment;
+        $result['metode_pembayaran'] = $metode_pembayaran;
+        $result['nomor_payment'] = $nomor_payment;
+        $result['penerima_payment'] = $penerima_payment;
+        $result['total_harga'] = (int)$totalakhir;
+        $result['nomor_konfirmasi'] = GETWA;
+        $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
+                mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
+                    \nNomor Invoice : *$invoice*
+                    \nJumlah     : *$total_format*
+                    \nBank Transfer : *$metode_pembayaran*
+                    \nNo Rekening : *$nomor_payment*
+                    \nAtas Nama : *$penerima_payment*
+                    \n\nJika ada pertanyaan lebih lanjut, anda dapat membalas langsung pesan ini.
+                    \n\nTerimakasih\nHormat Kami, 
+                    \n\nTim SatoeToko";
+        $response->code = 200;
+        $response->message = 'done';
+        $response->data = $result;
+        $response->json();
+        die();
         break;
     default:
         break;
