@@ -292,7 +292,7 @@ switch ($tag) {
     case "list_riwayat":
         $id_user = $_GET['id_user'];
 
-        $query = mysqli_query($conn, "SELECT a.id_transaksi, a.invoice, a.tgl_pembelian, a.status_transaksi, a.total_pembayaran, a.total_akhir_pembayaran FROM ebook_transaksi a 
+        $query = mysqli_query($conn, "SELECT a.id_transaksi, a.invoice, a.tgl_pembelian, a.batas_pembayaran, a.status_transaksi, a.total_pembayaran, a.total_akhir_pembayaran FROM ebook_transaksi a 
             JOIN ebook_transaksi_detail b ON a.id_transaksi = b.id_transaksi
             WHERE a.status_transaksi != '1' OR a.batas_pembayaran <= NOW() AND a.id_user = '$id_user' ORDER BY a.tgl_pembelian DESC;");
         
@@ -327,6 +327,7 @@ switch ($tag) {
                 'id_transaksi'              => $row['id_transaksi'],
                 'invoice'                => $row['invoice'],
                 'tgl_pembelian'                => date('d F Y h:i:s A', strtotime($row['tgl_pembelian'])),
+                'batas_pembayaran'          => date('d F Y h:i:s A', strtotime($row['batas_pembayaran'])),
                 'status_transaksi'              => $row['status_transaksi'],
                 'keterangan_status'              => $keterangan,
                 'total_pembayaran'              => (int)$row['total_pembayaran'],
