@@ -464,6 +464,7 @@ switch ($tag) {
         $diskon = $data->diskon;
         $harga_diskon = (int)$data->harga_diskon;
         $status_pembelian = $data->status_pembelian;
+        $status_payment = $data->status_payment;
 
         $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$data->payment_type'")->fetch_assoc();
         $icon_payment = $query['icon_payment'];
@@ -487,6 +488,7 @@ switch ($tag) {
         $result['batas_pembayaran'] = $tgl_expired;
         $result['id_transaksi'] = $id_transaksi;
         $result['invoice'] = $invoice;
+        $result['status_payment'] = $status_payment;
         $result['id_payment'] = $id_payment;
         $result['icon_payment'] = $icon_payment;
         $result['metode_pembayaran'] = $metode_pembayaran;
