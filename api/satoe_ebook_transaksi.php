@@ -235,9 +235,7 @@ switch ($tag) {
                 $payment_token = $response['token'];
 
                 $query = mysqli_query($conn, "UPDATE ebook_transaksi SET token_payment = '$payment_token', url_payment = '$payment_url' WHERE id_transaksi= '$transaction->id'");
-
-                $res2[] = $res;
-                echo json_encode($res2);
+                echo json_encode($res);
                 die();
             } else {
                 $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
