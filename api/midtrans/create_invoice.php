@@ -1,17 +1,18 @@
 <?php
-
-require_once('../koneksi.php');
+require_once('../../config/koneksi.php');
+include "../response.php";
+$response = new Response();
 
 $id_transaksi = $_POST['id_transaksi'];
 $pembayaran = $_POST['pembayaran'];
 
-$query = mysqli_query($conn, "SELECT * FROM ba_transaksi_ebook a
-  INNER JOIN loginuser_bahana b ON b.id_user = a.id_user
-  WHERE a.id_transaksi = '$id_transaksi'")->fetch_assoc();
+$query = mysqli_query($conn, "SELECT * FROM ebook_transaksi a 
+JOIN data_user b ON a.id_user = b.id_login
+WHERE a.id_transaksi = '$id_transaksi'")->fetch_assoc();
 $invoice = $query['invoice'];
 $nama_user = $query['nama_user'];
-$payer_email = $query['email_user'];
-$no_telp = $query['telepon_user'];
+$payer_email = $query['email'];
+$no_telp = $query['notelp'];
 
 $mtrans['transaction_details']['order_id'] = $invoice;
 $mtrans['transaction_details']['gross_amount'] = $pembayaran;
@@ -56,7 +57,7 @@ if (!isset($response['token'])) {
 $payment_url = $response['redirect_url'];
 $payment_token = $response['token'];
 
-$query = mysqli_query($conn, "UPDATE ba_transaksi_ebook SET token_payment = '$payment_token', url_payment = '$payment_url' WHERE id_transaksi='$id_transaksi' ");
+$query = mysqli_query($conn, "UPDATE ebook_transaksi SET token_payment = '$payment_token', url_payment = '$payment_url' WHERE id_transaksi= '$id_transaksi'");
 
 
 $res2[] = $res;

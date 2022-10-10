@@ -15,7 +15,7 @@ switch ($tag) {
         $diskon             = $_POST['diskon'];
         $harga_diskon       = $_POST['harga_diskon'];
 
-        $cektransaksi = $conn->query("SELECT * FROM ebook_transaksi_detail WHERE id_user = '$id_user' AND id_master = '$id_master' AND tgl_expired >= NOW()")->nums_row;
+        $cektransaksi = mysqli_query($conn, "SELECT * FROM ebook_transaksi_detail WHERE id_user = '$id_user' AND id_master = '$id_master' AND tgl_expired >= NOW()")->num_rows;
 
         if ($cektransaksi > 0) {
             $response->code = 400;
@@ -82,7 +82,6 @@ switch ($tag) {
                     'deskripsi_voucher' => $value['deskripsi_voucher'],
                     'nilai_voucher' => $value['nilai_voucher'],
                     'minimal_transaksi' => $value['minimal_transaksi'],
-                    'maksimal_diskon' => $value['maksimal_diskon'],
                 ));
             }
 
@@ -129,6 +128,12 @@ switch ($tag) {
         $response = new Response();
         $exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
 
+        if ($id_payment != '0') {
+            $status_payment = '2';
+        } else {
+            $status_payment = '1';
+        }
+
         $conn->begin_transaction();
 
         $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
@@ -145,7 +150,7 @@ switch ($tag) {
         id_user = '$id_user',
         tgl_pembelian = NOW(),
         status_transaksi = '1',
-        status_payment = '0',
+        status_payment = '$status_payment',
         batas_pembayaran = '$exp_date',
         total_pembayaran = '$jumlahbayar',
         kode_voucher = '$id_voucher',
@@ -177,19 +182,77 @@ switch ($tag) {
             die();
         } else {
 
-            $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
+            $querydata = mysqli_query($conn, "SELECT * FROM ebook_transaksi a 
+            JOIN data_user b ON a.id_user = b.id_login
+            WHERE a.id_transaksi = '$transaction->id'")->fetch_assoc();
+            $invoice = $querydata['invoice'];
+            $nama_user = $querydata['nama_user'];
+            $payer_email = $querydata['email'];
+            $no_telp = $querydata['notelp'];
 
-            $result['batas_pembayaran'] = $exp_date;
-            $result['id_transaksi'] = $idtransaksi;
-            $result['invoice'] = $invoice;
-            $result['id_payment'] = $id_payment;
-            $result['icon_payment'] = $icon_payment;
-            $result['metode_pembayaran'] = $metode_pembayaran;
-            $result['nomor_payment'] = $nomor_payment;
-            $result['penerima_payment'] = $penerima_payment;
-            $result['total_harga'] = (int)$jumlahbayar;
-            $result['nomor_konfirmasi'] = GETWA;
-            $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
+            if ($id_payment == '0') {
+                $mtrans['transaction_details']['order_id'] = $invoice;
+                $mtrans['transaction_details']['gross_amount'] = $jumlahbayar;
+                $mtrans['credit_card']['secure'] = true;
+                $mtrans['customer_details']['first_name'] = $nama_user;
+                $mtrans['customer_details']['last_name'] = '';
+                $mtrans['customer_details']['email'] = $payer_email;
+                $mtrans['customer_details']['phone'] = $no_telp;
+                $mtrans_json = json_encode($mtrans);
+
+                $curl = curl_init();
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => MTRANS_URL,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => $mtrans_json,
+                    CURLOPT_HTTPHEADER => array(
+                        'Authorization: Basic ' . base64_encode(MTRANS_SERVER_KEY),
+                        'Content-Type: application/json'
+                    ),
+                ));
+
+                $response_curl = curl_exec($curl);
+                curl_close($curl);
+
+                $response = json_decode($response_curl, true);
+                $res['token'] = $response['token'];
+                $res['redirect_url'] = $response['redirect_url'];
+
+                if (!isset($response['token'])) {
+                    respon_json_status_500();
+                    $respon['pesan'] = "Sorry, we encountered internal server error. We will fix this soon.";
+                    die(json_encode($respon));
+                }
+
+                $payment_url = $response['redirect_url'];
+                $payment_token = $response['token'];
+
+                $query = mysqli_query($conn, "UPDATE ebook_transaksi SET token_payment = '$payment_token', url_payment = '$payment_url' WHERE id_transaksi= '$transaction->id'");
+
+                $res2[] = $res;
+                echo json_encode($res2);
+                die();
+            } else {
+                $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
+
+                $result['batas_pembayaran'] = $exp_date;
+                $result['id_transaksi'] = $idtransaksi;
+                $result['invoice'] = $invoice;
+                $result['id_payment'] = $id_payment;
+                $result['icon_payment'] = $icon_payment;
+                $result['metode_pembayaran'] = $metode_pembayaran;
+                $result['nomor_payment'] = $nomor_payment;
+                $result['penerima_payment'] = $penerima_payment;
+                $result['total_harga'] = (int)$jumlahbayar;
+                $result['nomor_konfirmasi'] = GETWA;
+                $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
             mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
                 \nNomor Invoice : *$invoice*
                 \nJumlah     : *$total_format*
@@ -200,12 +263,13 @@ switch ($tag) {
                 \n\nTerimakasih\nHormat Kami, 
                 \n\nTim SatoeToko";
 
-            $conn->commit();
-            $response->code = 200;
-            $response->message = 'done';
-            $response->data = $result;
-            $response->json();
-            die();
+                $conn->commit();
+                $response->code = 200;
+                $response->message = 'done';
+                $response->data = $result;
+                $response->json();
+                die();
+            }
         }
         break;
     case "cancel_transaksi":
@@ -240,7 +304,7 @@ switch ($tag) {
             $waktu_sekarang = date('Y-m-d H:i:s');
             if ($status_transaksi == '1') {
                 $keterangan = 'Menunggu Pembayaran';
-            } else if ($status_transaksi == '1' AND $batas_pembayaran >= $waktu_sekarang) {
+            } else if ($status_transaksi == '1' and $batas_pembayaran >= $waktu_sekarang) {
                 $keterangan = 'Pembayaran Hangus';
             } else if ($status_transaksi == '2') {
                 $keterangan = 'Menunggu Verifikasi Pembayaran';
@@ -295,7 +359,7 @@ switch ($tag) {
         $query = mysqli_query($conn, "SELECT a.id_transaksi, a.invoice, a.tgl_pembelian, a.batas_pembayaran, a.status_transaksi, a.total_pembayaran, a.total_akhir_pembayaran FROM ebook_transaksi a 
             JOIN ebook_transaksi_detail b ON a.id_transaksi = b.id_transaksi
             WHERE a.status_transaksi != '1' OR a.batas_pembayaran <= NOW() AND a.id_user = '$id_user' ORDER BY a.tgl_pembelian DESC;");
-        
+
         $result = array();
         while ($row = mysqli_fetch_array($query)) {
             $status_transaksi = $row['status_transaksi'];

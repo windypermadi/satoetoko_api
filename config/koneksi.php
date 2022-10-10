@@ -25,19 +25,17 @@ if ($db->connect_errno) {
 	exit;die;
 }
 
-//mode tes
-define('KEY_XENDIT_PUBLIC', 'eG5kX2RldmVsb3BtZW50X0dVTWI5VWh0Q0VIUXdZb3pLY2pseVh0eDcxcVg5RWVHaDFqbFp4YVhic1pwUmJoZk9VRFJoQktnbkFRTk5XUzo=');
+//MIDTRANS SANDBOX
+define('MTRANS_MERCHANT_ID', 'G072856707'); // SANDBOX
+define('MTRANS_CLIENT_KEY', 'SB-Mid-client-O6Mh_Sby8GuFZlyU'); // SANDBOX
+define('MTRANS_SERVER_KEY', 'SB-Mid-server-flH6WJ9GxCevDxtbjIacbWyy'); // SANDBOX
+define('MTRANS_URL', 'https://app.sandbox.midtrans.com/snap/v1/transactions'); //SANDBOX
 
-//MIDTRANS
-// define('MTRANS_MERCHANT_ID', 'G884156136'); // SANDBOX
-// define('MTRANS_CLIENT_KEY', 'SB-Mid-client-Vpopf8qtZfYISDts'); // SANDBOX
-// define('MTRANS_SERVER_KEY', 'SB-Mid-server-HiKzuWxAiKKktIpvfoSu5qCz'); // SANDBOX
-// define('MTRANS_URL', 'https://app.sandbox.midtrans.com/snap/v1/transactions'); //SANDBOX
-
-define('MTRANS_MERCHANT_ID', 'G884156136'); // PROD
-define('MTRANS_CLIENT_KEY', 'Mid-client-rcekzDhxXgnaScLS'); // PROD
-define('MTRANS_SERVER_KEY', 'Mid-server-g3ziVzUgD0RE2iKLSRxwnmi3'); // PROD
-define('MTRANS_URL', 'https://app.midtrans.com/snap/v1/transactions'); //PROD
+//MIDTRANS PRODUCTIONS
+// define('MTRANS_MERCHANT_ID', 'G072856707'); // PROD
+// define('MTRANS_CLIENT_KEY', 'Mid-client-bOCKckbWYz52gALt'); // PROD
+// define('MTRANS_SERVER_KEY', 'Mid-server-smzxD9Be40AkecTlon1SfWJT'); // PROD
+// define('MTRANS_URL', 'https://app.midtrans.com/snap/v1/transactions'); //PROD
 
 define('GETWA', '628112845216'); // NOMOR WHATSAPP ADMIN
 
