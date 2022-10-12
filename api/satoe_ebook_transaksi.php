@@ -419,6 +419,7 @@ switch ($tag) {
         $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
         $ppn = $cekppn->pajak;
         $status_transaksi = $data->status_transaksi;
+        $status_payment = $data->status_payment;
 
         if ($status_transaksi == '1') {
             $keterangan = 'Menunggu Pembayaran';
@@ -486,6 +487,7 @@ switch ($tag) {
         $data1['tgl_pembelian'] = $tgl_pembelian;
         $data1['status_transaksi'] = $status_transaksi;
         $data1['status_penilaian'] = 'N';
+        $data1['status_payment'] = $status_payment;
         $data1['keterangan'] = $keterangan;
         $data1['subtotal'] = (int)$subtotal;
         $data1['harga_diskon'] = $harga_diskon;
@@ -527,38 +529,47 @@ switch ($tag) {
         $harga_diskon = (int)$data->harga_diskon;
         $status_pembelian = $data->status_pembelian;
         $status_payment = $data->status_payment;
+        $url_payment = $data->url_payment;
 
-        $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$data->payment_type'")->fetch_assoc();
-        $icon_payment = $query['icon_payment'];
-        $metode_pembayaran = $query['metode_pembayaran'];
-        $nomor_payment = $query['nomor_payment'];
-        $penerima_payment = $query['penerima_payment'];
+        if ($status_payment == '1') {
+            $result['url_payment'] = $url_payment;
+            $response->code = 200;
+            $response->message = 'done';
+            $response->data = $result;
+            $response->json();
+            die();
+        } else if ($status_payment == '2') {
+            $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$data->payment_type'")->fetch_assoc();
+            $icon_payment = $query['icon_payment'];
+            $metode_pembayaran = $query['metode_pembayaran'];
+            $nomor_payment = $query['nomor_payment'];
+            $penerima_payment = $query['penerima_payment'];
 
-        $tgl_expired = $data->tgl_expired;
-        $id_transaksi = $id_transaksi;
-        $invoice = id_ke_struk($data->invoice);
-        $id_payment = $data->payment_type;
-        $icon_payment = $icon_payment;
-        $metode_pembayaran = $metode_pembayaran;
-        $nomor_payment = $nomor_payment;
-        $penerima_payment = $penerima_payment;
-        $total = $subtotal - ($potongan_voucher + $harga_diskon);
-        $totalppn = $total * ((int)$ppn / 100);
-        $totalakhir = $total + $totalppn;
-        $total_format = "Rp" . number_format($totalakhir, 0, ',', '.');
+            $tgl_expired = $data->tgl_expired;
+            $id_transaksi = $id_transaksi;
+            $invoice = id_ke_struk($data->invoice);
+            $id_payment = $data->payment_type;
+            $icon_payment = $icon_payment;
+            $metode_pembayaran = $metode_pembayaran;
+            $nomor_payment = $nomor_payment;
+            $penerima_payment = $penerima_payment;
+            $total = $subtotal - ($potongan_voucher + $harga_diskon);
+            $totalppn = $total * ((int)$ppn / 100);
+            $totalakhir = $total + $totalppn;
+            $total_format = "Rp" . number_format($totalakhir, 0, ',', '.');
 
-        $result['batas_pembayaran'] = $tgl_expired;
-        $result['id_transaksi'] = $id_transaksi;
-        $result['invoice'] = $invoice;
-        $result['status_payment'] = $status_payment;
-        $result['id_payment'] = $id_payment;
-        $result['icon_payment'] = $icon_payment;
-        $result['metode_pembayaran'] = $metode_pembayaran;
-        $result['nomor_payment'] = $nomor_payment;
-        $result['penerima_payment'] = $penerima_payment;
-        $result['total_harga'] = (int)$totalakhir;
-        $result['nomor_konfirmasi'] = GETWA;
-        $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
+            $result['batas_pembayaran'] = $tgl_expired;
+            $result['id_transaksi'] = $id_transaksi;
+            $result['invoice'] = $invoice;
+            $result['status_payment'] = $status_payment;
+            $result['id_payment'] = $id_payment;
+            $result['icon_payment'] = $icon_payment;
+            $result['metode_pembayaran'] = $metode_pembayaran;
+            $result['nomor_payment'] = $nomor_payment;
+            $result['penerima_payment'] = $penerima_payment;
+            $result['total_harga'] = (int)$totalakhir;
+            $result['nomor_konfirmasi'] = GETWA;
+            $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
                 mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
                     \nNomor Invoice : *$invoice*
                     \nJumlah     : *$total_format*
@@ -568,11 +579,13 @@ switch ($tag) {
                     \n\nJika ada pertanyaan lebih lanjut, anda dapat membalas langsung pesan ini.
                     \n\nTerimakasih\nHormat Kami, 
                     \n\nTim SatoeToko";
-        $response->code = 200;
-        $response->message = 'done';
-        $response->data = $result;
-        $response->json();
-        die();
+            $response->code = 200;
+            $response->message = 'done';
+            $response->data = $result;
+            $response->json();
+            die();
+        }
+
         break;
     default:
         break;
