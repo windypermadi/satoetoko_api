@@ -148,7 +148,8 @@ switch ($tag) {
 
         $data2 = mysqli_fetch_object($conn->query("SELECT b.lama_sewa FROM master_item a 
         JOIN master_ebook_detail b ON a.id_master = b.id_master
-        JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
+        JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
+        WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
         $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET 
         id_transaksi = '$transaction->id',
@@ -171,8 +172,7 @@ switch ($tag) {
         diskon = '$diskon',
         harga_diskon = '$harga_diskon',
         status_pembelian = '$status',
-        tgl_create = NOW(),
-        tgl_expired = DATE_ADD(NOW(), INTERVAL + $data2->lama_sewa DAY)");
+        tgl_create = NOW()");
 
         $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$id_payment'")->fetch_assoc();
         $icon_payment = $query['icon_payment'];
@@ -204,7 +204,7 @@ switch ($tag) {
                 $mtrans['customer_details']['last_name'] = '';
                 $mtrans['customer_details']['email'] = $payer_email;
                 $mtrans['customer_details']['phone'] = $no_telp;
-                $mtrans_json = json_encode($mtrans);    
+                $mtrans_json = json_encode($mtrans);
 
                 $curl = curl_init();
 
@@ -226,7 +226,7 @@ switch ($tag) {
 
                 $response_curl = curl_exec($curl);
                 curl_close($curl);
-             
+
                 $responses = json_decode($response_curl, true);
 
                 $payment_url = $responses['redirect_url'];
@@ -553,7 +553,7 @@ switch ($tag) {
         $total = $subtotal - ($potongan_voucher + $harga_diskon);
 
         if ($status_payment == '1') {
-            $result['token'] = $response['token'];
+            $result['token'] = $token;
             $result['url_payment'] = $url_payment;
             $response->code = 200;
             $response->message = 'done';
