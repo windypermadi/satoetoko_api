@@ -134,6 +134,12 @@ switch ($tag) {
             $status_payment = '1';
         }
 
+        if ($diskon == 0) {
+            $harga_diskon = 0;
+        } else {
+            $harga_diskon = (int)$data->harga_diskon;
+        }
+
         $conn->begin_transaction();
 
         $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
@@ -198,7 +204,7 @@ switch ($tag) {
                 $mtrans['customer_details']['last_name'] = '';
                 $mtrans['customer_details']['email'] = $payer_email;
                 $mtrans['customer_details']['phone'] = $no_telp;
-                $mtrans_json = json_encode($mtrans);
+                $mtrans_json = json_encode($mtrans);    
 
                 $curl = curl_init();
 
@@ -220,22 +226,26 @@ switch ($tag) {
 
                 $response_curl = curl_exec($curl);
                 curl_close($curl);
+             
+                $responses = json_decode($response_curl, true);
 
-                $response = json_decode($response_curl, true);
-                $res['token'] = $response['token'];
-                $res['redirect_url'] = $response['redirect_url'];
+                $payment_url = $responses['redirect_url'];
+                $payment_token = $responses['token'];
+                $res['token'] = $payment_token;
+                $res['payment_url'] = $payment_url;
 
-                if (!isset($response['token'])) {
+                $query = mysqli_query($conn, "UPDATE ebook_transaksi SET token_payment = '$payment_token', url_payment = '$payment_url' WHERE id_transaksi= '$transaction->id'");
+
+                if (!isset($responses['token'])) {
                     respon_json_status_500();
                     $respon['pesan'] = "Sorry, we encountered internal server error. We will fix this soon.";
                     die(json_encode($respon));
                 }
 
-                $payment_url = $response['redirect_url'];
-                $payment_token = $response['token'];
-
-                $query = mysqli_query($conn, "UPDATE ebook_transaksi SET token_payment = '$payment_token', url_payment = '$payment_url' WHERE id_transaksi= '$transaction->id'");
-                echo json_encode($res);
+                $response->code = 200;
+                $response->message = 'result';
+                $response->data = $res;
+                $response->json();
                 die();
             } else {
                 $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
@@ -450,8 +460,12 @@ switch ($tag) {
         $subtotal = (int)$data->harga_normal;
         $potongan_voucher = (int)$data->potongan_voucher;
         $diskon = $data->diskon;
-        $harga_diskon = (int)$data->harga_diskon;
         $status_pembelian = $data->status_pembelian;
+        if ($diskon == 0) {
+            $harga_diskon = 0;
+        } else {
+            $harga_diskon = (int)$data->harga_diskon;
+        }
         $total = $subtotal - ($potongan_voucher + $harga_diskon);
 
         $listebook = array();
@@ -526,12 +540,20 @@ switch ($tag) {
         $subtotal = (int)$data->harga_normal;
         $potongan_voucher = (int)$data->potongan_voucher;
         $diskon = $data->diskon;
-        $harga_diskon = (int)$data->harga_diskon;
         $status_pembelian = $data->status_pembelian;
         $status_payment = $data->status_payment;
         $url_payment = $data->url_payment;
+        $token = $data->token_payment;
+
+        if ($diskon == 0) {
+            $harga_diskon = 0;
+        } else {
+            $harga_diskon = (int)$data->harga_diskon;
+        }
+        $total = $subtotal - ($potongan_voucher + $harga_diskon);
 
         if ($status_payment == '1') {
+            $result['token'] = $response['token'];
             $result['url_payment'] = $url_payment;
             $response->code = 200;
             $response->message = 'done';
