@@ -284,7 +284,7 @@ switch ($tag) {
         $id_user            = $_POST['id_user'];
         $id_transaksi       = $_POST['id_transaksi'];
 
-        $query = mysqli_query($conn, "UPDATE ebook_transaksi SET status_transaksi = '9' WHERE invoice = '$id_transaksi' AND id_user = '$id_user'");
+        $query = mysqli_query($conn, "UPDATE ebook_transaksi SET status_transaksi = '9' WHERE id_transaksi = '$id_transaksi' AND id_user = '$id_user'");
         if ($query) {
             $response->code = 200;
             $response->message = 'Transaksi berhasil dibatalkan';
