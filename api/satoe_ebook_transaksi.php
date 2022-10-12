@@ -232,7 +232,7 @@ switch ($tag) {
                 $payment_url = $responses['redirect_url'];
                 $payment_token = $responses['token'];
                 $res['token'] = $payment_token;
-                $res['payment_url'] = $payment_url;
+                $res['url_payment'] = $payment_url;
 
                 $query = mysqli_query($conn, "UPDATE ebook_transaksi SET token_payment = '$payment_token', url_payment = '$payment_url' WHERE id_transaksi= '$transaction->id'");
 
