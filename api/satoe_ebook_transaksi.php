@@ -430,7 +430,6 @@ switch ($tag) {
         $ppn = $cekppn->pajak;
         $status_transaksi = $data->status_transaksi;
         $status_payment = $data->status_payment;
-        $batas_pembayaran = $data->batas_pembayaran;
 
         if ($status_transaksi == '1') {
             $keterangan = 'Menunggu Pembayaran';
@@ -499,8 +498,7 @@ switch ($tag) {
 
         $data1['id_transaksi'] = $id_transaksi;
         $data1['invoice'] = $invoice;
-        $data1['tgl_pembelian'] = $tgl_pembelian;
-        $data1['batas_pembayaran'] = $batas_pembayaran;
+        $data1['tgl_pembelian'] = date('d F Y h:i:s A', strtotime($row['tgl_pembelian']));
         $data1['status_transaksi'] = $status_transaksi;
         $data1['status_penilaian'] = 'N';
         $data1['status_payment'] = $status_payment;
@@ -538,6 +536,7 @@ switch ($tag) {
         $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
         $ppn = $cekppn->pajak;
         $status_transaksi = $data->status_transaksi;
+        $batas_pembayaran = $data->batas_pembayaran;
 
         $subtotal = (int)$data->harga_normal;
         $potongan_voucher = (int)$data->potongan_voucher;
@@ -569,7 +568,6 @@ switch ($tag) {
             $nomor_payment = $query['nomor_payment'];
             $penerima_payment = $query['penerima_payment'];
 
-            $tgl_expired = $data->tgl_expired;
             $id_transaksi = $id_transaksi;
             $invoice = id_ke_struk($data->invoice);
             $id_payment = $data->payment_type;
@@ -582,7 +580,7 @@ switch ($tag) {
             $totalakhir = $total + $totalppn;
             $total_format = "Rp" . number_format($totalakhir, 0, ',', '.');
 
-            $result['batas_pembayaran'] = $tgl_expired;
+            $result['batas_pembayaran'] = $batas_pembayaran;
             $result['id_transaksi'] = $id_transaksi;
             $result['invoice'] = $invoice;
             $result['status_payment'] = $status_payment;
