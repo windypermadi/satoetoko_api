@@ -456,7 +456,7 @@ switch ($tag) {
         }
 
         $invoice = id_ke_struk($data->invoice);
-        $tgl_pembelian = date('d F Y h:i:s A', strtotime($data->tgl_pembelian));
+        $tgl_pembelian = $data->tgl_pembelian;
         $subtotal = (int)$data->harga_normal;
         $potongan_voucher = (int)$data->potongan_voucher;
         $diskon = $data->diskon;
