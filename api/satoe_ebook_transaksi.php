@@ -430,6 +430,7 @@ switch ($tag) {
         $ppn = $cekppn->pajak;
         $status_transaksi = $data->status_transaksi;
         $status_payment = $data->status_payment;
+        $batas_pembayaran = $data->batas_pembayaran;
 
         if ($status_transaksi == '1') {
             $keterangan = 'Menunggu Pembayaran';
@@ -499,6 +500,7 @@ switch ($tag) {
         $data1['id_transaksi'] = $id_transaksi;
         $data1['invoice'] = $invoice;
         $data1['tgl_pembelian'] = $tgl_pembelian;
+        $data1['batas_pembayaran'] = $batas_pembayaran;
         $data1['status_transaksi'] = $status_transaksi;
         $data1['status_penilaian'] = 'N';
         $data1['status_payment'] = $status_payment;
