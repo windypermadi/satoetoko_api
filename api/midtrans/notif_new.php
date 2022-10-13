@@ -2,8 +2,8 @@
 require_once('../../config/koneksi.php');
 
 $get_raw = file_get_contents('php://input');
-// $query = mysqli_query($conn, "INSERT into midtrans_callback set data = '$get_raw'");
-// die();
+$query = mysqli_query($conn, "INSERT into midtrans_callback set data = '$get_raw'");
+die();
 
 $data = json_decode($get_raw, true);
 
