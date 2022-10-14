@@ -241,6 +241,12 @@ switch ($tag) {
 				$harga_disc_sewa = (int)$value['harga_sewa'];
 			}
 
+			if ($value['harga_sewa'] == '0') {
+				$harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.');
+			} else {
+				$harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
+			}
+
 			array_push($datalist, array(
 				'id_master' => $value['id_master'],
 				'judul_master' => $value['judul_master'],
@@ -256,6 +262,7 @@ switch ($tag) {
 				'harga_sewa' => (int)$value['harga_sewa'],
 				'diskon_sewa' => (int)$jumlah_diskon_sewa,
 				'harga_diskon_sewa' => (int)$harga_disc_sewa,
+				'harga_tampil' => $harga_tampil,
 			));
 		}
 
