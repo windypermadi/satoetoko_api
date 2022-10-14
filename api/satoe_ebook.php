@@ -144,7 +144,7 @@ switch ($tag) {
 			if ($value['harga_sewa'] == '0') {
 				$harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.');
 			} else {
-				$harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
+				$harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
 			}
 
 			array_push($datalist, array(
