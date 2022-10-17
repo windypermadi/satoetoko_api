@@ -164,7 +164,7 @@ switch ($tag) {
         total_pembayaran = '$jumlahbayar',
         kode_voucher = '$id_voucher',
         payment_type = '$id_payment',
-        total_akhir_pembayaran = '$totalakhir");
+        total_akhir_pembayaran = '$jumlahbayar");
 
         $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET 
         id_transaksi_detail = UUID_SHORT(),
