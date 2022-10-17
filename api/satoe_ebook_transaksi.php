@@ -151,7 +151,7 @@ switch ($tag) {
         JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
         WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
-        $totalakhir = $jumlahbayar - $harga_diskon;
+        $totalakhir = (int)$jumlahbayar - (int)$harga_diskon;
 
         $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET 
         id_transaksi = '$transaction->id',
