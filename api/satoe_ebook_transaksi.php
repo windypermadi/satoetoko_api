@@ -151,6 +151,8 @@ switch ($tag) {
         JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
         WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
+        $totalakhir = $jumlahbayar - $harga_diskon;
+
         $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET 
         id_transaksi = '$transaction->id',
         invoice = '$idtransaksi',
@@ -161,7 +163,8 @@ switch ($tag) {
         batas_pembayaran = '$exp_date',
         total_pembayaran = '$jumlahbayar',
         kode_voucher = '$id_voucher',
-        payment_type = '$id_payment'");
+        payment_type = '$id_payment',
+        total_akhir_pembayaran = '$totalakhir");
 
         $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET 
         id_transaksi_detail = UUID_SHORT(),
