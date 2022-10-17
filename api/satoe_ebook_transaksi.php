@@ -501,7 +501,7 @@ switch ($tag) {
 
         $data1['id_transaksi'] = $id_transaksi;
         $data1['invoice'] = $invoice;
-        $data1['tgl_pembelian'] = date('d F Y h:i:s A', strtotime($row['tgl_pembelian']));
+        $data1['tgl_pembelian'] = date('d F Y h:i:s A', strtotime($data['tgl_pembelian']));
         $data1['status_transaksi'] = $status_transaksi;
         $data1['status_penilaian'] = 'N';
         $data1['status_payment'] = $status_payment;
