@@ -485,7 +485,7 @@ switch ($tag) {
             }
             array_push($listebook, array(
                 'judul_master' => $value['judul_master'],
-                'image_master' => $getimageproduk . $value['image_master'],
+                'image_master' => $urlimg . $value['image_master'],
                 'nama_kategori' => $value['nama_kategori'],
                 'harga_master' => (int)$harga,
                 'diskon_rupiah' => (int)$diskon_rupiah,

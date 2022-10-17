@@ -1,12 +1,12 @@
 <?php
 // local
-// static $password_db = '';
-// static $IP = 'localhost';
-// static $user_db = 'root';
-// server
-static $password_db = 'a123123123b@';
+static $password_db = '';
 static $IP = 'localhost';
-static $user_db = 'satoetoko_user';
+static $user_db = 'root';
+// server
+// static $password_db = 'a123123123b@';
+// static $IP = 'localhost';
+// static $user_db = 'satoetoko_user';
 
 define('HOST',$IP);
 define('USER',$user_db);
@@ -37,7 +37,7 @@ define('MTRANS_URL', 'https://app.sandbox.midtrans.com/snap/v1/transactions'); /
 // define('MTRANS_SERVER_KEY', 'Mid-server-smzxD9Be40AkecTlon1SfWJT'); // PROD
 // define('MTRANS_URL', 'https://app.midtrans.com/snap/v1/transactions'); //PROD
 
-define('GETWA', '628112845216'); // NOMOR WHATSAPP ADMIN
+define('GETWA', '628112845174'); // NOMOR WHATSAPP ADMIN
 
 // $urlmain = "http://103.137.254.78/andibook";
 $urlimg = "http://103.137.254.78/andibook/image/";
