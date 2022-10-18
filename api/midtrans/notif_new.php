@@ -48,7 +48,7 @@ if ($data['transaction_status'] == "settlement" or $data['transaction_status'] =
     //     INTERVAL '$lama' DAY) WHERE id_transaksi_detail = '$row[id_transaksi_detail]'");
     // }
 
-    $stmt[] = $conn->query("UPDATE ebook_transaksi SET status_transaksi= '7', tgl_dibayar = NOW(), tgl_aktif = DATE_ADD(NOW(), INTERVAL '$lama' DAY), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$invoice'");
+    $stmt[] = $conn->query("UPDATE ebook_transaksi SET status_transaksi= '7', tgl_dibayar = NOW(), tgl_aktif = DATE_ADD(NOW(), INTERVAL '14' DAY), payment_type= '$data[payment_type]' WHERE invoice = '$invoice'");
     if (in_array(false, $stmt) or in_array(0, $stmt)) {
         $conn->rollback();
         $response->code = 400;
