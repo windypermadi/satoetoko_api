@@ -62,7 +62,7 @@ if ($data['transaction_status'] == "settlement" or $data['transaction_status'] =
         die();
     }
 } else if ($data['transaction_status'] == "pending") {
-    $query = mysqli_query($conn, "UPDATE ebook_transaksi SET status_transaksi= '2', tgl_dibayar = NOW(), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$order_id'");
+    $query = mysqli_query($conn, "UPDATE ebook_transaksi SET status_transaksi= '1', tgl_dibayar = NOW(), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$order_id'");
 } else if ($data['transaction_status'] == "expire") {
     $query = mysqli_query($conn, "UPDATE ebook_transaksi SET status_transaksi= '8', tgl_dibayar = NOW(), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$order_id'");
 } else if ($data['transaction_status'] == "deny") {
