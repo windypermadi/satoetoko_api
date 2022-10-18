@@ -14,7 +14,11 @@ $server_key = MTRANS_SERVER_KEY;
 $signature_key = hash('sha512', $order_id . $status_code . $gross_amount . $server_key);
 
 if ($signature_key != $data['signature_key']) {
-    respon_json_status_400('signature not valid');
+    $response->code = 400;
+    $response->message = 'signature not valid';
+    $response->data = '';
+    $response->json();
+    die();
 }
 
 $data_kepala = $conn->query("SELECT * FROM ebook_transaksi a JOIN data_user b ON a.id_user = b.id_login WHERE a.invoice = '$order_id'")->fetch_assoc();
@@ -45,7 +49,7 @@ if ($data['transaction_status'] == "settlement" or $data['transaction_status'] =
     $stmt[]    = mysqli_query($conn, "UPDATE ebook_transaksi_detail SET tgl_expired = DATE_ADD(NOW(), 
     INTERVAL '$lama' DAY) WHERE id_transaksi_detail = '$row[id_transaksi_detail]'");
 
-    $stmt[] = $conn->query("UPDATE ebook_transaksi SET status_transaksi= '7', tanggal_dibayar = NOW(), tgl_aktif = DATE_ADD(NOW(), INTERVAL '$lama' DAY), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$invoice'");
+    $stmt[] = $conn->query("UPDATE ebook_transaksi SET status_transaksi= '7', tgl_dibayar = NOW(), tgl_aktif = DATE_ADD(NOW(), INTERVAL '$lama' DAY), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$invoice'");
     if (in_array(false, $stmt) or in_array(0, $stmt)) {
         $conn->rollback();
         $response->code = 400;
