@@ -2,8 +2,7 @@
 require_once('../../config/koneksi.php');
 
 $get_raw = file_get_contents('php://input');
-// $query = mysqli_query($conn, "INSERT into midtrans_callback set data = '$get_raw'");
-// die();
+$query = mysqli_query($conn, "INSERT into midtrans_callback set data = '$get_raw'");
 
 $data = json_decode($get_raw, true);
 
@@ -20,7 +19,11 @@ if ($signature_key != $data['signature_key']) {
 
 $data_kepala = $conn->query("SELECT * FROM ebook_transaksi a JOIN data_user b ON a.id_user = b.id_login WHERE a.invoice = '$order_id'")->fetch_assoc();
 if (empty($data_kepala)) {
-    respon_json_status_400('Invoice tidak ditemukan');
+    $response->code = 400;
+    $response->message = 'Invoice tidak ditemukan';
+    $response->data = '';
+    $response->json();
+    die();
 }
 
 if ($data['transaction_status'] == "settlement" or $data['transaction_status'] == "capture" or $data['transaction_status'] == "accept") {
@@ -37,20 +40,26 @@ if ($data['transaction_status'] == "settlement" or $data['transaction_status'] =
         } else if ($row['status_pembelian'] == '2') {
             $lama = $row['lama_sewa'];
         }
-        $stmt[]    = mysqli_query($conn, "UPDATE ebook_transaksi_detail SET tgl_expired = DATE_ADD(NOW(), 
-         INTERVAL '$lama' DAY) WHERE id_transaksi_detail = '$row[id_transaksi_detail]'");
     }
+
+    $stmt[]    = mysqli_query($conn, "UPDATE ebook_transaksi_detail SET tgl_expired = DATE_ADD(NOW(), 
+    INTERVAL '$lama' DAY) WHERE id_transaksi_detail = '$row[id_transaksi_detail]'");
 
     $stmt[] = $conn->query("UPDATE ebook_transaksi SET status_transaksi= '7', tanggal_dibayar = NOW(), tgl_aktif = DATE_ADD(NOW(), INTERVAL '$lama' DAY), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$invoice'");
     if (in_array(false, $stmt) or in_array(0, $stmt)) {
         $conn->rollback();
-        http_response_code(400);
-        $respon['pesan'] = "Gagal transaksi.\nKlik `Mengerti` untuk menutup pesan ini";
-        die(json_encode($respon));
+        $response->code = 400;
+        $response->message = 'Gagal transaksi.\nKlik `Mengerti` untuk menutup pesan ini';
+        $response->data = '';
+        $response->json();
+        die();
     } else {
         $conn->commit();
-        $respon['pesan'] = "Yeyee berhasil melakukan transaksi dengan kode invoice " . $invoice;
-        die(json_encode($respon));
+        $response->code = 200;
+        $response->message = 'Yeyee berhasil melakukan transaksi dengan kode invoice ' . $invoice;
+        $response->data = '';
+        $response->json();
+        die();
     }
 } else if ($data['transaction_status'] == "pending") {
     $query = mysqli_query($conn, "UPDATE ebook_transaksi SET status_transaksi= '2', tgl_dibayar = NOW(), payment_type='" . $data['payment_type'] . "' WHERE invoice = '$order_id'");
