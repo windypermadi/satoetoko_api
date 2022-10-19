@@ -16,7 +16,17 @@ if (!empty($_FILES['profil_user'])) {
         if (move_uploaded_file($lokasi, "../../assets/images/pict-profile/" . $nama_file)) {
             $query = mysqli_query($conn, "UPDATE data_user SET nama_user = '$nama_user', notelp = '$notelp', profil_user = '$nama_file' WHERE id_login = '$id_user'");
             if ($query) {
-                sendSuccess("Berhasil mengedit profil kamu");
+                $result['id_user'] = $id_user;
+                $result['nama_user'] = $nama_user;
+                $result['notelp'] = $notelp;
+                $result['profil_user'] = $nama_file;
+
+                $response = new Response();
+                $response->code = 200;
+                $response->message = 'Berhasil mengedit profil kamu';
+                $response->data = $result;
+                $response->json();
+                die();
             } else {
                 sendError("Gagal mengedit profil kamu");
             }
@@ -29,7 +39,16 @@ if (!empty($_FILES['profil_user'])) {
 } else {
     $query = mysqli_query($conn, "UPDATE data_user SET nama_user = '$nama_user', notelp = '$notelp' WHERE id_login = '$id_user'");
     if ($query) {
-        sendSuccess("Berhasil mengedit profil kamu");
+        $result['id_user'] = $id_user;
+        $result['nama_user'] = $nama_user;
+        $result['notelp'] = $notelp;
+
+        $response = new Response();
+        $response->code = 200;
+        $response->message = 'Berhasil mengedit profil kamu';
+        $response->data = $result;
+        $response->json();
+        die();
     } else {
         sendError("Gagal mengedit profil kamu");
     }
