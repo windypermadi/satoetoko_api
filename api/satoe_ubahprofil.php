@@ -6,6 +6,7 @@ $response = new Response();
 $id_user               = $_POST['id_user'];
 $nama_user             = $_POST['nama_user'] ?? '';
 $notelp                = $_POST['notelp'] ?? '';
+$getdata = mysqli_query($conn, "SELECT * FROM data_user WHERE id_login = '$id_user'")->fetch_assoc();
 
 if (!empty($_FILES['profil_user'])) {
 
@@ -19,7 +20,8 @@ if (!empty($_FILES['profil_user'])) {
                 $result['id_user'] = $id_user;
                 $result['nama_user'] = $nama_user;
                 $result['notelp'] = $notelp;
-                $result['profil_user'] = $nama_file;
+                $result['email'] = $getdata['email'];
+                $result['profil_user'] = $getprofile . $nama_file;
 
                 $response = new Response();
                 $response->code = 200;
@@ -42,6 +44,8 @@ if (!empty($_FILES['profil_user'])) {
         $result['id_user'] = $id_user;
         $result['nama_user'] = $nama_user;
         $result['notelp'] = $notelp;
+        $result['email'] = $getdata['email'];
+        $result['profil_user'] = $getprofile . $getdata['profil_user'];
 
         $response = new Response();
         $response->code = 200;

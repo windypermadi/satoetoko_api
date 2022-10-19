@@ -42,9 +42,12 @@ define('GETWA', '628112845174'); // NOMOR WHATSAPP ADMIN
 // $urlmain = "http://103.137.254.78/andibook";
 $urlimg = "http://103.137.254.78/andibook/image/";
 $urlpdf = "http://103.137.254.78/andibook/pdfs/";
+$getprofile = "http://dev.satoetoko.com/assets/images/pict-profile/";
+
+
 $urliklan = "http://andipublisher.com/images/iklan/";
 // $urladmin = "http://103.137.254.78/andibook/admin/";
-$getprofile = "http://andipublisher.com/images/user/profile/";
+
 $getfotobarang = "http://andipublisher.com/images/barang/";
 $geticonkategori = "http://andipublisher.com/images/kategori/";
 //sertifikat
