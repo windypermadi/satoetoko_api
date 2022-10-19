@@ -3,7 +3,7 @@
 // static $password_db = '';
 // static $IP = 'localhost';
 // static $user_db = 'root';
-// server
+// // server
 static $password_db = 'a123123123b@';
 static $IP = 'localhost';
 static $user_db = 'satoetoko_user';
