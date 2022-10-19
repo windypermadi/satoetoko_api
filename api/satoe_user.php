@@ -12,7 +12,7 @@ if ($sekarang['sekarang'] <= $data->tanggal_login) {
 	$data1['nama_user']        = $data->nama_user;
 	$data1['email']            = $data->email;
 	$data1['notelp']           = $data->notelp;
-	$data1['profil_user']      = $data->profil_user;
+	$data1['profil_user']      = $getprofile . $data->profil_user;
 	$update = mysqli_query($conn, "UPDATE data_user SET login_at = NOW() WHERE id_login = '$data->id_login' AND status_aktif  = 'Y' AND status_remove  = 'N'");
 
 	if ($update) {
