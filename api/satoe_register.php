@@ -26,49 +26,49 @@ $cek_email = mysqli_query($conn, "SELECT email FROM data_user WHERE email = '$em
 $cek_hp = mysqli_query($conn, "SELECT notelp FROM data_user WHERE notelp = '$no_hp' AND status_aktif  = 'Y' AND status_remove  = 'N'")->num_rows;
 
 if ($cek_email > 0) {
-	$response->code = 400;
-	$response->message = 'Email sudah terpakai mohon untuk menggunakan email yang berbeda!\nKlik `Mengerti` untuk menutup pesan ini';
-	$response->data = '';
-	$response->json();
-	die();
+    $response->code = 400;
+    $response->message = 'Email sudah terpakai mohon untuk menggunakan email yang berbeda!\nKlik `Mengerti` untuk menutup pesan ini';
+    $response->data = '';
+    $response->json();
+    die();
 } else {
-	if ($cek_hp > 0) {
-		$response->code = 400;
-		$response->message = 'Nomor HP sudah terpakai mohon untuk menggunakan nomor HP yang berbeda!\nKlik `Mengerti` untuk menutup pesan ini';
-		$response->data = '';
-		$response->json();
-		die();
-	} else {
-		//   $iduser = createID('id_user', 'loginuser_bahana', 'US');
-		//   $referal = generate_referal_lagi();
-		$query = mysqli_query($conn, "INSERT INTO `data_user`(`id_login`, `nama_user`, `email`, `notelp`, `password`, `status_provider`)
+    if ($cek_hp > 0) {
+        $response->code = 400;
+        $response->message = 'Nomor HP sudah terpakai mohon untuk menggunakan nomor HP yang berbeda!\nKlik `Mengerti` untuk menutup pesan ini';
+        $response->data = '';
+        $response->json();
+        die();
+    } else {
+        //   $iduser = createID('id_user', 'loginuser_bahana', 'US');
+        //   $referal = generate_referal_lagi();
+        $query = mysqli_query($conn, "INSERT INTO `data_user`(`id_login`, `nama_user`, `email`, `notelp`, `password`, `status_provider`)
         VALUES (UUID(), '$nama', '$email_login', '$no_hp', '$pass_login', '1')");
 
-		if ($query) {
-			$mail = new PHPMailer;
-			$mail->isSMTP();
-			$mail->SMTPOptions = array(
-				'ssl' => array(
-					'verify_peer' => false,
-					'verify_peer_name' => false,
-					'allow_self_signed' => true
-				)
-			);
-			$mail->Host = 'mail.bahanadigital.com';
-			$mail->Port = 587;
-			$mail->SMTPSecure = 'tsl';
-			$mail->SMTPAuth = true;
-			$mail->Username = 'info@bahanadigital.com';
-			$mail->Password = 'A123123123b@';
-			$mail->setFrom('info@bahanadigital.com', 'Bahana Digital');
-			$mail->addAddress($email_login, $nama);
-			$mail->isHTML(true);
-			$mail->Subject = 'Verifikasi E-mail';
-			$mail->Body = '
+        if ($query) {
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+            $mail->Host = 'mail.satoetoko.com';
+            $mail->Port = 465;
+            $mail->SMTPSecure = 'ssl';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'akun@satoetoko.com';
+            $mail->Password = 'a123123123b@';
+            $mail->setFrom('akun@satoetoko.com', 'Satoetoko');
+            $mail->addAddress($email_user, $email_user);
+            $mail->isHTML(true);
+            $mail->Subject = 'Verifikasi Email';
+            $mail->Body = '
         <!DOCTYPE html>
         <html>
         <head>
-        <title>Verifikasi E-mail</title>
+        <title>Verifikasi Email</title>
         <!-- FONT -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
@@ -78,12 +78,12 @@ if ($cek_email > 0) {
         <div class="email-container">
         <center><h3>VERIFIKASI EMAIL</h3></center>
         <hr><br>
-        Hallo, ' . $email_login . '.
+        Hallo, ' . $nama . '.
         <br><br>
         <div align="justify">
-        Selamat! Anda telah melakukan registrasi keanggotaan <b style="font-family: sans-serif; color:#21325E;"> BAHANA DIGITAL</b>.<br>
-        Terimakasih telah mendaftar sebagai anggota <b style="font-family: sans-serif; color:#21325E;"> BAHANA DIGITAL</b>. Nikmati
-        layanan terbaik kami untuk lebih menikmati membaca buku digital di aplikasi.<br>
+        Selamat! Anda telah melakukan registrasi keanggotaan <b style="font-family: sans-serif; color:#21325E;"> SATOETOKO</b>.<br>
+        Terimakasih telah mendaftar sebagai anggota <b style="font-family: sans-serif; color:#21325E;"> SATOETOKO</b>. Nikmati
+        layanan terbaik kami untuk lebih menikmati pembelian di aplikasi.<br>
         Klik link di bawah untuk mengaktifkan akun anda:
         <br><br>
         </div>
@@ -94,7 +94,7 @@ if ($cek_email > 0) {
         <br>
         <center>
         klik link di bawah ini jika tombol verifikasi diatas tidak berfungsi.<br><br>
-        <a href="' . $url_cek_token . '">http://dev.andipublisher.com/application_api/email/url_verifikasi_email.php?action=cek_token&token=' . $email_login . '</a></center><br><br>
+        <a href="' . $url_cek_token . '">http://satoetoko.com/satoetoko_api/api/email/url_verifikasi_email.php?action=cek_token&token=' . $email_login . '</a></center><br><br>
         Untuk informasi lebih lanjut mengenai layanan kami:<br>
         <table style="margin-left: 25px;">
         <tr>
@@ -102,7 +102,7 @@ if ($cek_email > 0) {
         Call Center
         </td>
         <td>
-        : +62811-2848-798
+        : 0811-2845-174
         </td>
         </tr>
         <tr>
@@ -110,7 +110,7 @@ if ($cek_email > 0) {
         Website
         </td>
         <td>
-        : www.bahanadigital.com
+        : www.satoetoko.com
         </td>
         </tr>
         <tr>
@@ -124,36 +124,36 @@ if ($cek_email > 0) {
         </table><br>
         <div style="text-align: left">
         Hormat Kami,<br><br><br>
-        <b style="font-family: sans-serif; color:#21325E;"> BAHANA DIGITAL</b>.<br>
+        <b style="font-family: sans-serif; color:#21325E;"> SATOETOKO</b>.<br>
         </div>
         </div>
         </div>
         </body>
         </html>';
 
-			if (!$mail->send()) {
-				$response->code = 400;
-				$response->message = 'Email tidak terkirim.';
-				$response->data = '';
-				$response->json();
-				die();
-			} else {
-				$response->code = 200;
-				$response->message = 'Yey registrasi kamu berhasil.\n\nSilahkan untuk verifikasi akun anda terlebih dahulu. Cek di KONTAK MASUK EMAIL atau di SPAM EMAIL.';
-				$response->data = '';
-				$response->json();
-				die();
-			}
+            if (!$mail->send()) {
+                $response->code = 400;
+                $response->message = 'Email tidak terkirim.';
+                $response->data = '';
+                $response->json();
+                die();
+            } else {
+                $response->code = 200;
+                $response->message = 'Yey registrasi kamu berhasil.\n\nSilahkan untuk verifikasi akun anda terlebih dahulu. Cek di KONTAK MASUK EMAIL atau di SPAM EMAIL.';
+                $response->data = '';
+                $response->json();
+                die();
+            }
 
 
-			die(json_encode($respon));
-		} else {
-			$response->code = 400;
-			$response->message = 'Gagal menambahkan Anggota baru!\nKlik `Mengerti` untuk menutup pesan ini';
-			$response->data = '';
-			$response->json();
-			die();
-		}
-	}
+            die(json_encode($respon));
+        } else {
+            $response->code = 400;
+            $response->message = 'Gagal menambahkan Anggota baru!\nKlik `Mengerti` untuk menutup pesan ini';
+            $response->data = '';
+            $response->json();
+            die();
+        }
+    }
 }
 mysqli_close($conn);
