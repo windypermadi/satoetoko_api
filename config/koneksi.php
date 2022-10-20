@@ -40,9 +40,7 @@ define('MTRANS_URL', 'https://app.sandbox.midtrans.com/snap/v1/transactions'); /
 define('GETWA', '628112845174'); // NOMOR WHATSAPP ADMIN
 
 // $urlmain = "http://103.137.254.78/andibook";
-$urlimg = "http://103.137.254.78/andibook/image/";
-$urlpdf = "http://103.137.254.78/andibook/pdfs/";
-$getprofile = "http://dev.satoetoko.com/assets/images/pict-profile/";
+// $urlimg = "http://103.137.254.78/andibook/image/";
 
 
 $urliklan = "http://andipublisher.com/images/iklan/";
@@ -66,11 +64,23 @@ $getkategoriicon = "https://devsertidemi.andipublisher.com/image/kategori/";
 // $getimageproduk = "localhost/assets/images/products/ebook/";
 // $geticonpayment = "http://dev.satoetoko.com/assets/images/products/ebook/";
 
-//satoetoko server
-$urlbanner = "http://dev.satoetoko.com/assets/images/banner/";
-$geticonkategori = "http://dev.satoetoko.com/assets/images/icon_kategori/";
-$getimageproduk = "http://dev.satoetoko.com/assets/images/products/ebook/";
-$geticonpayment = "http://dev.satoetoko.com/assets/images/payment/";
+//satoetoko server production
+$urlimg = "https://satoetoko.com/assets/images/products/ebook/";
+$urlpdf = "http://103.137.254.78/andibook/pdfs/";
+$getprofile = "https://satoetoko.com/assets/images/pict-profile/";
+$urlbanner = "https://satoetoko.com/assets/images/banner/";
+$geticonkategori = "https://satoetoko.com/assets/images/icon_kategori/";
+$getimageproduk = "https://satoetoko.com/assets/images/products/ebook/";
+$geticonpayment = "https://satoetoko.com/assets/images/payment/";
+
+//satoetoko server testing
+// $urlimg = "https://dev.satoetoko.com/assets/images/products/ebook/";
+// $urlpdf = "http://103.137.254.78/andibook/pdfs/";
+// $getprofile = "https://dev.satoetoko.com/assets/images/pict-profile/";
+// $urlbanner = "https://dev.satoetoko.com/assets/images/banner/";
+// $geticonkategori = "https://dev.satoetoko.com/assets/images/icon_kategori/";
+// $getimageproduk = "https://dev.satoetoko.com/assets/images/products/ebook/";
+// $geticonpayment = "https://dev.satoetoko.com/assets/images/payment/";
 
 date_default_timezone_set("ASIA/JAKARTA");
 
