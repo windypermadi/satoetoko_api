@@ -1,5 +1,7 @@
 <?php
 require_once('../../config/koneksi.php');
+include "../response.php";
+$response = new Response();
 
 $get_raw = file_get_contents('php://input');
 $query = mysqli_query($conn, "INSERT into midtrans_callback set data = '$get_raw'");
