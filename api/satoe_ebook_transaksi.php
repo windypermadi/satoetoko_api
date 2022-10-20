@@ -19,7 +19,7 @@ switch ($tag) {
 
         if ($cektransaksi > 0) {
             $response->code = 400;
-            $response->message = 'Kamu masih punya ebook ini lho, dibaca jangan dianggurin yaa!\nKlik `Mengerti` untuk menutup pesan ini';
+            $response->message = 'Kamu masih punya ebook ini lho, dibaca jangan dianggurin yaa';
             $response->data = '';
             $response->json();
             die();
@@ -31,7 +31,8 @@ switch ($tag) {
         LEFT JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
             $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
-            $ppn = $cekppn->pajak;
+            // $ppn = $cekppn->pajak;
+            $ppn = "0";
 
             if ($status == '1') {
                 $diskon_persen = $data->diskon_persen;
@@ -74,7 +75,9 @@ switch ($tag) {
             }
 
             $listvoucher = array();
-            $vouchers = $conn->query("SELECT * FROM voucher WHERE tgl_berakhir >= NOW()");
+            $vouchers = $conn->query("SELECT * FROM voucher_user a 
+            JOIN voucher b ON a.idvoucher = b.idvoucher
+            WHERE a.iduser = '$iduser' AND a.status_pakai = '0' AND tgl_mulai <= CURRENT_DATE() AND tgl_berakhir >= CURRENT_DATE();");
             foreach ($vouchers as $key => $value) {
                 array_push($listvoucher, array(
                     'idvoucher' => $value['idvoucher'],
@@ -85,7 +88,8 @@ switch ($tag) {
                 ));
             }
 
-            $totalppn = $harga_produk * ((int)$ppn / 100);
+            // $totalppn = $harga_produk * ((int)$ppn / 100);
+            $totalppn = 0;
 
             $data1['produk'] = $listebook;
             $data1['kupon'] = $listvoucher;
@@ -430,7 +434,8 @@ switch ($tag) {
         JOIN ebook_transaksi e ON a.id_transaksi = e.id_transaksi WHERE a.id_transaksi = '$id_transaksi';"));
 
         $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
-        $ppn = $cekppn->pajak;
+        // $ppn = $cekppn->pajak;
+        $ppn = "0";
         $status_transaksi = $data->status_transaksi;
         $status_payment = $data->status_payment;
 
@@ -497,7 +502,8 @@ switch ($tag) {
             ));
         }
 
-        $totalppn = $total * ((int)$ppn / 100);
+        // $totalppn = $total * ((int)$ppn / 100);
+        $totalppn = 0;
 
         $data1['id_transaksi'] = $id_transaksi;
         $data1['invoice'] = $invoice;

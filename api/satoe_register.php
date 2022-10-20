@@ -42,7 +42,7 @@ if ($cek_email > 0) {
         //   $iduser = createID('id_user', 'loginuser_bahana', 'US');
         //   $referal = generate_referal_lagi();
         $query = mysqli_query($conn, "INSERT INTO `data_user`(`id_login`, `nama_user`, `email`, `notelp`, `password`, `status_provider`)
-        VALUES (UUID(), '$nama', '$email_login', '$no_hp', '$pass_login', '1')");
+        VALUES (UUID_SHORT(), '$nama', '$email_login', '$no_hp', '$pass_login', '1')");
 
         if ($query) {
             $mail = new PHPMailer;
