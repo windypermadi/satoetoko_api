@@ -67,7 +67,7 @@ switch ($tag) {
             foreach ($payments as $key => $value) {
                 array_push($listmetode, array(
                     'id_payment' => $value['id_payment'],
-                    'icon_payment' => $value['icon_payment'],
+                    'icon_payment' => $geticonpayment.$value['icon_payment'],
                     'metode_pembayaran' => $value['metode_pembayaran'],
                     'nomor_payment' => $value['nomor_payment'],
                     'penerima_payment' => $value['penerima_payment']
@@ -182,7 +182,7 @@ switch ($tag) {
         tgl_create = NOW()");
 
         $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$id_payment'")->fetch_assoc();
-        $icon_payment = $query['icon_payment'];
+        $icon_payment = $geticonpayment.$query['icon_payment'];
         $metode_pembayaran = $query['metode_pembayaran'];
         $nomor_payment = $query['nomor_payment'];
         $penerima_payment = $query['penerima_payment'];
@@ -261,7 +261,7 @@ switch ($tag) {
                 $result['id_transaksi'] = $idtransaksi;
                 $result['invoice'] = $invoice;
                 $result['id_payment'] = $id_payment;
-                $result['icon_payment'] = $icon_payment;
+                $result['icon_payment'] = $geticonpayment.$icon_payment;
                 $result['metode_pembayaran'] = $metode_pembayaran;
                 $result['nomor_payment'] = $nomor_payment;
                 $result['penerima_payment'] = $penerima_payment;
@@ -572,7 +572,7 @@ switch ($tag) {
             die();
         } else if ($status_payment == '2') {
             $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$data->payment_type'")->fetch_assoc();
-            $icon_payment = $query['icon_payment'];
+            $icon_payment = $geticonpayment.$query['icon_payment'];
             $metode_pembayaran = $query['metode_pembayaran'];
             $nomor_payment = $query['nomor_payment'];
             $penerima_payment = $query['penerima_payment'];
@@ -594,7 +594,7 @@ switch ($tag) {
             $result['invoice'] = $invoice;
             $result['status_payment'] = $status_payment;
             $result['id_payment'] = $id_payment;
-            $result['icon_payment'] = $icon_payment;
+            $result['icon_payment'] = $geticonpayment.$icon_payment;
             $result['metode_pembayaran'] = $metode_pembayaran;
             $result['nomor_payment'] = $nomor_payment;
             $result['penerima_payment'] = $penerima_payment;
