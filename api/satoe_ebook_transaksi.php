@@ -323,7 +323,7 @@ switch ($tag) {
             JOIN master_ebook_detail b ON a.id_master = b.id_master
             JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
             WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
-        $lama = $data2['lama_sewa'];
+        $lama = $data2->lama_sewa;
 
         $totalakhir = (int)$jumlahbayar - (int)$harga_diskon;
 
