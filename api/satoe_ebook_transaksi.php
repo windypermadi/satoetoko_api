@@ -334,6 +334,7 @@ switch ($tag) {
             tgl_pembelian = NOW(),
             status_transaksi = '7',
             status_payment = '$status_payment',
+            tgl_dibayar = NOW(),
             batas_pembayaran = '$exp_date',
             total_pembayaran = '$jumlahbayar',
             kode_voucher = '$id_voucher',
@@ -362,7 +363,7 @@ switch ($tag) {
             harga_diskon = '$harga_diskon',
             status_pembelian = '$status',
             tgl_create = NOW(),
-            tgl_expired = tgl_expired = DATE_ADD(NOW(), 
+            tgl_expired = DATE_ADD(NOW(), 
         INTERVAL '$lama' DAY)");
         }
 
