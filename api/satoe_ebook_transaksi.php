@@ -67,7 +67,7 @@ switch ($tag) {
             foreach ($payments as $key => $value) {
                 array_push($listmetode, array(
                     'id_payment' => $value['id_payment'],
-                    'icon_payment' => $geticonpayment.$value['icon_payment'],
+                    'icon_payment' => $geticonpayment . $value['icon_payment'],
                     'metode_pembayaran' => $value['metode_pembayaran'],
                     'nomor_payment' => $value['nomor_payment'],
                     'penerima_payment' => $value['penerima_payment']
@@ -182,7 +182,7 @@ switch ($tag) {
         tgl_create = NOW()");
 
         $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$id_payment'")->fetch_assoc();
-        $icon_payment = $geticonpayment.$query['icon_payment'];
+        $icon_payment = $geticonpayment . $query['icon_payment'];
         $metode_pembayaran = $query['metode_pembayaran'];
         $nomor_payment = $query['nomor_payment'];
         $penerima_payment = $query['penerima_payment'];
@@ -261,7 +261,7 @@ switch ($tag) {
                 $result['id_transaksi'] = $idtransaksi;
                 $result['invoice'] = $invoice;
                 $result['id_payment'] = $id_payment;
-                $result['icon_payment'] = $geticonpayment.$icon_payment;
+                $result['icon_payment'] = $geticonpayment . $icon_payment;
                 $result['metode_pembayaran'] = $metode_pembayaran;
                 $result['nomor_payment'] = $nomor_payment;
                 $result['penerima_payment'] = $penerima_payment;
@@ -285,6 +285,89 @@ switch ($tag) {
                 $response->json();
                 die();
             }
+        }
+        break;
+    case "addtransaksifree":
+        $id_user            = $_POST['id_user'];
+        $id_master          = $_POST['id_master'];
+        $id_voucher         = $_POST['id_voucher'] ?? '';
+        $id_payment         = $_POST['id_payment'];
+        $status             = $_POST['status_pembelian'];
+        $jumlahbayar        = $_POST['jumlahbayar'];
+        $harga_normal       = $_POST['harga_normal'];
+        $diskon             = $_POST['diskon'];
+        $harga_diskon       = $_POST['harga_diskon'];
+
+        $response = new Response();
+        $exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
+
+        if ($id_payment != '0') {
+            $status_payment = '2';
+        } else {
+            $status_payment = '1';
+        }
+
+        if ($diskon == 0) {
+            $harga_diskon = 0;
+        } else {
+            $harga_diskon = (int)$data->harga_diskon;
+        }
+
+        $conn->begin_transaction();
+
+        $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
+        $idtransaksi = createID('invoice', 'ebook_transaksi', 'TR');
+        $invoice = id_ke_struk($idtransaksi);
+
+        $data2 = mysqli_fetch_object($conn->query("SELECT b.lama_sewa FROM master_item a 
+            JOIN master_ebook_detail b ON a.id_master = b.id_master
+            JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
+            WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
+
+        $totalakhir = (int)$jumlahbayar - (int)$harga_diskon;
+
+        $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET 
+            id_transaksi = '$transaction->id',
+            invoice = '$idtransaksi',
+            id_user = '$id_user',
+            tgl_pembelian = NOW(),
+            status_transaksi = '7',
+            status_payment = '$status_payment',
+            batas_pembayaran = '$exp_date',
+            total_pembayaran = '$jumlahbayar',
+            kode_voucher = '$id_voucher',
+            payment_type = '$id_payment',
+            total_akhir_pembayaran = '$totalakhir'");
+
+        $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET 
+            id_transaksi_detail = UUID_SHORT(),
+            id_transaksi = '$transaction->id',
+            id_user = '$id_user',
+            id_master = '$id_master',
+            harga_normal = '$harga_normal',
+            diskon = '$diskon',
+            harga_diskon = '$harga_diskon',
+            status_pembelian = '$status',
+            tgl_create = NOW()");
+
+        $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$id_payment'")->fetch_assoc();
+        $icon_payment = $geticonpayment . $query['icon_payment'];
+        $metode_pembayaran = $query['metode_pembayaran'];
+        $nomor_payment = $query['nomor_payment'];
+        $penerima_payment = $query['penerima_payment'];
+
+        if (in_array(false, $data)) {
+            $response->code = 400;
+            $response->message = mysqli_error($conn);
+            $response->data = '';
+            $response->json();
+            die();
+        } else {
+            $conn->commit();
+            $response->code = 200;
+            $response->message = 'Selamat transaksi kamu telah berhasil.';
+            $response->json();
+            die();
         }
         break;
     case "cancel_transaksi":
@@ -572,7 +655,7 @@ switch ($tag) {
             die();
         } else if ($status_payment == '2') {
             $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$data->payment_type'")->fetch_assoc();
-            $icon_payment = $geticonpayment.$query['icon_payment'];
+            $icon_payment = $geticonpayment . $query['icon_payment'];
             $metode_pembayaran = $query['metode_pembayaran'];
             $nomor_payment = $query['nomor_payment'];
             $penerima_payment = $query['penerima_payment'];
@@ -594,7 +677,7 @@ switch ($tag) {
             $result['invoice'] = $invoice;
             $result['status_payment'] = $status_payment;
             $result['id_payment'] = $id_payment;
-            $result['icon_payment'] = $geticonpayment.$icon_payment;
+            $result['icon_payment'] = $geticonpayment . $icon_payment;
             $result['metode_pembayaran'] = $metode_pembayaran;
             $result['nomor_payment'] = $nomor_payment;
             $result['penerima_payment'] = $penerima_payment;
