@@ -366,6 +366,7 @@ switch ($tag) {
             $conn->commit();
             $response->code = 200;
             $response->message = 'Selamat transaksi kamu telah berhasil.';
+            $response->data = '';
             $response->json();
             die();
         }
