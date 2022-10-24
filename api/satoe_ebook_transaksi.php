@@ -323,6 +323,7 @@ switch ($tag) {
             JOIN master_ebook_detail b ON a.id_master = b.id_master
             JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
             WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
+        $lama = $data2['lama_sewa'];
 
         $totalakhir = (int)$jumlahbayar - (int)$harga_diskon;
 
@@ -339,7 +340,8 @@ switch ($tag) {
             payment_type = '$id_payment',
             total_akhir_pembayaran = '$totalakhir'");
 
-        $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET 
+        if ($status == '1') {
+            $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET 
             id_transaksi_detail = UUID_SHORT(),
             id_transaksi = '$transaction->id',
             id_user = '$id_user',
@@ -349,6 +351,20 @@ switch ($tag) {
             harga_diskon = '$harga_diskon',
             status_pembelian = '$status',
             tgl_create = NOW()");
+        } else if ($status == '2') {
+            $data[] = $conn->query("INSERT INTO ebook_transaksi_detail SET 
+            id_transaksi_detail = UUID_SHORT(),
+            id_transaksi = '$transaction->id',
+            id_user = '$id_user',
+            id_master = '$id_master',
+            harga_normal = '$harga_normal',
+            diskon = '$diskon',
+            harga_diskon = '$harga_diskon',
+            status_pembelian = '$status',
+            tgl_create = NOW(),
+            tgl_expired = tgl_expired = DATE_ADD(NOW(), 
+        INTERVAL '$lama' DAY)");
+        }
 
         $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$id_payment'")->fetch_assoc();
         $icon_payment = $geticonpayment . $query['icon_payment'];
