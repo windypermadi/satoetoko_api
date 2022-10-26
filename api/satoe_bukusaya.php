@@ -31,11 +31,6 @@ switch ($status) {
             WHERE b.id_user = '$id_user' AND a.status_pembelian = '1' AND b.status_transaksi = '7' AND c.judul_master LIKE '%$q%' LIMIT $offset, $limit");
         }
         while ($row = mysqli_fetch_array($query)) {
-            // if (file_exists($urlpdf . $row['url_pdf'])) {
-            //     $baca = $urlpdf . $row['url_pdf'];
-            // } else {
-            //     $baca = $urlpdf_obral . $row['url_pdf'];
-            // }
             array_push($result, array(
                 'id_master' => $row['id_master'],
                 'judul_master'   => $row['judul_master'],
