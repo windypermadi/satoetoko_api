@@ -4,7 +4,7 @@ include "response.php";
 $response = new Response();
 
 $query = mysqli_query($conn, "SELECT * FROM banner_promo WHERE tanggal_mulai <= NOW() AND 
-tanggal_selesai >= NOW() AND status_aktif = 'Y' ORDER BY tanggal_mulai ASC;");
+tanggal_selesai >= NOW() AND status_aktif = 'Y' AND status_banner != '1' ORDER BY tanggal_mulai ASC;");
 
 $result = array();
 while ($row = mysqli_fetch_array($query)) {
