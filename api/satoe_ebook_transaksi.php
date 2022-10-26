@@ -15,15 +15,15 @@ switch ($tag) {
         $diskon             = $_POST['diskon'];
         $harga_diskon       = $_POST['harga_diskon'];
 
-        $cektransaksi = mysqli_query($conn, "SELECT * FROM ebook_transaksi_detail WHERE id_user = '$id_user' AND id_master = '$id_master' AND tgl_expired >= NOW()")->num_rows;
+        // $cektransaksi = mysqli_query($conn, "SELECT * FROM ebook_transaksi_detail WHERE id_user = '$id_user' AND id_master = '$id_master' AND tgl_expired >= NOW()")->num_rows;
 
-        if ($cektransaksi > 0) {
-            $response->code = 400;
-            $response->message = 'Kamu masih punya ebook ini lho, dibaca jangan dianggurin yaa';
-            $response->data = '';
-            $response->json();
-            die();
-        } else {
+        // if ($cektransaksi > 0) {
+        //     $response->code = 400;
+        //     $response->message = 'Kamu masih punya ebook ini lho, dibaca jangan dianggurin yaa';
+        //     $response->data = '';
+        //     $response->json();
+        //     die();
+        // } else {
             $data = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
         a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
         b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
@@ -116,7 +116,7 @@ switch ($tag) {
                 $response->json();
                 die();
             }
-        }
+        // }
         break;
     case "addtransaksi":
         $id_user            = $_POST['id_user'];
