@@ -89,11 +89,17 @@ switch ($status) {
             WHERE b.id_user = '$id_user' AND a.status_pembelian = '2' AND b.status_transaksi = '7' AND a.tgl_expired >= NOW() AND c.judul_master LIKE '%$q%' LIMIT $offset, $limit");
         }
         while ($row = mysqli_fetch_array($query)) {
+            if (file_exists($urlpdf . $row['url_pdf'])) {
+                $baca = $urlpdf . $row['url_pdf'];
+            } else {
+                $baca = $urlpdf_obral . $row['url_pdf'];
+            }
             array_push($result, array(
                 'id_master' => $row['id_master'],
                 'judul_master'   => $row['judul_master'],
                 'image_master'   => $urlimg . $row['image_master'],
-                'url_pdf' => $urlpdf . $row['url_pdf'],
+                // 'url_pdf' => $urlpdf . $row['url_pdf'],
+                'url_pdf' => $baca,
                 'nama_kategori'     => $row['nama_kategori'],
                 'tgl_expired'     => $row['tgl_expired'],
             ));
