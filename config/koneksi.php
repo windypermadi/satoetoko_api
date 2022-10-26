@@ -51,7 +51,7 @@ $getkategoriicon = "https://devsertidemi.andipublisher.com/image/kategori/";
 
 //satoetoko server production
 $urlpdf = "https://satoetoko.com/dashboard/files/upload/ebook/";
-$urlpdf_obral = "http://103.137.254.78/andibook/pdfs/";
+// $urlpdf = "http://103.137.254.78/andibook/pdfs/";
 $urlimg = "https://satoetoko.com/assets/images/products/ebook/";
 $getprofile = "https://satoetoko.com/assets/images/pict-profile/";
 $urlbanner = "https://satoetoko.com/assets/images/banner/";
