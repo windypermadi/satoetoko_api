@@ -205,7 +205,7 @@ switch ($tag) {
         
         $cektemp = $conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail[id_supplier]' ORDER BY tanggal_posting DESC")->num_rows;
         $temp = mysqli_fetch_object($conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail[id_supplier]' ORDER BY tanggal_posting DESC"));
-
+        $saldo_akhir = $temp->saldo_akhir + $transaksidetail->sub_total;
         if ($cektemp == 0){
             $data[] = mysqli_query($conn, "INSERT INTO saldo SET 
             id_saldo = '$transaction->id',
@@ -227,8 +227,8 @@ switch ($tag) {
             saldo_masuk = '$transaksidetail->sub_total',
             saldo_keluar = 0,
             saldo_awal = '$temp->saldo_akhir',
-            saldo_akhir = '$temp->saldo_akhir + $transaksidetail->sub_total'"
-            );
+            saldo_akhir = '$saldo_akhir'
+            ");
         }
 
         if (in_array(false, $data)) {
