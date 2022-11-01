@@ -195,6 +195,41 @@ switch ($tag) {
         $nomor_payment = $query['nomor_payment'];
         $penerima_payment = $query['penerima_payment'];
 
+        //PAYMENT MIDTRANS
+        $transaksidetail =  mysqli_query($conn, "SELECT a.id_transaksi, a.id_transaksi_detail, a.status_pembelian, d.lama_sewa, c.id_supplier, a.harga_normal, a.harga_diskon, a.fee_toko, a.sub_total
+        FROM ebook_transaksi_detail a 
+        JOIN ebook_transaksi b ON a.id_transaksi = b.id_transaksi
+        JOIN master_item c ON a.id_master = c.id_master
+        JOIN master_ebook_detail d ON c.id_master = d.id_master
+        WHERE b.invoice = '$order_id'")->fetch_assoc();
+        $cektemp = $conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail[id_supplier]' ORDER BY tanggal_posting DESC")->num_rows;
+        $temp = mysqli_fetch_object($conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail[id_supplier]' ORDER BY tanggal_posting DESC"));
+
+        if ($cektemp == 0){
+            $data[] = mysqli_query($conn, "INSERT INTO saldo SET 
+            id_saldo = '$transaction->id',
+            id_supplier = '$transaksidetail[id_supplier]',
+            keterangan = 'SALDO MASUK TRANSAKSI CUSTOMER',
+            id_transaksi = '$transaksidetail[id_transaksi]',
+            saldo_masuk = '$transaksidetail[sub_total]',
+            saldo_keluar = 0,
+            saldo_awal = 0,
+            saldo_akhir = '$transaksidetail[sub_total]'"
+            );
+    
+        } else {
+            $data[] = mysqli_query($conn, "INSERT INTO saldo SET 
+            id_saldo = '$transaction->id',
+            id_supplier = '$transaksidetail[id_supplier]',
+            keterangan = 'SALDO MASUK TRANSAKSI CUSTOMER',
+            id_transaksi = '$transaksidetail[id_transaksi]',
+            saldo_masuk = '$transaksidetail[sub_total]',
+            saldo_keluar = 0,
+            saldo_awal = '$temp[saldo_akhir]',
+            saldo_akhir = '$temp[saldo_akhir] + $transaksidetail[sub_total]'"
+            );
+        }
+
         if (in_array(false, $data)) {
             $response->code = 400;
             $response->message = mysqli_error($conn);

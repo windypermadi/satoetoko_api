@@ -14,6 +14,10 @@ define('PASS',$password_db);
 define('DB','satoetoko_deve');
 $conn = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
 
+// git config --global user.email "you@example.com"
+//   git config --global user.name "Your Name"
+
+
 //database object adi
 $hostsi = $IP;
 $usersi = $user_db;
@@ -26,16 +30,16 @@ if ($db->connect_errno) {
 }
 
 //MIDTRANS SANDBOX
-// define('MTRANS_MERCHANT_ID', 'G072856707'); // SANDBOX
-// define('MTRANS_CLIENT_KEY', 'SB-Mid-client-O6Mh_Sby8GuFZlyU'); // SANDBOX
-// define('MTRANS_SERVER_KEY', 'SB-Mid-server-flH6WJ9GxCevDxtbjIacbWyy'); // SANDBOX
-// define('MTRANS_URL', 'https://app.sandbox.midtrans.com/snap/v1/transactions'); //SANDBOX
+define('MTRANS_MERCHANT_ID', 'G072856707'); // SANDBOX
+define('MTRANS_CLIENT_KEY', 'SB-Mid-client-O6Mh_Sby8GuFZlyU'); // SANDBOX
+define('MTRANS_SERVER_KEY', 'SB-Mid-server-flH6WJ9GxCevDxtbjIacbWyy'); // SANDBOX
+define('MTRANS_URL', 'https://app.sandbox.midtrans.com/snap/v1/transactions'); //SANDBOX
 
 //MIDTRANS PRODUCTIONS
-define('MTRANS_MERCHANT_ID', 'G072856707'); // PROD
-define('MTRANS_CLIENT_KEY', 'Mid-client-bOCKckbWYz52gALt'); // PROD
-define('MTRANS_SERVER_KEY', 'Mid-server-smzxD9Be40AkecTlon1SfWJT'); // PROD
-define('MTRANS_URL', 'https://app.midtrans.com/snap/v1/transactions'); //PROD
+// define('MTRANS_MERCHANT_ID', 'G072856707'); // PROD
+// define('MTRANS_CLIENT_KEY', 'Mid-client-bOCKckbWYz52gALt'); // PROD
+// define('MTRANS_SERVER_KEY', 'Mid-server-smzxD9Be40AkecTlon1SfWJT'); // PROD
+// define('MTRANS_URL', 'https://app.midtrans.com/snap/v1/transactions'); //PROD
 
 define('GETWA', '628112845174'); // NOMOR WHATSAPP ADMIN
 
