@@ -203,8 +203,8 @@ switch ($tag) {
         JOIN master_ebook_detail d ON c.id_master = d.id_master
         WHERE b.invoice = '$idtransaksi'"));
         
-        $cektemp = $conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail[id_supplier]' ORDER BY tanggal_posting DESC")->num_rows;
-        $temp = mysqli_fetch_object($conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail[id_supplier]' ORDER BY tanggal_posting DESC"));
+        $cektemp = $conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail->id_supplier' ORDER BY tanggal_posting DESC")->num_rows;
+        $temp = mysqli_fetch_object($conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail->id_supplier' ORDER BY tanggal_posting DESC"));
         $saldo_akhir = $temp->saldo_akhir + $transaksidetail->sub_total;
         if ($cektemp == 0){
             $data[] = mysqli_query($conn, "INSERT INTO saldo SET 
