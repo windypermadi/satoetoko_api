@@ -155,6 +155,12 @@ switch ($tag) {
         JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
         WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
+        $datasupplier = mysqli_fetch_object($conn->query("SELECT a.id_supplier,b.fee_admin FROM master_item a 
+        JOIN supplier b ON a.id_supplier = b.id_supplier
+        WHERE a.id_master = '$id_master';"));
+        $feeadmin = $jumlahbayar*($datasupplier->fee_admin/100);
+        $subtotalfee = $jumlahbayar - $feeadmin;
+
         $totalakhir = (int)$jumlahbayar - (int)$harga_diskon;
 
         $data[] = mysqli_query($conn, "INSERT INTO ebook_transaksi SET 
@@ -179,6 +185,8 @@ switch ($tag) {
         diskon = '$diskon',
         harga_diskon = '$harga_diskon',
         status_pembelian = '$status',
+        fee_toko = '$feeadmin',
+        sub_total = '$subtotalfee',
         tgl_create = NOW()");
 
         $query = mysqli_query($conn, "SELECT * FROM metode_pembayaran WHERE id_payment = '$id_payment'")->fetch_assoc();
