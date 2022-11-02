@@ -5,87 +5,60 @@ $response = new Response();
 
 $limit = $_GET['limit'];
 $offset = $_GET['offset'];
-		$q = $_GET['q'] ?? '';
-		if (empty($q)) {
-			$datalist = array();
-			$data = $conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
-				a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
-				b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
-				JOIN master_ebook_detail b ON a.id_master = b.id_master
-				JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
+
+$result2 = array();
+$data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, diskon_rupiah, diskon_persen,
+total_dibeli, total_disukai FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' AND status_hapus = 'N' ORDER BY judul_master ASC LIMIT $offset, $limit");
+foreach ($data as $key => $value) {
+
+	//! untuk varian harga diskon atau enggak
+	$varian_harga = 'N';
+	if ($varian_harga == 'N') {
+
+		if ($value['diskon_persen'] != 0) {
+			$status_diskon = 'Y';
+			(float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
 		} else {
-			$datalist = array();
-			$data = $conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
-				a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
-				b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
-				JOIN master_ebook_detail b ON a.id_master = b.id_master
-				JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.status_approve = '2' AND a.judul_master LIKE '%$q%' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
+			$status_diskon = 'N';
+			(float)$harga_disc = $value['harga_master'];
 		}
 
-		foreach ($data as $key => $value) {
-			if ($value['status_ebook'] == '1') {
-				//beli
-				$status_ebook = '1';
-			} else if ($value['status_ebook'] == '2') {
-				//sewa
-				$status_ebook = '2';
-			} else if ($value['status_ebook'] == '3') {
-				//beli dan sewa
-				$status_ebook = '3';
-			} else {
-				$status_ebook = '1';
-			}
+		$harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.');
+		$harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+	} else {
 
-			if ($value['diskon_persen'] != 0) {
-				(float)$harga_potongan = (float)$value['harga_master'] * ((float)$value['diskon_persen'] / 100);
-				(float)$harga_disc = $value['harga_master'] - $harga_potongan;
-				$jumlah_diskon = $value['diskon_persen'];
-			} else if ($value['diskon_rupiah'] != 0) {
-				(float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
-				$jumlah_diskon = $value['diskon_rupiah'];
-			} else {
-				$harga_potongan = 0;
-				$jumlah_diskon = "0";
-				$harga_disc = (int)$value['harga_master'];
-			}
-
-			if ($value['diskon_sewa_persen'] != 0) {
-				(float)$harga_potongan_sewa = (float)$value['harga_sewa'] * ((float)$value['diskon_sewa_persen'] / 100);
-				(float)$harga_disc_sewa = $value['harga_sewa'] - $harga_potongan;
-				$jumlah_diskon_sewa = $value['diskon_sewa_persen'];
-			} else if ($value['diskon_sewa_rupiah'] != 0) {
-				(float)$harga_disc_sewa = $value['harga_sewa'] - $value['diskon_sewa_rupiah'];
-				$jumlah_diskon_sewa = $value['diskon_sewa_rupiah'];
-			} else {
-				$harga_potongan_sewa = 0;
-				$jumlah_diskon_sewa = "0";
-				$harga_disc_sewa = (int)$value['harga_sewa'];
-			}
-
-			if ($value['harga_sewa'] == '0') {
-				$harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.');
-			} else {
-				$harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
-			}
-
-			array_push($datalist, array(
-				'id_master' => $value['id_master'],
-				'judul_master' => $value['judul_master'],
-				'image_master' => $urlimg . $value['image_master'],
-				'status_ebook' => $value['status_ebook'],
-				'rating_ebook' => 0,
-				'nama_kategori' => $value['nama_kategori'],
-				'sinopsis' => $value['sinopsis'],
-				'lama_sewa' => $value['lama_sewa'],
-				'harga_beli' => (int)$value['harga_master'],
-				'diskon_beli' => (int)$jumlah_diskon,
-				'harga_diskon_beli' => (int)$harga_disc,
-				'harga_sewa' => (int)$value['harga_sewa'],
-				'diskon_sewa' => (int)$jumlah_diskon_sewa,
-				'harga_diskon_sewa' => (int)$harga_disc_sewa,
-				'harga_tampil' => $harga_tampil,
-			));
+		if ($value['diskon_persen'] != 0) {
+			$status_diskon = 'Y';
+			(float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+		} else {
+			$status_diskon = 'N';
+			(float)$harga_disc = $value['harga_master'];
 		}
+
+		$harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.') . " - " . "Rp" . number_format($value['harga_master'], 0, ',', '.');
+		$harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
+	}
+
+	$varian_diskon = 'N';
+	if ($varian_diskon == 'N') {
+		$status_varian_diskon = 'OFF';
+	} else {
+		$status_varian_diskon = 'UPTO';
+	}
+
+	array_push($result2, array(
+		'id_master' => $value['id_master'],
+		'judul_master' => $value['judul_master'],
+		'image_master' => $urlimg . $value['image_master'],
+		'harga_produk' => $harga_produk,
+		'harga_tampil' => $harga_tampil,
+		'status_diskon' => $status_diskon,
+		'status_varian_diskon' => $status_varian_diskon,
+		'diskon' => $value['diskon_persen'] . "%",
+		'total_dibeli' => $value['total_dibeli'] . " terjual",
+		'rating_item' => 0,
+	));
+}
 
 $result['nama_list'] = 'Produk Unggulan';
 $result['url'] = 'localhost/satoetoko_api/st_item_unggulan.php';
