@@ -8,11 +8,11 @@ static $password_db = 'a123123123b@';
 static $IP = 'localhost';
 static $user_db = 'satoetoko_user';
 
-define('HOST',$IP);
-define('USER',$user_db);
-define('PASS',$password_db);
-define('DB','satoetoko_deve');
-$conn = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
+define('HOST', $IP);
+define('USER', $user_db);
+define('PASS', $password_db);
+define('DB', 'satoetoko_deve');
+$conn = mysqli_connect(HOST, USER, PASS, DB) or die('Unable to Connect');
 
 // git config --global user.email "you@example.com"
 //   git config --global user.name "Your Name"
@@ -23,10 +23,11 @@ $hostsi = $IP;
 $usersi = $user_db;
 $passsi = $password_db;
 $dbsi   = "satoetoko_deve";
-$db = new mysqli($hostsi,$usersi,$passsi,$dbsi);
+$db = new mysqli($hostsi, $usersi, $passsi, $dbsi);
 if ($db->connect_errno) {
 	printf("Connect DB failed: %s\n", $db->connect_error);
-	exit;die;
+	exit;
+	die;
 }
 
 //MIDTRANS SANDBOX
@@ -75,52 +76,61 @@ $geticonpayment = "https://satoetoko.com/assets/images/icon-payment/";
 
 date_default_timezone_set("ASIA/JAKARTA");
 
-function random_word($id = 20){
+function random_word($id = 20)
+{
 	$pool = '1234567890abcdefghijkmnpqrstuvwxyz';
-	
+
 	$word = '';
-	for ($i = 0; $i < $id; $i++){
-		$word .= substr($pool, mt_rand(0, strlen($pool) -1), 1);
+	for ($i = 0; $i < $id; $i++) {
+		$word .= substr($pool, mt_rand(0, strlen($pool) - 1), 1);
 	}
-	return $word; 
+	return $word;
 }
 
-function tanggal_indo($tanggal) {
-	$bulan = array (1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+function tanggal_indo($tanggal)
+{
+	$bulan = array(1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
 	$split = explode('-', $tanggal);
-	return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
+	return $split[2] . ' ' . $bulan[(int)$split[1]] . ' ' . $split[0];
 }
-$hari_indo = array ( 1 =>    'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
+$hari_indo = array(
+	1 =>    'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
 );
 
-function createID($search, $table, $kode){
-          // CREATE ID
+function createID($search, $table, $kode)
+{
+	// CREATE ID
 	$id_primary = $GLOBALS['conn']->query("SELECT max($search) as maxKode FROM $table");
 	$id_primary = $id_primary->fetch_assoc();
 	$id_primary = $id_primary['maxKode'];
-	
-	if(substr($id_primary, 2, 8) != date('Ymd')){
+
+	if (substr($id_primary, 2, 8) != date('Ymd')) {
 		$noUrut = 0;
 	} else {
 		$noUrut = (int) substr($id_primary, 10, 10);
-		if($noUrut == 9999999999){ $noUrut = 0; } 
-		else { $noUrut++; }
+		if ($noUrut == 9999999999) {
+			$noUrut = 0;
+		} else {
+			$noUrut++;
+		}
 	}
 	$id_primary = $kode . date('Ymd') . sprintf("%010s", $noUrut);
 	return $id_primary;
-          // END CREATE ID
+	// END CREATE ID
 }
 
-function id_ke_struk($string){
-	$inisial = substr($string, 0,2);
-	$tgl = substr($string, 4,6);
-	$tgl = date_format(date_create($tgl),"dmy");
+function id_ke_struk($string)
+{
+	$inisial = substr($string, 0, 2);
+	$tgl = substr($string, 4, 6);
+	$tgl = date_format(date_create($tgl), "dmy");
 	$num = round(substr($string, 10));
-	$no_nota = $inisial = $inisial."-".$tgl."-".$num;
+	$no_nota = $inisial = $inisial . "-" . $tgl . "-" . $num;
 	return $no_nota;
 }
 
-function respon_json_status_500($pesan = ""){
+function respon_json_status_500($pesan = "")
+{
 	http_response_code(500);
 	$respon['status'] = "500";
 	$word = 'pesan';
@@ -129,7 +139,8 @@ function respon_json_status_500($pesan = ""){
 	exit();
 }
 
-function respon_json_status_200($pesan = ""){
+function respon_json_status_200($pesan = "")
+{
 	http_response_code(200);
 	$respon['status'] = "200";
 	$word = 'pesan';
@@ -138,7 +149,8 @@ function respon_json_status_200($pesan = ""){
 	exit();
 }
 
-function respon_json_status_400($pesan = ""){
+function respon_json_status_400($pesan = "")
+{
 	http_response_code(400);
 	$respon['status'] = "400";
 	$word = 'pesan';
@@ -148,15 +160,14 @@ function respon_json_status_400($pesan = ""){
 }
 
 
-function generate_referal($string){
+function generate_referal($string)
+{
 	$inisial = substr(MD5($string), 0, 7);
 	return $inisial;
 }
 
-function generate_referal_lagi(){
+function generate_referal_lagi()
+{
 	$inisial = substr(MD5(RAND()), 0, 7);
 	return $inisial;
 }
-
-
-?>

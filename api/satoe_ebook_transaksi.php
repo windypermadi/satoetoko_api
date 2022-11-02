@@ -24,98 +24,98 @@ switch ($tag) {
         //     $response->json();
         //     die();
         // } else {
-            $data = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
+        $data = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
         a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
         b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
         JOIN master_ebook_detail b ON a.id_master = b.id_master
         LEFT JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.id_master = '$id_master'"));
 
-            $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
-            // $ppn = $cekppn->pajak;
-            $ppn = "0";
+        $cekppn = mysqli_fetch_object($conn->query("SELECT * FROM profile"));
+        // $ppn = $cekppn->pajak;
+        $ppn = "0";
 
-            if ($status == '1') {
-                $diskon_persen = $data->diskon_persen;
-                $diskon_rupiah = $data->diskon_rupiah;
-                $harga_produk = $data->harga_master;
-            } else if ($status == '2') {
-                $diskon_persen = $data->diskon_sewa_persen;
-                $diskon_rupiah = $data->diskon_sewa_rupiah;
-                $harga_produk = $data->harga_sewa;
-            } else {
-                $response->code = 400;
-                $response->message = 'status pembelian tidak ada.';
-                $response->data = '';
-                $response->json();
-                die();
-            }
+        if ($status == '1') {
+            $diskon_persen = $data->diskon_persen;
+            $diskon_rupiah = $data->diskon_rupiah;
+            $harga_produk = $data->harga_master;
+        } else if ($status == '2') {
+            $diskon_persen = $data->diskon_sewa_persen;
+            $diskon_rupiah = $data->diskon_sewa_rupiah;
+            $harga_produk = $data->harga_sewa;
+        } else {
+            $response->code = 400;
+            $response->message = 'status pembelian tidak ada.';
+            $response->data = '';
+            $response->json();
+            die();
+        }
 
-            $listebook = array();
-            $ebooks = $conn->query("SELECT * FROM master_item a LEFT JOIN kategori_sub b ON a.id_sub_kategori = b.id_sub 
+        $listebook = array();
+        $ebooks = $conn->query("SELECT * FROM master_item a LEFT JOIN kategori_sub b ON a.id_sub_kategori = b.id_sub 
         WHERE a.id_master = '$id_master'");
-            foreach ($ebooks as $key => $value) {
-                array_push($listebook, array(
-                    'id_master' => $value['id_master'],
-                    'judul_master' => $value['judul_master'],
-                    'image_master' => $urlimg . $value['image_master'],
-                    'nama_kategori' => $value['nama_kategori'],
-                ));
-            }
+        foreach ($ebooks as $key => $value) {
+            array_push($listebook, array(
+                'id_master' => $value['id_master'],
+                'judul_master' => $value['judul_master'],
+                'image_master' => $urlimg . $value['image_master'],
+                'nama_kategori' => $value['nama_kategori'],
+            ));
+        }
 
-            $listmetode = array();
-            $payments = $conn->query("SELECT * FROM metode_pembayaran WHERE status_aktif = 'Y' ORDER BY id_payment ASC");
-            foreach ($payments as $key => $value) {
-                array_push($listmetode, array(
-                    'id_payment' => $value['id_payment'],
-                    'icon_payment' => $geticonpayment . $value['icon_payment'],
-                    'metode_pembayaran' => $value['metode_pembayaran'],
-                    'nomor_payment' => $value['nomor_payment'],
-                    'penerima_payment' => $value['penerima_payment']
-                ));
-            }
+        $listmetode = array();
+        $payments = $conn->query("SELECT * FROM metode_pembayaran WHERE status_aktif = 'Y' ORDER BY id_payment ASC");
+        foreach ($payments as $key => $value) {
+            array_push($listmetode, array(
+                'id_payment' => $value['id_payment'],
+                'icon_payment' => $geticonpayment . $value['icon_payment'],
+                'metode_pembayaran' => $value['metode_pembayaran'],
+                'nomor_payment' => $value['nomor_payment'],
+                'penerima_payment' => $value['penerima_payment']
+            ));
+        }
 
-            $listvoucher = array();
-            $vouchers = $conn->query("SELECT * FROM voucher_user a 
+        $listvoucher = array();
+        $vouchers = $conn->query("SELECT * FROM voucher_user a 
             JOIN voucher b ON a.idvoucher = b.idvoucher
             WHERE a.iduser = '$iduser' AND a.status_pakai = '0' AND tgl_mulai <= CURRENT_DATE() AND tgl_berakhir >= CURRENT_DATE();");
-            foreach ($vouchers as $key => $value) {
-                array_push($listvoucher, array(
-                    'idvoucher' => $value['idvoucher'],
-                    'nama_voucher' => $value['nama_voucher'],
-                    'deskripsi_voucher' => $value['deskripsi_voucher'],
-                    'nilai_voucher' => $value['nilai_voucher'],
-                    'minimal_transaksi' => $value['minimal_transaksi'],
-                ));
-            }
+        foreach ($vouchers as $key => $value) {
+            array_push($listvoucher, array(
+                'idvoucher' => $value['idvoucher'],
+                'nama_voucher' => $value['nama_voucher'],
+                'deskripsi_voucher' => $value['deskripsi_voucher'],
+                'nilai_voucher' => $value['nilai_voucher'],
+                'minimal_transaksi' => $value['minimal_transaksi'],
+            ));
+        }
 
-            // $totalppn = $harga_produk * ((int)$ppn / 100);
-            $totalppn = 0;
+        // $totalppn = $harga_produk * ((int)$ppn / 100);
+        $totalppn = 0;
 
-            $data1['produk'] = $listebook;
-            $data1['kupon'] = $listvoucher;
-            $data1['metode_pembayaran'] = $listmetode;
-            $data1['harga_produk'] = (int)$harga_produk;
-            $data1['diskon_rupiah'] = (int)$diskon_rupiah;
-            $data1['diskon_persen'] = (int)$diskon_persen;
-            $data1['voucher'] = 0;
-            $data1['ppn_persen'] = $ppn . "%";
-            $data1['ppn_rupiah'] = (int)$totalppn;
-            $data1['biaya_admin'] = 0;
-            $data1['total'] = (int)$harga_produk + (int)$totalppn;
+        $data1['produk'] = $listebook;
+        $data1['kupon'] = $listvoucher;
+        $data1['metode_pembayaran'] = $listmetode;
+        $data1['harga_produk'] = (int)$harga_produk;
+        $data1['diskon_rupiah'] = (int)$diskon_rupiah;
+        $data1['diskon_persen'] = (int)$diskon_persen;
+        $data1['voucher'] = 0;
+        $data1['ppn_persen'] = $ppn . "%";
+        $data1['ppn_rupiah'] = (int)$totalppn;
+        $data1['biaya_admin'] = 0;
+        $data1['total'] = (int)$harga_produk + (int)$totalppn;
 
-            if ($data) {
-                $response->code = 200;
-                $response->message = 'success';
-                $response->data = $data1;
-                $response->json();
-                die();
-            } else {
-                $response->code = 200;
-                $response->message = mysqli_error($conn);
-                $response->data = [];
-                $response->json();
-                die();
-            }
+        if ($data) {
+            $response->code = 200;
+            $response->message = 'success';
+            $response->data = $data1;
+            $response->json();
+            die();
+        } else {
+            $response->code = 200;
+            $response->message = mysqli_error($conn);
+            $response->data = [];
+            $response->json();
+            die();
+        }
         // }
         break;
     case "addtransaksi":
@@ -158,7 +158,7 @@ switch ($tag) {
         $datasupplier = mysqli_fetch_object($conn->query("SELECT a.id_supplier,b.fee_admin FROM master_item a 
         JOIN supplier b ON a.id_supplier = b.id_supplier
         WHERE a.id_master = '$id_master';"));
-        $feeadmin = $jumlahbayar*($datasupplier->fee_admin/100);
+        $feeadmin = $jumlahbayar * ($datasupplier->fee_admin / 100);
         $subtotalfee = $jumlahbayar - $feeadmin;
 
         $totalakhir = (int)$jumlahbayar - (int)$harga_diskon;
@@ -194,42 +194,6 @@ switch ($tag) {
         $metode_pembayaran = $query['metode_pembayaran'];
         $nomor_payment = $query['nomor_payment'];
         $penerima_payment = $query['penerima_payment'];
-
-        //PAYMENT MIDTRANS
-        $transaksidetail = mysqli_fetch_object($conn->query("SELECT a.id_transaksi, a.id_transaksi_detail, a.status_pembelian, d.lama_sewa, c.id_supplier, a.harga_normal, a.harga_diskon, a.fee_toko, a.sub_total
-        FROM ebook_transaksi_detail a 
-        JOIN ebook_transaksi b ON a.id_transaksi = b.id_transaksi
-        JOIN master_item c ON a.id_master = c.id_master
-        JOIN master_ebook_detail d ON c.id_master = d.id_master
-        WHERE b.invoice = '$idtransaksi'"));
-        
-        $cektemp = $conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail->id_supplier'")->num_rows;
-        $temp = mysqli_fetch_object($conn->query("SELECT * FROM saldo WHERE id_supplier = '$transaksidetail->id_supplier' ORDER BY tanggal_posting DESC"));
-        $saldo_akhir = $temp->saldo_akhir + $transaksidetail->sub_total;
-        if ($cektemp == 0){
-            $data[] = mysqli_query($conn, "INSERT INTO saldo SET 
-            id_saldo = '$transaction->id',
-            id_supplier = '$transaksidetail->id_supplier',
-            keterangan = 'SALDO MASUK TRANSAKSI CUSTOMER',
-            id_transaksi = '$transaksidetail->id_transaksi',
-            saldo_masuk = '$transaksidetail->sub_total',
-            saldo_keluar = 0,
-            saldo_awal = 0,
-            saldo_akhir = '$transaksidetail->sub_total'"
-            );
-    
-        } else {
-            $data[] = mysqli_query($conn, "INSERT INTO saldo SET 
-            id_saldo = '$transaction->id',
-            id_supplier = '$transaksidetail->id_supplier',
-            keterangan = 'SALDO MASUK TRANSAKSI CUSTOMER',
-            id_transaksi = '$transaksidetail->id_transaksi',
-            saldo_masuk = '$transaksidetail->sub_total',
-            saldo_keluar = 0,
-            saldo_awal = '$temp->saldo_akhir',
-            saldo_akhir = '$saldo_akhir'
-            ");
-        }
 
         if (in_array(false, $data)) {
             $response->code = 400;
