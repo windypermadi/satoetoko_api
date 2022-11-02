@@ -14,10 +14,6 @@ define('PASS', $password_db);
 define('DB', 'satoetoko_deve');
 $conn = mysqli_connect(HOST, USER, PASS, DB) or die('Unable to Connect');
 
-// git config --global user.email "you@example.com"
-//   git config --global user.name "Your Name"
-
-
 //database object adi
 $hostsi = $IP;
 $usersi = $user_db;
