@@ -46,6 +46,8 @@ foreach ($data as $key => $value) {
 		$status_varian_diskon = 'UPTO';
 	}
 
+	$status_jenis_harga = '1';
+
 	array_push($result2, array(
 		'id_master' => $value['id_master'],
 		'judul_master' => $value['judul_master'],
@@ -54,6 +56,7 @@ foreach ($data as $key => $value) {
 		'harga_tampil' => $harga_tampil,
 		'status_diskon' => $status_diskon,
 		'status_varian_diskon' => $status_varian_diskon,
+		'status_jenis_harga' => $status_jenis_harga,
 		'diskon' => $value['diskon_persen'] . "%",
 		'total_dibeli' => $value['total_dibeli'] . " terjual",
 		'rating_item' => 0,
