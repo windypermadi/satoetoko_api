@@ -13,22 +13,22 @@ JOIN kategori_sub d ON a.id_sub_kategori = d.id_sub
 WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
 
 $bukufisik = mysqli_fetch_object($conn->query("SELECT b.penulis, b.penerbit, b.isbn, b.deskripsi, b.sinopsis, b.tahun_terbit, b.edisi,
-b.halaman, b.berat, a.image_master, b.video_produk, b.gambar_1, b.gambar_2, b.gambar_3 FROM master_item a
+b.halaman, b.berat, a.image_master, b.gambar_1, b.gambar_2, b.gambar_3 FROM master_item a
 JOIN master_buku_detail b ON a.id_master = b.id_master
 JOIN kategori_sub d ON a.id_sub_kategori = d.id_sub
 WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
 
-$datastok = mysqli_fetch_object($conn->query("SELECT * FROM stok a JOIN cabang b ON a.id_warehouse = b.id_cabang WHERE a.id_barang = '$id_master';"));
+$datastok = mysqli_fetch_object($conn->query("SELECT sum(jumlah) as jumlah, alamat_cabang FROM stok a JOIN cabang b ON a.id_warehouse = b.id_cabang WHERE a.id_barang = '$id_master';"));
 
 $imageurl = $conn->query("SELECT b.image_master, a.video_produk, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_fisik_detail a
 JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
 $imageurls = array();
 while ($key = mysqli_fetch_object($imageurl)) {
     array_push($imageurls, array(
-        'gambar' => $getimagefisik . $key->image_master,
+        'gambar' => $getvideofisik . $key->video_produk,
     ));
     array_push($imageurls, array(
-        'gambar' => $getvideofisik . $key->video_produk,
+        'gambar' => $getimagefisik . $key->image_master,
     ));
     array_push($imageurls, array(
         'gambar' => $getimagefisik . $key->gambar_1,
@@ -40,11 +40,12 @@ while ($key = mysqli_fetch_object($imageurl)) {
         'gambar' => $getimagefisik . $key->gambar_3,
     ));
 }
+
 // while ($key = mysqli_fetch_object($imageurl)) {
 //     array_push($imageurls, array(
 //         'gambar_varian' => $key->image_master,
 //     ));
-}
+// }
 
 //!status buat whislist apakah menjadi whislist atau tidak
 // $cekwhislist =
