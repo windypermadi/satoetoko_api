@@ -25,25 +25,25 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
 $imageurls = array();
 while ($key = mysqli_fetch_object($imageurl)) {
     array_push($imageurls, array(
-        'gambar' => $key->image_master,
+        'gambar' => $getimagefisik . $key->image_master,
     ));
     array_push($imageurls, array(
-        'gambar' => $key->video_produk,
+        'gambar' => $getvideofisik . $key->video_produk,
     ));
     array_push($imageurls, array(
-        'gambar' => $key->gambar_1,
+        'gambar' => $getimagefisik . $key->gambar_1,
     ));
     array_push($imageurls, array(
-        'gambar' => $key->gambar_2,
+        'gambar' => $getimagefisik . $key->gambar_2,
     ));
     array_push($imageurls, array(
-        'gambar' => $key->gambar_3,
+        'gambar' => $getimagefisik . $key->gambar_3,
     ));
 }
-while ($key = mysqli_fetch_object($imageurl)) {
-    array_push($imageurls, array(
-        'gambar_varian' => $key->image_master,
-    ));
+// while ($key = mysqli_fetch_object($imageurl)) {
+//     array_push($imageurls, array(
+//         'gambar_varian' => $key->image_master,
+//     ));
 }
 
 //!status buat whislist apakah menjadi whislist atau tidak

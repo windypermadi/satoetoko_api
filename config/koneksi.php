@@ -60,6 +60,8 @@ $urlbanner = "https://satoetoko.com/assets/images/banner/";
 $geticonkategori = "https://satoetoko.com/assets/images/icon_kategori/";
 $getimageproduk = "https://satoetoko.com/assets/images/products/ebook/";
 $geticonpayment = "https://satoetoko.com/assets/images/icon-payment/";
+$getimagefisik = "https://satoetoko.com/assets/images/products/fisik/";
+$getvideofisik = "https://satoetoko.com/assets/images/products/fisik/";
 
 //satoetoko server testing
 // $urlimg = "https://dev.satoetoko.com/assets/images/products/ebook/";
