@@ -19,6 +19,18 @@ JOIN kategori_sub d ON a.id_sub_kategori = d.id_sub
 WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
 
 $datastok = mysqli_fetch_object($conn->query("SELECT sum(jumlah) as jumlah, alamat_cabang FROM stok a JOIN cabang b ON a.id_warehouse = b.id_cabang WHERE a.id_barang = '$id_master';"));
+$warehousedata = $conn->query("SELECT * FROM stok a JOIN cabang b ON a.id_warehouse = b.id_cabang WHERE a.id_barang = '$id_master' AND b.status_aktif = 'Y' AND b.status_hapus = 'N'");
+$warehousedatas = array();
+foreach ($warehousedata as $key => $value) {
+    array_push($warehousedatas, array(
+        'id_cabang' => $value['id_cabang'],
+        'kode_cabang' => $value['kode_cabang'],
+        'nama_cabang' => $value['nama_cabang'],
+        'alamat_lengkap_cabang' => $value['alamat_lengkap_cabang'],
+        'alamat_cabang' => $value['alamat_cabang'],
+        'stok' => $value['jumlah']
+    ));
+}
 
 $imageurl = $conn->query("SELECT b.image_master, a.video_produk, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_fisik_detail a
 JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
@@ -120,6 +132,7 @@ $data1['total_dibeli'] = $data->total_dibeli . " terjual";
 $data1['rating_item'] = 0;
 $data1['status_whislist'] = $status_whislist;
 $data1['stok'] = $datastok->jumlah;
+$data1['warehouse'] = $warehousedatas;
 
 $data1['status_bahaya'] = $data->status_bahaya;
 $data1['merek'] = $data->merek;
