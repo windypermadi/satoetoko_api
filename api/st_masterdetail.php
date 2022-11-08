@@ -25,19 +25,29 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
 $imageurls = array();
 while ($key = mysqli_fetch_object($imageurl)) {
     array_push($imageurls, array(
-        'gambar' => $getvideofisik . $key->video_produk,
+        'status_url' => '1',
+        'keterangan' => 'image',
+        'url' => $getvideofisik . $key->video_produk,
     ));
     array_push($imageurls, array(
-        'gambar' => $getimagefisik . $key->image_master,
+        'status_url' => '2',
+        'keterangan' => 'video',
+        'url' => $getimagefisik . $key->image_master,
     ));
     array_push($imageurls, array(
-        'gambar' => $getimagefisik . $key->gambar_1,
+        'status_url' => '1',
+        'keterangan' => 'image',
+        'url' => $getimagefisik . $key->gambar_1,
     ));
     array_push($imageurls, array(
-        'gambar' => $getimagefisik . $key->gambar_2,
+        'status_url' => '1',
+        'keterangan' => 'image',
+        'url' => $getimagefisik . $key->gambar_2,
     ));
     array_push($imageurls, array(
-        'gambar' => $getimagefisik . $key->gambar_3,
+        'status_url' => '1',
+        'keterangan' => 'image',
+        'url' => $getimagefisik . $key->gambar_3,
     ));
 }
 
@@ -132,7 +142,7 @@ $data1['edisi'] = $bukufisik->edisi;
 $data1['halaman'] = $bukufisik->halaman;
 $data1['berat'] = $bukufisik->berat;
 $data1['status_varian'] = $varian;
-$data1['imageurl'] = $imageurls;
+$data1['url'] = $imageurls;
 
 if ($data) {
     $response->code = 200;
