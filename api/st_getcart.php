@@ -3,19 +3,15 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$id_login         = $_POST['id_login'];
-$id_cabang        = $_POST['id_cabang'];
-$id_master        = $_POST['id_master'];
-$id_variant       = $_POST['id_variant'] ?? '';
-$jumlah           = $_POST['jumlah'];
+$id_login         = $_GET['id_login'];
 
-if (isset($id_login) && isset($id_cabang) && isset($id_master) && isset($jumlah)) {
+if (isset($id_login)) {
 
-    $q = "SELECT id,qty FROM user_keranjang WHERE id_user = 
-'$id_login' AND id_barang = '$id_master' AND id_gudang = '$id_cabang'";
-    $cekitemdata = $conn->query($q);
+    $data = $conn->query("SELECT * FROM user_keranjang WHERE id_user = '$id_login'");
 
-    if ($cekitemdata->num_rows > 0) {
+    if ($data) {
+        $datalist = array();
+
         $data = $cekitemdata->fetch_object();
         $qty = $data->qty;
         $qty = $qty + $jumlah;

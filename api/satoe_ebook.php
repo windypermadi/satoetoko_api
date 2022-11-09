@@ -142,7 +142,7 @@ switch ($tag) {
 				$harga_disc_sewa = (int)$value['harga_sewa'];
 			}
 
-			if ($value['harga_sewa'] == '0') {
+			if ($value['status_ebook'] == '1') {
 				$harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.');
 			} else {
 				$harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
@@ -242,7 +242,7 @@ switch ($tag) {
 				$harga_disc_sewa = (int)$value['harga_sewa'];
 			}
 
-			if ($value['harga_sewa'] == '0') {
+			if ($value['status_ebook'] == '1') {
 				$harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.');
 			} else {
 				$harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
