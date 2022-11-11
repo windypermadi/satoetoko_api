@@ -11,14 +11,13 @@ $jumlah           = $_POST['jumlah'];
 
 if (isset($id_login) && isset($id_cabang) && isset($id_master) && isset($jumlah)) {
 
-    if (is_null($id_variant)) {
+    if (empty($id_variant)) {
         $q = "SELECT id,qty FROM user_keranjang WHERE id_user = 
                 '$id_login' AND id_barang = '$id_master' AND id_gudang = '$id_cabang'";
         $cekitemdata = $conn->query($q);
-        $data = $cekitemdata->fetch_object();
 
         if ($cekitemdata->num_rows > 0) {
-            $data = $cekvariant->fetch_object();
+            $data = $cekitemdata->fetch_object();
             $qty = $data->qty;
             $qty = $qty + $jumlah;
             $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$qty' WHERE id = '$data->id'");
@@ -35,10 +34,11 @@ if (isset($id_login) && isset($id_cabang) && isset($id_master) && isset($jumlah)
         $q = "SELECT id,qty FROM user_keranjang WHERE id_user = 
                 '$id_login' AND id_barang = '$id_master' AND id_gudang = '$id_cabang' AND id_variant = '$id_variant'";
         $cekitemdata = $conn->query($q);
-        $data = $cekitemdata->fetch_object();
+        // var_dump($cekitemdata->num_rows);
+        // die();
 
         if ($cekitemdata->num_rows > 0) {
-            $data = $cekvariant->fetch_object();
+            $data = $cekitemdata->fetch_object();
             $qty = $data->qty;
             $qty = $qty + $jumlah;
             $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$qty' WHERE id = '$data->id'");
