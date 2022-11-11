@@ -19,7 +19,7 @@ class Response
 		switch ($code) {
 			case 200:
 				echo json_encode([
-					'status' => $code,
+					'code' => $code,
 					'message' => 'sukses',
 					'data' => $this->data
 				]);
@@ -28,7 +28,7 @@ class Response
 				break;
 			case 201:
 				echo json_encode([
-					'status' => $code,
+					'code' => $code,
 					'message' => 'Berhasil disimpan',
 					'data' => $this->data
 				]);
