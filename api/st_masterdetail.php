@@ -91,6 +91,43 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
         $variants = [];
     }
 
+    $varian_harga = 'N';
+    if ($varian_harga == 'N') {
+
+        if ($datanew->diskon_persen != 0) {
+            $status_diskon = 'Y';
+            (float)$harga_disc = $datanew->harga_master - $datanew->diskon_rupiah;
+        } else {
+            $status_diskon = 'N';
+            (float)$harga_disc = $datanew->harga_master;
+        }
+
+        $harga_produk = "Rp" . number_format($data->harga_master, 0, ',', '.');
+        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+    } else {
+
+        if ($datanew->diskon_persen != 0) {
+            $status_diskon = 'Y';
+            (float)$harga_disc = $datanew->harga_master - $datanew->diskon_rupiah;
+        } else {
+            $status_diskon = 'N';
+            (float)$harga_disc = $datanew->harga_master;
+        }
+
+        $harga_produk = "Rp" . number_format($datanew->harga_master, 0, ',', '.') . " - " . "Rp" . number_format($data->harga_master, 0, ',', '.');
+        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
+    }
+
+    $harga_produk = "Rp" . number_format($datanew->harga_master, 0, ',', '.');
+    $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+
+    $varian_diskon = 'N';
+    if ($varian_diskon == 'N') {
+        $status_varian_diskon = 'OFF';
+    } else {
+        $status_varian_diskon = 'UPTO';
+    }
+
     $data1['id_master'] = $datanew->id_master;
     $data1['judul_master'] = $datanew->judul_master;
     $data1['slug_judul_master'] = $datanew->slug_judul_master;
@@ -99,7 +136,7 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
     $data1['harga_tampil'] = $harga_tampil;
     $data1['status_diskon'] = $status_diskon;
     $data1['status_varian_diskon'] = $status_varian_diskon;
-    $data1['status_jenis_harga'] = $status_jenis_harga;
+    $data1['status_jenis_harga'] = $varian_diskon;
     $data1['diskon'] = $datanew->diskon_persen . "%";
     $data1['total_dibeli'] = $datanew->total_dibeli . " terjual";
     $data1['rating_item'] = 0;
