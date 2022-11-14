@@ -75,7 +75,7 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
     }
 
     if ($datanew->status_varian == 'Y') {
-        $variant = $conn->query("SELECT * FROM variant WHERE id_master = '$id_master'");
+        $variant = $conn->query("SELECT * FROM variant a JOIN stok b ON a.id_variant = b.id_varian WHERE a.id_master = '$id_master'");
         $variants = array();
         foreach ($variant as $key => $value) {
             array_push($variants, array(
@@ -85,6 +85,7 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
                 'diskon_rupiah_varian' => $value['diskon_rupiah_varian'],
                 'diskon_persen_varian' => $value['diskon_persen_varian'],
                 'image_varian' => $getimagefisik . $value['image_varian'],
+                'stok' => $value['jumlah'],
             ));
         }
     } else {
