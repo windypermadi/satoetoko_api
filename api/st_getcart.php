@@ -74,6 +74,7 @@ WHERE a.id_user = '$id_login';");
                     'varian' => $key['keterangan_varian'],
                     'harga_produk' => $harga_produk,
                     'harga_tampil' => $harga_tampil,
+                    'status_diskon' => $status_diskon,
                     'qty' => $key['qty'],
                     'stok_saatini' => $cekstok['jumlah'],
                 ));
@@ -108,6 +109,11 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
                 $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
 
                 if (!is_null($value['id_variant'])) {
+
+                    $cekstok = $conn->query("SELECT jumlah FROM user_keranjang a 
+                    LEFT JOIN stok b ON a.id_barang = b.id_barang
+                    WHERE a.id_user = '$id_login' AND a.id_variant = '$value[id_barang]'")->fetch_assoc();
+
                     $id_variant = $_GET['id_variant'];
                     $data = $conn->query("SELECT * FROM user_keranjang a
                     JOIN master_item b ON a.id_barang = b.id_master
@@ -115,6 +121,11 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
                     WHERE a.id_user = '$id_login' AND a.id_variant = '$id_variant';");
                     $datalist = array();
                 } else {
+
+                    $cekstok = $conn->query("SELECT jumlah FROM user_keranjang a 
+                    LEFT JOIN stok b ON a.id_variant = b.id_varian
+                    WHERE a.id_user = '$id_login' AND a.id_variant = '$value[id_variant]'")->fetch_assoc();
+
                     $data = $conn->query("SELECT * FROM user_keranjang a
                     JOIN master_item b ON a.id_barang = b.id_master
                     LEFT JOIN variant c ON a.id_variant = c.id_variant
@@ -129,7 +140,9 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
                     'varian' => $value['keterangan_varian'],
                     'harga_produk' => $harga_produk,
                     'harga_tampil' => $harga_tampil,
+                    'status_diskon' => $status_diskon,
                     'qty' => $value['qty'],
+                    'stok_saatini' => $cekstok['jumlah'],
                 ));
             }
 
