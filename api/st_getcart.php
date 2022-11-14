@@ -19,6 +19,11 @@ WHERE a.id_user = '$id_login';");
             foreach ($data as $key) {
 
                 if ($key['status_varian'] == 'Y') {
+
+                    $cekstok = $conn->query("SELECT jumlah FROM user_keranjang a 
+                    LEFT JOIN stok b ON a.id_variant = b.id_varian
+                    WHERE a.id_user = '$id_login' AND a.id_variant = '$key[id_variant]'")->fetch_assoc();
+
                     if ($key['diskon_persen_varian'] != 0) {
                         $status_diskon = 'Y';
                         $harga_disc = $key['harga_varian'] - $key['diskon_rupiah_varian'];
@@ -30,6 +35,10 @@ WHERE a.id_user = '$id_login';");
                     $harga_produk = "Rp" . number_format($key['harga_varian'], 0, ',', '.');
                     $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
                 } else {
+
+                    $cekstok = $conn->query("SELECT jumlah FROM user_keranjang a 
+                    LEFT JOIN stok b ON a.id_barang = b.id_barang
+                    WHERE a.id_user = '$id_login' AND a.id_variant = '$key[id_barang]'")->fetch_assoc();
 
                     if ($key['diskon_persen'] != 0) {
                         $status_diskon = 'Y';
@@ -66,6 +75,7 @@ WHERE a.id_user = '$id_login';");
                     'harga_produk' => $harga_produk,
                     'harga_tampil' => $harga_tampil,
                     'qty' => $key['qty'],
+                    'stok_saatini' => $cekstok['jumlah'],
                 ));
             }
 
