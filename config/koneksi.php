@@ -123,7 +123,7 @@ function id_ke_struk($string)
 	$tgl = substr($string, 4, 6);
 	$tgl = date_format(date_create($tgl), "dmy");
 	$num = round(substr($string, 10));
-	$no_nota = $inisial = $inisial . "-" . $tgl . "-" . $num;
+	$no_nota = $inisial = $inisial . "_" . $tgl . "_" . $num;
 	return $no_nota;
 }
 

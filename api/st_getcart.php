@@ -34,6 +34,8 @@ WHERE a.id_user = '$id_login';");
 
                     $harga_produk = "Rp" . number_format($key['harga_varian'], 0, ',', '.');
                     $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+                    $harga_produk_int = $key['harga_varian'];
+                    $harga_tampil_int = $harga_disc;
                 } else {
 
                     $cekstok = $conn->query("SELECT jumlah FROM user_keranjang a 
@@ -50,6 +52,8 @@ WHERE a.id_user = '$id_login';");
 
                     $harga_produk = "Rp" . number_format($key['harga_master'], 0, ',', '.');
                     $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+                    $harga_produk_int = $key['harga_master'];
+                    $harga_tampil_int = $harga_disc;
                 }
 
                 // if (!is_null($value['id_variant'])) {
@@ -71,9 +75,12 @@ WHERE a.id_user = '$id_login';");
                     'id' => $key['id'],
                     'image_master' => $urlimg . $key['image_master'],
                     'judul' => $key['judul_master'],
+                    'id_varian' => $key['id_variant'],
                     'varian' => $key['keterangan_varian'],
                     'harga_produk' => $harga_produk,
                     'harga_tampil' => $harga_tampil,
+                    'harga_produk_int' => $harga_produk_int,
+                    'harga_tampil_int' => $harga_tampil_int,
                     'status_diskon' => $status_diskon,
                     'qty' => $key['qty'],
                     'stok_saatini' => $cekstok['jumlah'],
@@ -107,6 +114,8 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
 
                 $harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.');
                 $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+                $harga_produk_int = $key['harga_master'];
+                $harga_tampil_int = $harga_disc;
 
                 if (!is_null($value['id_variant'])) {
 
@@ -140,6 +149,8 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
                     'varian' => $value['keterangan_varian'],
                     'harga_produk' => $harga_produk,
                     'harga_tampil' => $harga_tampil,
+                    'harga_produk_int' => $harga_produk_int,
+                    'harga_tampil_int' => $harga_tampil_int,
                     'status_diskon' => $status_diskon,
                     'qty' => $value['qty'],
                     'stok_saatini' => $cekstok['jumlah'],
