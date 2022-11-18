@@ -21,14 +21,9 @@ if (isset($id_login)) {
             'status_alamat_utama' => $value['status_alamat_utama'],
         ));
     }
-
-    if ($rows[0]) {
-        $response->data = $rows;
-        $response->sukses(200);
-    } else {
-        $response->data = null;
-        $response->error(400);
-    }
+    $result = $rows[0] ? 'sukses' : 'error';
+    $response->data = $rows[0] ? $rows : null;
+    $response->$result($rows[0] ? 200 : 400);
 } else {
     $response->data = null;
     $response->error(400);
