@@ -11,9 +11,9 @@ if (isset($id_login)) {
     switch ($tag) {
         case 'semua':
             $data = $conn->query("SELECT * FROM user_keranjang a
-JOIN master_item b ON a.id_barang = b.id_master
-LEFT JOIN variant c ON a.id_variant = c.id_variant
-WHERE a.id_user = '$id_login';");
+    JOIN master_item b ON a.id_barang = b.id_master
+    LEFT JOIN variant c ON a.id_variant = c.id_variant
+    WHERE a.id_user = '$id_login';");
             $datalist = array();
 
             foreach ($data as $key) {
@@ -40,7 +40,7 @@ WHERE a.id_user = '$id_login';");
 
                     $cekstok = $conn->query("SELECT jumlah FROM user_keranjang a 
                     LEFT JOIN stok b ON a.id_barang = b.id_barang
-                    WHERE a.id_user = '$id_login' AND a.id_variant = '$key[id_barang]'")->fetch_assoc();
+                    WHERE a.id_user = '$id_login' AND a.id_barang = '$key[id_barang]'")->fetch_assoc();
 
                     if ($key['diskon_persen'] != 0) {
                         $status_diskon = 'Y';
