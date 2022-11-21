@@ -3,51 +3,68 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$id_login         = $_POST['id_login'];
-$id_cabang        = $_POST['id_cabang'];
-$id_master        = $_POST['id_master'];
-$id_variant       = $_POST['id_variant'] ?? '';
-$jumlah           = $_POST['jumlah'];
+$id         = $_POST['id'];
+$jumlah         = $_POST['jumlah'];
 
-if (isset($id_login) && isset($id_cabang) && isset($id_master) && isset($jumlah)) {
+if (isset($id)) {
+    $getdata = $conn->query("SELECT * FROM user_keranjang WHERE id = '$id'");
+    $data = $getdata->fetch_object();
 
-    if (empty($id_variant)) {
-        $q = "SELECT id,qty FROM user_keranjang WHERE id_user = 
-                '$id_login' AND id_barang = '$id_master' AND id_gudang = '$id_cabang'";
-        $cekitemdata = $conn->query($q);
+    $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$jumlah' WHERE id = '$data->id'");
 
-        if ($cekitemdata->num_rows > 0) {
-            $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$jumlah' WHERE id = '$data->id'");
+    $data2 = $conn->query("SELECT * FROM user_keranjang a
+    JOIN master_item b ON a.id_barang = b.id_master
+    LEFT JOIN variant c ON a.id_variant = c.id_variant
+    WHERE a.id = '$id';")->fetch_object();
+
+    if ($data2->status_varian == 'Y') {
+
+        if ($data2->diskon_rupiah_varian != 0) {
+            $status_diskon = 'Y';
+            $harga_disc = $data2->harga_varian - $data2->diskon_rupiah_varian;
         } else {
-            $qty = $jumlah;
-            $query = mysqli_query($conn, "INSERT INTO user_keranjang SET id = UUID(),
-                        id_user='$id_login',
-                        id_barang='$id_master',
-                        id_variant='$id_variant',
-                        id_gudang='$id_cabang',
-                        qty='$jumlah'");
+            $status_diskon = 'N';
+            $harga_disc = $data2->harga_varian;
         }
+
+        $harga_produk = "Rp" . number_format($data2->harga_varian, 0, ',', '.');
+        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk_int = $data2->harga_varian;
+        $harga_tampil_int = $harga_disc;
     } else {
-        $q = "SELECT id,qty FROM user_keranjang WHERE id_user = 
-                '$id_login' AND id_barang = '$id_master' AND id_gudang = '$id_cabang' AND id_variant = '$id_variant'";
-        $cekitemdata = $conn->query($q);
-        // var_dump($cekitemdata->num_rows);
-        // die();
 
-        if ($cekitemdata->num_rows > 0) {
-            $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$jumlah' WHERE id = '$data->id'");
+        if ($data2->diskon_persen != 0) {
+            $status_diskon = 'Y';
+            $harga_disc = $data2->harga_master - $data2->diskon_rupiah;
         } else {
-            $query = mysqli_query($conn, "INSERT INTO user_keranjang SET id = UUID(),
-                        id_user='$id_login',
-                        id_barang='$id_master',
-                        id_variant='$id_variant',
-                        id_gudang='$id_cabang',
-                        qty='$jumlah'");
+            $status_diskon = 'N';
+            $harga_disc = $data2->harga_master;
         }
+
+        $harga_produk = "Rp" . number_format($data2->harga_master, 0, ',', '.');
+        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk_int = $data2->harga_master;
+        $harga_produk_int = $harga_disc;
     }
 
+    $data1 = [
+        'id' => $data2->id,
+        'image_master' => $urlimg . $data2->image_master,
+        'judul' => $data2->judul_master,
+        'id_varian' => $data2->id_variant,
+        'varian' => $data2->keterangan_varian,
+        'harga_produk' => $harga_produk,
+        'harga_tampil' => $harga_tampil,
+        'harga_produk_int' => $harga_produk_int,
+        'harga_tampil_int' => $harga_produk_int,
+        'status_diskon' => $status_diskon,
+        'qty' => $data2->qty,
+        'stok_saatini' => $data2->qty,
+        'id_cabang' => $data2->id_gudang,
+    ];
+
     if ($query) {
-        $response->data = null;
+        $response->data = $data1;
         $response->sukses(200);
     } else {
         $response->data = null;

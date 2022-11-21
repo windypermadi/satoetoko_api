@@ -84,6 +84,7 @@ WHERE a.id_user = '$id_login';");
                     'status_diskon' => $status_diskon,
                     'qty' => $key['qty'],
                     'stok_saatini' => $cekstok['jumlah'],
+                    'id_cabang' => $key['id_gudang'],
                 ));
             }
 
@@ -154,6 +155,7 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
                     'status_diskon' => $status_diskon,
                     'qty' => $value['qty'],
                     'stok_saatini' => $cekstok['jumlah'],
+                    'id_cabang' => $key['id_gudang'],
                 ));
             }
 
