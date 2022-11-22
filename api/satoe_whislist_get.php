@@ -17,7 +17,7 @@ switch ($tag) {
         b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
         JOIN master_ebook_detail b ON a.id_master = b.id_master
         JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub
-        JOIN ebook_whislist d ON d.id_master = a.id_master WHERE a.status_master_detail = '1' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
+        JOIN whislist_product d ON d.id_master = a.id_master WHERE a.status_master_detail = '1' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
 
         foreach ($data as $key => $value) {
             if ($value['status_ebook'] == '1') {
@@ -60,15 +60,15 @@ switch ($tag) {
             }
 
             if ($value['harga_sewa'] == '0') {
-				$harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.');
-			} else {
-				$harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
-			}
+                $harga_tampil = "Rp" . number_format($value['harga_master'], 0, ',', '.');
+            } else {
+                $harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
+            }
 
             array_push($datalist, array(
                 'id_master' => $value['id_master'],
                 'judul_master' => $value['judul_master'],
-                'image_master' => $urlimg.$value['image_master'],
+                'image_master' => $urlimg . $value['image_master'],
                 'status_ebook' => $value['status_ebook'],
                 'rating_ebook' => 0,
                 'nama_kategori' => $value['nama_kategori'],
@@ -102,7 +102,7 @@ switch ($tag) {
         $id_master = $_GET['id_master'];
         $id_user = $_GET['id_user'];
 
-        $cekdata = $conn->query("SELECT * FROM ebook_whislist WHERE id_master = '$id_master' AND id_login = '$id_user'")->num_rows;
+        $cekdata = $conn->query("SELECT * FROM whislist_product WHERE id_master = '$id_master' AND id_login = '$id_user'")->num_rows;
         if ($cekdata > 0) {
             $data = "1";
         } else {
