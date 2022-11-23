@@ -163,8 +163,8 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
                 $response->data = $datalist;
                 $response->sukses(200);
             } else {
-                $response->data = null;
-                $response->error(400);
+                $response->data = [];
+                $response->sukses(200);
             }
 
             break;
