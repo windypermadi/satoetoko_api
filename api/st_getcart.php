@@ -92,8 +92,8 @@ if (isset($id_login)) {
                 $response->data = $datalist;
                 $response->sukses(200);
             } else {
-                $response->data = null;
-                $response->error(400);
+                $response->data = [];
+                $response->sukses(200);
             }
             break;
         case 'diskon':
