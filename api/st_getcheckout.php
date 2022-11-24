@@ -7,11 +7,14 @@ $dataraw = json_decode(file_get_contents('php://input'), true);
 
 //? LIST PRODUK
 $dataproduk = $dataraw["produk"];
+//? LIST ONGKIR
+$dataongkir = $dataraw["ongkir"];
 
 foreach ($dataproduk as $i => $key) {
     $getproduk[] = $conn->query("SELECT b.judul_master,b.image_master,a.id_variant,
     c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
-    a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, b.status_master_detail, a.id_gudang FROM user_keranjang a
+    a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
+    b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk FROM user_keranjang a
 JOIN master_item b ON a.id_barang = b.id_master
 LEFT JOIN variant c ON a.id_variant = c.id_variant
 LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
@@ -80,16 +83,24 @@ $address_shipper =
 
 $getdatatotal =
     [
-        'count_order' => '',
-        'subtotal' => $dataraw['total'],
+        'count_order' => $u->jumlah_produk,
+        'subtotal' => (string) ($dataraw['total'] + $dataongkir['harga']),
         'subtotal_produk' => $dataraw['total'],
-        'subtotal_pengiriman' => $dataraw['total'],
-        'subtotal_diskon' => $dataraw['total'],
+        'subtotal_pengiriman' => $dataongkir['harga'],
+        'subtotal_diskon' => "Rp 0",
         'weight' => $berat,
     ];
 
+//? ONGKIR
+$dataongkir = [
+    'layanan' => $dataongkir['layanan'],
+    'estimasi' => "Barang akan sampai dalam " . $dataongkir['estimasi'] . " hari",
+    'harga' => "Rp" . number_format($dataongkir['harga'], 0, ',', '.'),
+];
+
 $data1['data_address_buyer'] = $address;
 $data1['data_address_shipper'] = $address_shipper;
+$data1['data_ongkir'] = $dataongkir;
 $data1['data_product'] = $getprodukcoba;
 $data1['data_price'] = $getdatatotal;
 
