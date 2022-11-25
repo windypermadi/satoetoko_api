@@ -52,11 +52,19 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
             'keterangan' => 'image',
             'url' => $getimagefisik . $key->image_master,
         ));
-        array_push($imageurls, array(
-            'status_url' => '2',
-            'keterangan' => 'video',
-            'url' => $getvideofisik . $key->video_produk,
-        ));
+        if ($key->$video_produk != null) {
+            array_push($imageurls, array(
+                'status_url' => '2',
+                'keterangan' => 'video',
+                'url' => $getvideofisik . $key->video_produk,
+            ));
+        } else {
+            array_push($imageurls, array(
+                'status_url' => '1',
+                'keterangan' => 'image',
+                'url' => $getimagefisik . $key->image_master,
+            ));
+        }
         array_push($imageurls, array(
             'status_url' => '1',
             'keterangan' => 'image',
@@ -67,11 +75,13 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
             'keterangan' => 'image',
             'url' => $getimagefisik . $key->gambar_2,
         ));
-        array_push($imageurls, array(
-            'status_url' => '1',
-            'keterangan' => 'image',
-            'url' => $getimagefisik . $key->gambar_3,
-        ));
+        if ($key->$gambar_3 != null) {
+            array_push($imageurls, array(
+                'status_url' => '1',
+                'keterangan' => 'image',
+                'url' => $getimagefisik . $key->gambar_3,
+            ));
+        }
     }
 
     if ($datanew->status_varian == 'Y') {
