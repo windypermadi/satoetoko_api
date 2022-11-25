@@ -50,12 +50,12 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
         array_push($imageurls, array(
             'status_url' => '1',
             'keterangan' => 'image',
-            'url' => $getvideofisik . $key->video_produk,
+            'url' => $getimagefisik . $key->image_master,
         ));
         array_push($imageurls, array(
             'status_url' => '2',
             'keterangan' => 'video',
-            'url' => $getimagefisik . $key->image_master,
+            'url' => $getvideofisik . $key->video_produk,
         ));
         array_push($imageurls, array(
             'status_url' => '1',
