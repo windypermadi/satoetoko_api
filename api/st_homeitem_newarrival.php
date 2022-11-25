@@ -51,7 +51,7 @@ foreach ($data as $key => $value) {
     array_push($result2, array(
         'id_master' => $value['id_master'],
         'judul_master' => $value['judul_master'],
-        'image_master' => $urlimg . $value['image_master'],
+        'image_master' => $getimagefisik . $value['image_master'],
         'harga_produk' => $harga_produk,
         'harga_tampil' => $harga_tampil,
         'status_diskon' => $status_diskon,
