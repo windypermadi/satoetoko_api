@@ -58,23 +58,21 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
                 'keterangan' => 'video',
                 'url' => $getvideofisik . $key->video_produk,
             ));
-        } else {
+        }
+        if ($key->$gambar_1 != null) {
             array_push($imageurls, array(
                 'status_url' => '1',
                 'keterangan' => 'image',
-                'url' => $getimagefisik . $key->image_master,
+                'url' => $getimagefisik . $key->gambar_1,
             ));
         }
-        array_push($imageurls, array(
-            'status_url' => '1',
-            'keterangan' => 'image',
-            'url' => $getimagefisik . $key->gambar_1,
-        ));
-        array_push($imageurls, array(
-            'status_url' => '1',
-            'keterangan' => 'image',
-            'url' => $getimagefisik . $key->gambar_2,
-        ));
+        if ($key->$gambar_2 != null) {
+            array_push($imageurls, array(
+                'status_url' => '1',
+                'keterangan' => 'image',
+                'url' => $getimagefisik . $key->gambar_2,
+            ));
+        }
         if ($key->$gambar_3 != null) {
             array_push($imageurls, array(
                 'status_url' => '1',
