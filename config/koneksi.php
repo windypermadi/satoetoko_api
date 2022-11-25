@@ -14,7 +14,7 @@ define('PASS', $password_db);
 define('DB', 'satoetoko_deve');
 $conn = mysqli_connect(HOST, USER, PASS, DB) or die('Unable to Connect');
 
-//database object adi
+//database object adi	
 $hostsi = $IP;
 $usersi = $user_db;
 $passsi = $password_db;
