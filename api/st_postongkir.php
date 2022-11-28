@@ -3,12 +3,26 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$dataraw = json_decode(file_get_contents('php://input'), true);
+$layanan       = $_POST['layanan'];
+$kode          = $_POST['kode'];
+$produk        = $_POST['produk'];
+$estimasi      = $_POST['estimasi'];
+$harga         = $_POST['harga'];
+
+if (isset($layanan) && isset($kode) && isset($produk) && isset($estimasi) && isset($harga)) {
+
+
+    $data1['data_ongkir'] = $dataongkir;
+    $data1['data_price'] = $getdatatotal;
+} else {
+    $response->data = null;
+    $response->error(400);
+}
 
 //? LIST PRODUK
 $dataproduk = $dataraw["produk"];
 //? LIST ONGKIR
-// $dataongkir = $dataraw["ongkir"];
+$dataongkir = $dataraw["ongkir"];
 
 foreach ($dataproduk as $i => $key) {
     $getproduk[] = $conn->query("SELECT b.judul_master,b.image_master,a.id_variant,
@@ -92,15 +106,15 @@ $getdatatotal =
     ];
 
 //? ONGKIR
-// $dataongkir = [
-//     'layanan' => $dataongkir['layanan'],
-//     'estimasi' => "Barang akan sampai dalam " . $dataongkir['estimasi'] . " hari",
-//     'harga' => "Rp" . number_format($dataongkir['harga'], 0, ',', '.'),
-// ];
+$dataongkir = [
+    'layanan' => $dataongkir['layanan'],
+    'estimasi' => "Barang akan sampai dalam " . $dataongkir['estimasi'] . " hari",
+    'harga' => "Rp" . number_format($dataongkir['harga'], 0, ',', '.'),
+];
 
 $data1['data_address_buyer'] = $address;
 $data1['data_address_shipper'] = $address_shipper;
-// $data1['data_ongkir'] = $dataongkir;
+$data1['data_ongkir'] = $dataongkir;
 $data1['data_product'] = $getprodukcoba;
 $data1['data_price'] = $getdatatotal;
 

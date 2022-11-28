@@ -23,7 +23,7 @@ if (isset($id_login)) {
     }
     $result = $rows[0] ? 'sukses' : 'error';
     $response->data = $rows[0] ? $rows : null;
-    $response->$result($rows[0] ? 200 : 400);
+    $response->$result($rows[0] ? 200 : 200);
 } else {
     $response->data = null;
     $response->error(400);
