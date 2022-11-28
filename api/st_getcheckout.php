@@ -86,8 +86,8 @@ $getdatatotal =
         'count_order' => $u->jumlah_produk,
         'subtotal' => (string) ($dataraw['total'] + $dataongkir['harga']),
         'subtotal_produk' => $dataraw['total'],
-        'subtotal_pengiriman' => $dataongkir['harga'],
-        'subtotal_diskon' => "Rp 0",
+        'subtotal_pengiriman' => "0",
+        'subtotal_diskon' => "0",
         'weight' => $berat,
     ];
 

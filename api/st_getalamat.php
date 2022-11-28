@@ -9,6 +9,10 @@ if (isset($id_login)) {
 
     $query_alamat = "SELECT * FROM user_alamat WHERE id_user = '$id_login'";
     $getalamat = $conn->query($query_alamat);
+    if ($getalamat->num_rows < 1) {
+        $response->data = null;
+        $response->error(400);
+    }
     // $row = $result->fetch_array(MYSQLI_ASSOC);
     $rows = array();
     foreach ($getalamat as $key => $value) {
@@ -21,9 +25,17 @@ if (isset($id_login)) {
             'status_alamat_utama' => $value['status_alamat_utama'],
         ));
     }
-    $result = $rows[0] ? 'sukses' : 'error';
+
+    // if ($rows) {
+    //     $response->data = $rows;
+    //     $response->sukses(200);
+    // } else {
+    //     $response->data = null;
+    //     $response->error(200);
+    // }
+    // $result = $rows[0] ? 'sukses' : 'error';
     $response->data = $rows[0] ? $rows : null;
-    $response->$result($rows[0] ? 200 : 200);
+    $response->sukses(200);
 } else {
     $response->data = null;
     $response->error(400);
