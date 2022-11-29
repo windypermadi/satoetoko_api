@@ -31,7 +31,7 @@ if ($valid == '1') {
 
   $getdatatotal =
     [
-      'subtotal' => (string) ($data['total'] + $data['harga']),
+      'subtotal' => (string) ($data['subtotal'] + $data['harga']),
       'subtotal_produk' => $data['subtotal'],
       'subtotal_pengiriman' => $data['harga'],
       'subtotal_diskon' => "0",
