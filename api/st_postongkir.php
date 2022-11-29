@@ -10,8 +10,6 @@ $data = [
   'estimasi' => $_POST['estimasi'],
   'harga' => $_POST['harga'],
   'subtotal' => $_POST['subtotal'],
-  'weight' => $_POST['weight'],
-  'count_order' => $_POST['count_order'],
 ];
 foreach ($data as $v) {
   if (!empty($v)) {
