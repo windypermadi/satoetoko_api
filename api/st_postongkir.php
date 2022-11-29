@@ -10,6 +10,8 @@ $data = [
   'estimasi' => $_POST['estimasi'],
   'harga' => $_POST['harga'],
   'subtotal' => $_POST['subtotal'],
+  'weight' => $_POST['weight'],
+  'count_order' => $_POST['count_order'],
 ];
 foreach ($data as $v) {
   if (!empty($v)) {
@@ -23,6 +25,8 @@ if ($valid == '1') {
   //? ONGKIR
   $dataongkir = [
     'layanan' => $data['layanan'],
+    'kode' => $data['kode'],
+    'produk' => $data['produk'],
     'estimasi' => $data['estimasi'],
     'harga' => $data['harga'],
   ];
@@ -34,6 +38,7 @@ if ($valid == '1') {
       'subtotal_pengiriman' => $data['harga'],
       'subtotal_diskon' => "0",
     ];
+
 
   $data1['data_ongkir'] = $dataongkir;
   $data1['data_price'] = $getdatatotal;

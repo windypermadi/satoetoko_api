@@ -83,11 +83,15 @@ $address_shipper =
 
 $getdatatotal =
     [
-        'count_order' => $u->jumlah_produk,
         'subtotal' => (string) ($dataraw['total'] + $dataongkir['harga']),
         'subtotal_produk' => $dataraw['total'],
         'subtotal_pengiriman' => "0",
         'subtotal_diskon' => "0",
+    ];
+
+$getqtyproduk =
+    [
+        'count_order' => $u->jumlah_produk,
         'weight' => $berat,
     ];
 
@@ -100,9 +104,10 @@ $getdatatotal =
 
 $data1['data_address_buyer'] = $address;
 $data1['data_address_shipper'] = $address_shipper;
-// $data1['data_ongkir'] = $dataongkir;
 $data1['data_product'] = $getprodukcoba;
+$data1['data_qty_product'] = $getqtyproduk;
 $data1['data_price'] = $getdatatotal;
+
 
 $response->data = $data1;
 $response->sukses(200);
