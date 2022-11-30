@@ -52,7 +52,6 @@ foreach ($getproduk as $u) {
             'qty' => $u->qty,
             'harga_produk' => $u->harga_master,
             'harga_tampil' => $u->diskon_rupiah != 0 ? ($diskon_format) : $harga_master
-
         ];
     }
 }
