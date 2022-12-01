@@ -11,7 +11,7 @@ $dataproduk = $dataraw["produk"];
 // $dataongkir = $dataraw["ongkir"];
 
 foreach ($dataproduk as $i => $key) {
-    $getproduk[] = $conn->query("SELECT b.judul_master,b.image_master,a.id_variant,
+    $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
     c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
     a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
     b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk FROM user_keranjang a
@@ -32,6 +32,7 @@ foreach ($getproduk as $u) {
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
         $harga_varian = "Rp" . number_format($u->harga_varian, 0, ',', '.');
         $getprodukcoba[] = [
+            'id_master' => $u->id_master,
             'judul_master' => $u->judul_master,
             'image_master' => $u->image_master,
             'id_variant' => $u->id_variant,
@@ -45,6 +46,7 @@ foreach ($getproduk as $u) {
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
         $harga_master = "Rp" . number_format($u->harga_master, 0, ',', '.');
         $getprodukcoba[] = [
+            'id_master' => $u->id_master,
             'judul_master' => $u->judul_master,
             'image_master' => $u->image_master,
             'id_variant' => $u->id_variant,
