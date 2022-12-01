@@ -12,7 +12,7 @@ $conn->begin_transaction();
 
 $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
 $idtransaksi = createID('invoice', 'transaksi', 'TR');
-$invoice = id_ke_struk($idtransaksi);
+$invoice = id_ke_struk_fisik($idtransaksi);
 
 //? ADDRESS
 $query_alamat = "SELECT * FROM user_alamat WHERE id = '$dataraw->id_alamat'";
