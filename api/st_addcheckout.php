@@ -70,8 +70,10 @@ foreach ($dataproduk as $i => $key) {
 foreach ($getproduk as $u) {
     if ($u->status_master_detail == '2') {
         $berat += $u->berat_buku * $u->qty;
+        $berat_detail = $u->berat_buku * $u->qty;
     } else if ($u->status_master_detail == '3') {
         $berat += $u->berat_fisik * $u->qty;
+        $berat_detail = $u->berat_fisik * $u->qty;
     }
 
     if ($u->id_variant) {
@@ -103,7 +105,7 @@ foreach ($getproduk as $u) {
         diskon_barang = '$u->diskon_rupiah_varian',
         harga_diskon = '$harga_diskon',
         jumlah_beli = '$u->qty',
-        berat = '$berat',
+        berat = '$berat_detail',
         fee_toko = '$feetoko',  
         sub_total = '$sbtotal'");
 
@@ -155,7 +157,7 @@ foreach ($getproduk as $u) {
         diskon_barang = '$u->diskon_rupiah',
         harga_diskon = '$harga_diskon',
         jumlah_beli = '$u->qty',
-        berat = '$berat',
+        berat = '$berat_detail',
         fee_toko = '$feetoko',  
         sub_total = '$sbtotal'");
 
@@ -193,7 +195,7 @@ $query[] = mysqli_query($conn, "INSERT INTO transaksi SET
         metode_pembayaran = '$dataraw->id_payment'");
 
 if (in_array(false, $query)) {
-    $response->data = null;
+    $response->data = "tekan kene";
     $response->error(400);
 } else {
 
