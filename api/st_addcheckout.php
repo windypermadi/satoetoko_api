@@ -9,6 +9,7 @@ $dataraw2 = json_decode(file_get_contents('php://input'), true);
 // $exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
 
 $conn->begin_transaction();
+
 $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
 $idtransaksi = createID('invoice', 'transaksi', 'TR');
 $invoice = id_ke_struk($idtransaksi);
@@ -51,10 +52,11 @@ foreach ($dataproduk as $i => $key) {
 }
 foreach ($getproduk as $u) {
     if ($u->status_master_detail == '2') {
-        $berat = $u->berat_buku;
+        $berat += $u->berat_buku * $u->qty;
     } else if ($u->status_master_detail == '3') {
-        $berat = $u->berat_fisik;
+        $berat += $u->berat_fisik * $u->qty;
     }
+
     if ($u->id_variant) {
 
         $diskon = ($u->harga_varian) - ($u->diskon_rupiah_varian);
@@ -89,10 +91,10 @@ foreach ($getproduk as $u) {
         sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
-        $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
-        $hasiljumlah = $query['jumlah'] - $u->qty;
+        // $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
+        // $hasiljumlah = $query['jumlah'] - $u->qty;
 
-        $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
+        // $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
 
         //! UPDATE STOK HISTORY PRODUCT
         // $query[] = $conn->query("INSERT INTO stok_history SET 
@@ -141,10 +143,10 @@ foreach ($getproduk as $u) {
         sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
-        $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
-        $hasiljumlah = $query['jumlah'] - $u->qty;
+        // $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
+        // $hasiljumlah = $query['jumlah'] - $u->qty;
 
-        $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
+        // $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
     }
 }
 
@@ -218,18 +220,20 @@ if (in_array(false, $query)) {
         curl_close($curl);
 
         $responses = json_decode($response_curl, true);
+        var_dump($responses);
+        die();
 
         $payment_url = $responses['redirect_url'];
         $payment_token = $responses['token'];
         $res['token'] = $payment_token;
         $res['url_payment'] = $payment_url;
 
-        $query = mysqli_query($conn, "UPDATE transaksi SET midtrans_token = '$payment_token', midtrans_redirect_url = '$payment_url' WHERE id_transaksi= '$transaction->id'");
+        $query2 = mysqli_query($conn, "UPDATE transaksi SET midtrans_token = '$payment_token', midtrans_redirect_url = '$payment_url' WHERE id_transaksi= '$transaction->id'");
 
         if (!isset($responses['token'])) {
-            respon_json_status_500();
-            $respon['pesan'] = "Sorry, we encountered internal server error. We will fix this soon.";
-            die(json_encode($respon));
+            $response->data = "Sorry, we encountered internal server error. We will fix this soon.";
+            $response->error(500);
+            die();
         }
 
         $conn->commit();

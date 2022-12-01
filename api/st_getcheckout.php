@@ -23,9 +23,9 @@ WHERE a.id = '$key[id_cart]'")->fetch_object();
 }
 foreach ($getproduk as $u) {
     if ($u->status_master_detail == '2') {
-        $berat = $u->berat_buku;
+        $berat += $u->berat_buku * $u->qty;
     } else if ($u->status_master_detail == '3') {
-        $berat = $u->berat_fisik;
+        $berat += $u->berat_fisik * $u->qty;
     }
     if ($u->id_variant != null) {
         $diskon = ($u->harga_varian) - ($u->diskon_rupiah_varian);
