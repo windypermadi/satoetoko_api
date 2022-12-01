@@ -37,8 +37,8 @@ $data_ongkir_harga = $dataraw2["data_ongkir"]["harga"];
 
 //? PRODUCT
 $dataproduk = $dataraw2['produk'];
-$dataa =
-    "SELECT 
+foreach ($dataproduk as $i => $key) {
+    $getproduk[] = $conn->query("SELECT 
             b.id_master, 
             b.judul_master, 
             b.image_master, 
@@ -65,9 +65,7 @@ $dataa =
             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
             LEFT JOIN stok g ON b.id_master = g.id_barang 
-            WHERE a.id_cart = '$dataproduk[id_cart]'";
-foreach ($dataproduk as $i => $key) {
-    $getproduk[] = $conn->query($dataa)->fetch_object();
+            WHERE a.id = '$dataproduk[id_cart]'")->fetch_object();
 }
 foreach ($getproduk as $u) {
     if ($u->status_master_detail == '2') {
