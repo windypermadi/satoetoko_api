@@ -37,9 +37,8 @@ $data_ongkir_harga = $dataraw2["data_ongkir"]["harga"];
 
 //? PRODUCT
 $dataproduk = $dataraw2['produk'];
-if (empty($dataproduk['id_variant'])) {
-    $dataa =
-        "SELECT 
+$dataa =
+    "SELECT 
             b.id_master, 
             b.judul_master, 
             b.image_master, 
@@ -66,39 +65,7 @@ if (empty($dataproduk['id_variant'])) {
             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
             LEFT JOIN stok g ON b.id_master = g.id_barang 
-            WHERE a.id_user = '$dataraw2[id_user]' AND a.id_barang = '$dataproduk[id_produk]' AND a.id_gudang = '$dataraw2[id_cabang]'";
-} else {
-    $dataa =
-        "SELECT 
-            b.id_master, 
-            b.judul_master, 
-            b.image_master, 
-            a.id_variant, 
-            c.keterangan_varian, 
-            b.harga_master, 
-            b.diskon_rupiah, 
-            c.harga_varian, 
-            c.diskon_rupiah_varian, 
-            a.qty, 
-            c.diskon_rupiah_varian, 
-            d.berat as berat_buku, 
-            e.berat as berat_fisik, 
-            b.status_master_detail, 
-            a.id_gudang, 
-            COUNT(a.id) as jumlah_produk, 
-            f.id_supplier, 
-            f.fee_admin 
-            FROM 
-            user_keranjang a 
-            JOIN master_item b ON a.id_barang = b.id_master 
-            LEFT JOIN variant c ON a.id_variant = c.id_variant 
-            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master 
-            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
-            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
-            LEFT JOIN stok g ON b.id_master = g.id_barang 
-            WHERE a.id_user = '$dataraw2[id_user]' AND a.id_barang = '$dataproduk[id_produk]' 
-            AND a.id_gudang = '$dataraw2[id_cabang]' AND a.id_variant = '$dataproduk[id_variant]'";
-}
+            WHERE a.id_cart = '$dataproduk[id_cart]'";
 foreach ($dataproduk as $i => $key) {
     $getproduk[] = $conn->query($dataa)->fetch_object();
 }
