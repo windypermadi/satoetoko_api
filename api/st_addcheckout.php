@@ -38,7 +38,7 @@ $data_ongkir_harga = $dataraw2["data_ongkir"]["harga"];
 //? PRODUCT
 $dataproduk = $dataraw2['produk'];
 if (empty($dataproduk['id_variant'])) {
-    $query =
+    $dataa =
         "SELECT 
             b.id_master, 
             b.judul_master, 
@@ -68,7 +68,7 @@ if (empty($dataproduk['id_variant'])) {
             LEFT JOIN stok g ON b.id_master = g.id_barang 
             WHERE a.id_user = '$dataraw2[id_user]' AND a.id_barang = '$dataproduk[id_produk]' AND a.id_gudang = '$dataraw2[id_cabang]'";
 } else {
-    $query =
+    $dataa =
         "SELECT 
             b.id_master, 
             b.judul_master, 
@@ -100,7 +100,7 @@ if (empty($dataproduk['id_variant'])) {
             AND a.id_gudang = '$dataraw2[id_cabang]' AND a.id_variant = '$dataproduk[id_variant]'";
 }
 foreach ($dataproduk as $i => $key) {
-    $getproduk[] = $conn->query($query)->fetch_object();
+    $getproduk[] = $conn->query($dataa)->fetch_object();
 }
 foreach ($getproduk as $u) {
     if ($u->status_master_detail == '2') {
