@@ -91,10 +91,10 @@ foreach ($getproduk as $u) {
         sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
-        // $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
-        // $hasiljumlah = $query['jumlah'] - $u->qty;
+        $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
+        $hasiljumlah = $query['jumlah'] - $u->qty;
 
-        // $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
+        $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
 
         //! UPDATE STOK HISTORY PRODUCT
         // $query[] = $conn->query("INSERT INTO stok_history SET 
@@ -143,10 +143,10 @@ foreach ($getproduk as $u) {
         sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
-        // $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
-        // $hasiljumlah = $query['jumlah'] - $u->qty;
+        $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
+        $hasiljumlah = $query['jumlah'] - $u->qty;
 
-        // $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
+        $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
     }
 }
 
@@ -220,8 +220,6 @@ if (in_array(false, $query)) {
         curl_close($curl);
 
         $responses = json_decode($response_curl, true);
-        var_dump($responses);
-        die();
 
         $payment_url = $responses['redirect_url'];
         $payment_token = $responses['token'];
