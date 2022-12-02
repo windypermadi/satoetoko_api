@@ -198,7 +198,7 @@ if (in_array(false, $query)) {
 } else {
 
     foreach ($dataproduk as $key => $value) {
-        $deleteCart = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id_barang = '$value[id_master]'");
+        $deleteCart = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id = '$value[id_cart]'");
     }
 
     $querydata = mysqli_query($conn, "SELECT * FROM transaksi a 
