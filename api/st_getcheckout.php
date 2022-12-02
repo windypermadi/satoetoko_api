@@ -32,6 +32,7 @@ foreach ($getproduk as $u) {
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
         $harga_varian = "Rp" . number_format($u->harga_varian, 0, ',', '.');
         $getprodukcoba[] = [
+            'id_cart' => $key['id_cart'],
             'id_master' => $u->id_master,
             'judul_master' => $u->judul_master,
             'image_master' => $u->image_master,
@@ -46,6 +47,7 @@ foreach ($getproduk as $u) {
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
         $harga_master = "Rp" . number_format($u->harga_master, 0, ',', '.');
         $getprodukcoba[] = [
+            'id_cart' => $key['id_cart'],
             'id_master' => $u->id_master,
             'judul_master' => $u->judul_master,
             'image_master' => $u->image_master,

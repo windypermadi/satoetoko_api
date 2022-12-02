@@ -40,35 +40,18 @@ $dataproduk = $dataraw2['produk'];
 // $idbarang = $dataraw2["produk"]["id_master"];
 // if (empty($dataproduk['id_variant'])) {
 //     foreach ($dataproduk as $i => $key) {
-//         $getproduk[] = $conn->query("SELECT 
-//             b.id_master, 
-//             b.judul_master, 
-//             b.image_master, 
-//             a.id_variant, 
-//             c.keterangan_varian, 
-//             b.harga_master, 
-//             b.diskon_rupiah, 
-//             c.harga_varian, 
-//             c.diskon_rupiah_varian, 
-//             a.qty,
-//             c.diskon_rupiah_varian, 
-//             d.berat as berat_buku, 
-//             e.berat as berat_fisik, 
-//             b.status_master_detail, 
-//             a.id_gudang, 
-//             COUNT(a.id) as jumlah_produk, 
-//             f.id_supplier, 
-//             f.fee_admin 
-//             FROM 
-//             user_keranjang a 
-//             JOIN master_item b ON a.id_barang = b.id_master 
-//             LEFT JOIN variant c ON a.id_variant = c.id_variant 
-//             LEFT JOIN master_buku_detail d ON b.id_master = d.id_master 
-//             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
-//             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
-//             LEFT JOIN stok g ON b.id_master = g.id_barang 
-//             WHERE a.id_barang = '$dataproduk[id_master]' AND a.id_user = '$datarow2[id_user]'
-//             AND a.id_gudang = '$datarow2[id_cabang]'")->fetch_object();
+//         $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
+// c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
+// a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
+// b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
+// f.id_supplier FROM user_keranjang a
+// JOIN master_item b ON a.id_barang = b.id_master
+// LEFT JOIN variant c ON a.id_variant = c.id_variant
+// LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
+// LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
+// LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
+// WHERE a.id_barang = '$key[id_master]' AND a.id_user = '$dataraw->id_user' 
+// AND a.id_gudang = '$dataraw->id_cabang'")->fetch_object();
 //     }
 // } else {
 //     foreach ($dataproduk as $i => $key) {

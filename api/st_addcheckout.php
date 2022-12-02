@@ -37,9 +37,8 @@ $data_ongkir_harga = $dataraw2["data_ongkir"]["harga"];
 
 //? LIST PRODUK
 $dataproduk = $dataraw2["produk"];
-if (empty($dataproduk["id_variant"])) {
-    foreach ($dataproduk as $i => $key) {
-        $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
+foreach ($dataproduk as $i => $key) {
+    $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
             c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
             a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
             b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
@@ -49,22 +48,7 @@ if (empty($dataproduk["id_variant"])) {
             LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
-            WHERE a.id_barang = '$key[id_master]'")->fetch_object();
-    }
-} else {
-    foreach ($dataproduk as $i => $key) {
-        $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
-            c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
-            a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
-            b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
-            f.id_supplier FROM user_keranjang a
-            JOIN master_item b ON a.id_barang = b.id_master
-            LEFT JOIN variant c ON a.id_variant = c.id_variant
-            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
-            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
-            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
-            WHERE a.id_barang = '$key[id_master]' AND a.id_variant = '$key[id_variant]'")->fetch_object();
-    }
+            WHERE a.id = '$key[id_cart]'")->fetch_object();
 }
 
 foreach ($getproduk as $u) {
@@ -109,24 +93,24 @@ foreach ($getproduk as $u) {
         sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
-        $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
-        $hasiljumlah = $query['jumlah'] - $u->qty;
+        $jml = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
+        $hasiljumlah = $jml['jumlah'] - $u->qty;
 
         $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
 
         //! UPDATE STOK HISTORY PRODUCT
-        // $query[] = $conn->query("INSERT INTO stok_history SET 
-        // id_history = UUID_SHORT(),
-        // tanggal_input = '$u->id_master',
-        // master_item = '$u->id_supplier',
-        // varian_item = '$u->harga_master',
-        // id_warehouse = '$u->diskon_rupiah',
-        // keterangan = '$harga_diskon',
-        // masuk = '$u->qty',
-        // keluar = '$berat',
-        // stok_awal = '$feetoko',  
-        // stok_sekarang = '$sbtotal'");
-        // $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
+        $stokawal = $jml['jumlah'];
+        $query[] = $conn->query("INSERT INTO stok_history SET 
+        id_history = UUID_SHORT(),
+        tanggal_input = NOW(),
+        master_item = '$u->id_master',
+        varian_item = '$u->id_variant',
+        id_warehouse = '$u->id_gudang',
+        keterangan = 'TRANSAKSI MASUK',
+        masuk = '0',
+        keluar = '$u->qty',
+        stok_awal = '$stokawal',  
+        stok_sekarang = '$hasiljumlah'");
     } else {
         $diskon = ($u->harga_master) - ($u->diskon_rupiah);
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
@@ -161,10 +145,24 @@ foreach ($getproduk as $u) {
         sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
-        $query[] = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
-        $hasiljumlah = $query['jumlah'] - $u->qty;
+        $jml = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
+        $hasiljumlah = $jml['jumlah'] - $u->qty;
 
         $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
+
+        //! UPDATE STOK HISTORY PRODUCT
+        $stokawal = $jml['jumlah'];
+        $query[] = $conn->query("INSERT INTO stok_history SET 
+        id_history = UUID_SHORT(),
+        tanggal_input = NOW(),
+        master_item = '$u->id_master',
+        varian_item = '$u->id_variant',
+        id_warehouse = '$u->id_gudang',
+        keterangan = 'TRANSAKSI MASUK',
+        masuk = '0',
+        keluar = '$u->qty',
+        stok_awal = '$stokawal',  
+        stok_sekarang = '$hasiljumlah'");
     }
 }
 
@@ -195,9 +193,13 @@ $query[] = mysqli_query($conn, "INSERT INTO transaksi SET
 
 
 if (in_array(false, $query)) {
-    $response->data = "tekan kene";
+    $response->data = mysqli_error($conn);
     $response->error(400);
 } else {
+
+    foreach ($dataproduk as $key => $value) {
+        $deleteCart = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id_barang = '$value[id_master]'");
+    }
 
     $querydata = mysqli_query($conn, "SELECT * FROM transaksi a 
             JOIN data_user b ON a.id_user = b.id_login
