@@ -12,15 +12,11 @@ switch ($tag) {
         $q = $_GET['q'] ?? '';
         $result = array();
         if (empty($q)) {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen,total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' ORDER BY tanggal_approve DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' GROUP BY a.id_master ORDER BY a.tanggal_approve DESC LIMIT $offset, $limit");
         } else {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen,total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' AND judul_master LIKE '%$q%' ORDER BY tanggal_approve DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' AND a.judul_master LIKE '%$q%' GROUP BY a.id_master ORDER BY a.tanggal_approve DESC LIMIT $offset, $limit");
         }
         foreach ($data as $key => $value) {
 
@@ -70,6 +66,7 @@ switch ($tag) {
                 'status_diskon' => $status_diskon,
                 'status_varian_diskon' => $status_varian_diskon,
                 'status_jenis_harga' => $status_jenis_harga,
+                'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
                 'diskon' => $value['diskon_persen'] . "%",
                 'total_dibeli' => $value['total_dibeli'] . " terjual",
                 'rating_item' => 0,
@@ -80,15 +77,11 @@ switch ($tag) {
         $q = $_GET['q'] ?? '';
         $result = array();
         if (empty($q)) {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen, total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' ORDER BY total_dibeli DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' GROUP BY a.id_master ORDER BY a.total_dibeli DESC LIMIT $offset, $limit");
         } else {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen, total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' AND judul_master LIKE '%$q%' ORDER BY total_dibeli DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' AND a.judul_master LIKE '%$q%' GROUP BY a.id_master ORDER BY a.total_dibeli DESC LIMIT $offset, $limit");
         }
         foreach ($data as $key => $value) {
 
@@ -138,6 +131,7 @@ switch ($tag) {
                 'status_diskon' => $status_diskon,
                 'status_varian_diskon' => $status_varian_diskon,
                 'status_jenis_harga' => $status_jenis_harga,
+                'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
                 'diskon' => $value['diskon_persen'] . "%",
                 'total_dibeli' => $value['total_dibeli'] . " terjual",
                 'rating_item' => 0,
@@ -148,15 +142,11 @@ switch ($tag) {
         $q = $_GET['q'] ?? '';
         $result = array();
         if (empty($q)) {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen, total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' ORDER BY harga_master ASC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' GROUP BY a.id_master ORDER BY a.harga_master ASC LIMIT $offset, $limit");
         } else {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen, total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' AND judul_master LIKE '%$q%' ORDER BY harga_master ASC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' AND a.judul_master LIKE '%$q%' GROUP BY a.id_master ORDER BY a.harga_master ASC LIMIT $offset, $limit");
         }
         foreach ($data as $key => $value) {
 
@@ -206,6 +196,7 @@ switch ($tag) {
                 'status_diskon' => $status_diskon,
                 'status_varian_diskon' => $status_varian_diskon,
                 'status_jenis_harga' => $status_jenis_harga,
+                'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
                 'diskon' => $value['diskon_persen'] . "%",
                 'total_dibeli' => $value['total_dibeli'] . " terjual",
                 'rating_item' => 0,
@@ -216,15 +207,11 @@ switch ($tag) {
         $q = $_GET['q'] ?? '';
         $result = array();
         if (empty($q)) {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen, total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' ORDER BY harga_master DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' GROUP BY a.id_master ORDER BY a.harga_master DESC LIMIT $offset, $limit");
         } else {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen, total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' AND judul_master LIKE '%$q%' ORDER BY harga_master DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' AND a.judul_master LIKE '%$q%' GROUP BY a.id_master ORDER BY a.harga_master DESC LIMIT $offset, $limit");
         }
         foreach ($data as $key => $value) {
 
@@ -274,6 +261,7 @@ switch ($tag) {
                 'status_diskon' => $status_diskon,
                 'status_varian_diskon' => $status_varian_diskon,
                 'status_jenis_harga' => $status_jenis_harga,
+                'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
                 'diskon' => $value['diskon_persen'] . "%",
                 'total_dibeli' => $value['total_dibeli'] . " terjual",
                 'rating_item' => 0,
@@ -284,15 +272,11 @@ switch ($tag) {
         $q = $_GET['q'] ?? '';
         $result = array();
         if (empty($q)) {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen,total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' ORDER BY tanggal_approve DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' GROUP BY a.id_master ORDER BY a.tanggal_approve DESC LIMIT $offset, $limit");
         } else {
-            $data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, 
-            diskon_rupiah, diskon_persen,total_dibeli, total_disukai 
-            FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' 
-            AND status_hapus = 'N' AND judul_master LIKE '%$q%' ORDER BY tanggal_approve DESC LIMIT $offset, $limit");
+            $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+            a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' AND a.judul_master LIKE '%$q%' GROUP BY a.id_master ORDER BY a.tanggal_approve DESC LIMIT $offset, $limit");
         }
         foreach ($data as $key => $value) {
 
@@ -342,6 +326,7 @@ switch ($tag) {
                 'status_diskon' => $status_diskon,
                 'status_varian_diskon' => $status_varian_diskon,
                 'status_jenis_harga' => $status_jenis_harga,
+                'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
                 'diskon' => $value['diskon_persen'] . "%",
                 'total_dibeli' => $value['total_dibeli'] . " terjual",
                 'rating_item' => 0,

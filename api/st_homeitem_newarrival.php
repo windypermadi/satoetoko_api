@@ -7,8 +7,8 @@ $limit = $_GET['limit'];
 $offset = $_GET['offset'];
 
 $result2 = array();
-$data = $conn->query("SELECT id_master, image_master, judul_master, harga_master, diskon_rupiah, diskon_persen,
-total_dibeli, total_disukai FROM master_item WHERE status_aktif = 'Y' AND status_approve = '2' AND status_hapus = 'N' ORDER BY tanggal_approve DESC LIMIT $offset, $limit");
+$data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
+a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' GROUP BY a.id_master ORDER BY a.tanggal_approve DESC LIMIT $offset, $limit");
 foreach ($data as $key => $value) {
 
     //! untuk varian harga diskon atau enggak
@@ -48,7 +48,7 @@ foreach ($data as $key => $value) {
 
     $status_jenis_harga = '1';
 
-    array_push($result2, array(
+    $result2[] = [
         'id_master' => $value['id_master'],
         'judul_master' => $value['judul_master'],
         'image_master' => $getimagefisik . $value['image_master'],
@@ -57,10 +57,25 @@ foreach ($data as $key => $value) {
         'status_diskon' => $status_diskon,
         'status_varian_diskon' => $status_varian_diskon,
         'status_jenis_harga' => $status_jenis_harga,
+        'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
         'diskon' => $value['diskon_persen'] . "%",
         'total_dibeli' => $value['total_dibeli'] . " terjual",
         'rating_item' => 0,
-    ));
+    ];
+    // array_push($result2, array(
+    //     'id_master' => $value['id_master'],
+    //     'judul_master' => $value['judul_master'],
+    //     'image_master' => $getimagefisik . $value['image_master'],
+    //     'harga_produk' => $harga_produk,
+    //     'harga_tampil' => $harga_tampil,
+    //     'status_diskon' => $status_diskon,
+    //     'status_varian_diskon' => $status_varian_diskon,
+    //     'status_jenis_harga' => $status_jenis_harga,
+    //     'status_stok' => $status_stok,
+    //     'diskon' => $value['diskon_persen'] . "%",
+    //     'total_dibeli' => $value['total_dibeli'] . " terjual",
+    //     'rating_item' => 0,
+    // ));
 }
 
 $result['nama_list'] = 'New Arrival';
