@@ -6,7 +6,7 @@ $response = new Response();
 $dataraw = json_decode(file_get_contents('php://input'));
 $dataraw2 = json_decode(file_get_contents('php://input'), true);
 
-// $exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
+$exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
 
 $conn->begin_transaction();
 
@@ -260,32 +260,37 @@ if (in_array(false, $query)) {
         $response->sukses(200);
         die();
     } else {
-        // $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
+        //? METODE PEMBAYARAN
+        $query_payment = "SELECT * FROM metode_pembayaran WHERE id_payment = '$dataraw->id_payment'";
+        $getpayment = $conn->query($query_payment);
+        $data_payment = $getpayment->fetch_object();
+        $metode_pembayaran = $data_payment->metode_pembayaran;
 
-        // $result['batas_pembayaran'] = $exp_date;
+        $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
+
+        $result['batas_pembayaran'] = $exp_date;
         $result['id_transaksi'] = $idtransaksi;
         $result['invoice'] = $invoice;
-        // $result['id_payment'] = $id_payment;
-        // $result['icon_payment'] = $geticonpayment . $icon_payment;
-        // $result['metode_pembayaran'] = $metode_pembayaran;
-        // $result['nomor_payment'] = $nomor_payment;
-        // $result['penerima_payment'] = $penerima_payment;
-        // $result['total_harga'] = (int)$jumlahbayar;
-        // $result['nomor_konfirmasi'] = GETWA;
-        // $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
-        //     mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
-        //         \nNomor Invoice : *$invoice*
-        //         \nJumlah     : *$total_format*
-        //         \nBank Transfer : *$metode_pembayaran*
-        //         \nNo Rekening : *$nomor_payment*
-        //         \nAtas Nama : *$penerima_payment*
-        //         \n\nJika ada pertanyaan lebih lanjut, anda dapat membalas langsung pesan ini.
-        //         \n\nTerimakasih\nHormat Kami, 
-        //         \n\nTim SatoeToko";
+        $result['icon_payment'] = $data_payment->icon_payment;
+        $result['metode_pembayaran'] = $data_payment->metode_pembayaran;
+        $result['nomor_payment'] = $data_payment->nomor_payment;
+        $result['penerima_payment'] = $data_payment->penerima_payment;
+        $result['total_harga'] = (int)$jumlahbayar;
+        $result['nomor_konfirmasi'] = GETWA;
+        $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
+            mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
+                \nNomor Invoice : *$invoice*
+                \nJumlah     : *$total_format*
+                \nBank Transfer : *$metode_pembayaran*
+                \nNo Rekening : *$nomor_payment*
+                \nAtas Nama : *$penerima_payment*
+                \n\nJika ada pertanyaan lebih lanjut, anda dapat membalas langsung pesan ini.
+                \n\nTerimakasih\nHormat Kami, 
+                \n\nTim SatoeToko";
 
         $conn->commit();
-        $response->data = "Pembayaran Harus Midtrans Otomatis";
-        $response->error(400);
+        $response->data = $result;
+        $response->sukses(200);
         die();
     }
 }
