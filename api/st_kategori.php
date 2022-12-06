@@ -4,6 +4,7 @@ include "response.php";
 $response = new Response();
 
 $id_kategori = $_GET['id_kategori'] ?? '';
+
 if (empty($id_kategori)) {
     $q = $_GET['q'] ?? '';
     if (empty($q)) {
@@ -22,8 +23,7 @@ if (empty($id_kategori)) {
 } else {
     $idsub = $_GET['id_sub'] ?? '';
     if (!empty($idsub)) {
-        $query = mysqli_query($conn, "SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
-        a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' AND a.id_sub_kategori = '$idsub' GROUP BY a.id_master ORDER BY a.tanggal_approve DESC");
+        $query = mysqli_query($conn, "SELECT *  FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.id_sub_kategori LIKE '$idsub'");
         foreach ($query as $key => $value) {
             //! untuk varian harga diskon atau enggak
             $varian_harga = 'N';
@@ -62,7 +62,7 @@ if (empty($id_kategori)) {
 
             $status_jenis_harga = '1';
 
-            $result2[] = [
+            $result[] = [
                 'id_master' => $value['id_master'],
                 'judul_master' => $value['judul_master'],
                 'image_master' => $getimagefisik . $value['image_master'],
