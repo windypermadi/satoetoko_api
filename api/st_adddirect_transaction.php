@@ -37,8 +37,8 @@ $data_ongkir_harga = $dataraw2["data_ongkir"]["harga"];
 
 //? LIST PRODUK
 $dataproduk = $dataraw2["produk"];
-foreach ($dataproduk as $i => $key) {
-    $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
+if (empty($dataproduk['id_variant'])) {
+    $getproduk = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
             c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
             a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
             b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
@@ -48,122 +48,132 @@ foreach ($dataproduk as $i => $key) {
             LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
-            WHERE a.id = '$key[id_cart]'")->fetch_object();
+            WHERE a.id_barang = '$dataproduk[id_master]'")->fetch_object();
+} else {
+    $getproduk = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
+            c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
+            a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
+            b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
+            f.id_supplier FROM user_keranjang a
+            JOIN master_item b ON a.id_barang = b.id_master
+            LEFT JOIN variant c ON a.id_variant = c.id_variant
+            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
+            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
+            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
+            WHERE a.id = '$dataproduk[id_master]' AND a.id_variant = '$dataproduk[id_variant]'")->fetch_object();
 }
 
-foreach ($getproduk as $u) {
-    if ($u->status_master_detail == '2') {
-        $berat += $u->berat_buku * $u->qty;
-        $berat_detail = $u->berat_buku * $u->qty;
-    } else if ($u->status_master_detail == '3') {
-        $berat += $u->berat_fisik * $u->qty;
-        $berat_detail = $u->berat_fisik * $u->qty;
-    }
-    if ($u->id_variant) {
-        $diskon = ($u->harga_varian) - ($u->diskon_rupiah_varian);
-        $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
-        $harga_varian = "Rp" . number_format($u->harga_varian, 0, ',', '.');
-        $getprodukcoba[] = [
-            'id_master' => $u->id_master,
-            'judul_master' => $u->judul_master,
-            'image_master' => $u->image_master,
-            'id_variant' => $u->id_variant,
-            'keterangan_varian' => $u->keterangan_varian != null ? $u->keterangan_varian : "",
-            'qty' => $u->qty,
-            'harga_produk' => "Rp" . number_format($u->harga_varian, 0, ',', '.'),
-            'harga_tampil' => $u->diskon_rupiah_varian != 0 ? ($diskon_format) : $harga_varian
-        ];
+if ($getproduk->status_master_detail == '2') {
+    $berat += $getproduk->berat_buku * $getproduk->qty;
+    $berat_detail = $getproduk->berat_buku * $getproduk->qty;
+} else if ($getproduk->status_master_detail == '3') {
+    $berat += $getproduk->berat_fisik * $getproduk->qty;
+    $berat_detail = $getproduk->berat_fisik * $getproduk->qty;
+}
+if ($getproduk->id_variant) {
+    $diskon = ($getproduk->harga_varian) - ($getproduk->diskon_rupiah_varian);
+    $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
+    $harga_varian = "Rp" . number_format($getproduk->harga_varian, 0, ',', '.');
+    $getprodukcoba[] = [
+        'id_master' => $getproduk->id_master,
+        'judul_master' => $getproduk->judul_master,
+        'image_master' => $getproduk->image_master,
+        'id_variant' => $getproduk->id_variant,
+        'keterangan_varian' => $getproduk->keterangan_varian != null ? $getproduk->keterangan_varian : "",
+        'qty' => $getproduk->qty,
+        'harga_produk' => "Rp" . number_format($getproduk->harga_varian, 0, ',', '.'),
+        'harga_tampil' => $getproduk->diskon_rupiah_varian != 0 ? ($diskon_format) : $harga_varian
+    ];
 
-        //! INSERT TRANSAKSI DETAIL ADA VARIANT
-        $harga_diskon = $u->harga_varian - $u->diskon_rupiah_varian;
-        $feetoko = $harga_diskon - ($harga_diskon * ($u->fee_admin / 100));
-        $sbtotal = round($harga_diskon * $u->qty);
+    //! INSERT TRANSAKSI DETAIL ADA VARIANT
+    $harga_diskon = $getproduk->harga_varian - $getproduk->diskon_rupiah_varian;
+    $feetoko = $harga_diskon - ($harga_diskon * ($getproduk->fee_admin / 100));
+    $sbtotal = round($harga_diskon * $getproduk->qty);
 
-        $query[] = $conn->query("INSERT INTO transaksi_detail SET 
+    $query[] = $conn->query("INSERT INTO transaksi_detail SET 
         id_transaksi_detail = UUID_SHORT(),
         id_transaksi = '$transaction->id',
-        id_barang = '$u->id_variant',
-        id_supplier = '$u->id_supplier',
-        harga_barang = '$u->harga_varian',
-        diskon_barang = '$u->diskon_rupiah_varian',
+        id_barang = '$getproduk->id_variant',
+        id_supplier = '$getproduk->id_supplier',
+        harga_barang = '$getproduk->harga_varian',
+        diskon_barang = '$getproduk->diskon_rupiah_varian',
         harga_diskon = '$harga_diskon',
-        jumlah_beli = '$u->qty',
+        jumlah_beli = '$getproduk->qty',
         berat = '$berat_detail',
         fee_toko = '$feetoko',  
         sub_total = '$sbtotal'");
 
-        //! UPDATE STOK PRODUCT
-        $jml = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
-        $hasiljumlah = $jml['jumlah'] - $u->qty;
+    //! UPDATE STOK PRODUCT
+    $jml = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$getproduk->id_variant'")->fetch_assoc();
+    $hasiljumlah = $jml['jumlah'] - $getproduk->qty;
 
-        $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
+    $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$getproduk->id_variant'");
 
-        //! UPDATE STOK HISTORY PRODUCT
-        $stokawal = $jml['jumlah'];
-        $query[] = $conn->query("INSERT INTO stok_history SET 
+    //! UPDATE STOK HISTORY PRODUCT
+    $stokawal = $jml['jumlah'];
+    $query[] = $conn->query("INSERT INTO stok_history SET 
         id_history = UUID_SHORT(),
         tanggal_input = NOW(),
-        master_item = '$u->id_master',
-        varian_item = '$u->id_variant',
-        id_warehouse = '$u->id_gudang',
+        master_item = '$getproduk->id_master',
+        varian_item = '$getproduk->id_variant',
+        id_warehouse = '$getproduk->id_gudang',
         keterangan = 'TRANSAKSI MASUK',
         masuk = '0',
-        keluar = '$u->qty',
+        keluar = '$getproduk->qty',
         stok_awal = '$stokawal',  
         stok_sekarang = '$hasiljumlah'");
-    } else {
-        $diskon = ($u->harga_master) - ($u->diskon_rupiah);
-        $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
-        $harga_master = "Rp" . number_format($u->harga_master, 0, ',', '.');
-        $getprodukcoba[] = [
-            'id_master' => $u->id_master,
-            'judul_master' => $u->judul_master,
-            'image_master' => $u->image_master,
-            'id_variant' => $u->id_variant,
-            'keterangan_varian' => $u->keterangan_varian != null ? $u->keterangan_varian : "",
-            'qty' => $u->qty,
-            'harga_produk' => $u->harga_master,
-            'harga_tampil' => $u->diskon_rupiah != 0 ? ($diskon_format) : $harga_master
-        ];
+} else {
+    $diskon = ($u->harga_master) - ($getproduk->diskon_rupiah);
+    $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
+    $harga_master = "Rp" . number_format($getproduk->harga_master, 0, ',', '.');
+    $getprodukcoba[] = [
+        'id_master' => $getproduk->id_master,
+        'judul_master' => $getproduk->judul_master,
+        'image_master' => $getproduk->image_master,
+        'id_variant' => $getproduk->id_variant,
+        'keterangan_varian' => $getproduk->keterangan_varian != null ? $getproduk->keterangan_varian : "",
+        'qty' => $getproduk->qty,
+        'harga_produk' => $getproduk->harga_master,
+        'harga_tampil' => $getproduk->diskon_rupiah != 0 ? ($diskon_format) : $harga_master
+    ];
 
-        //! INSERT TRANSAKSI DETAIL TIDAK ADA VARIANT
-        $harga_diskon = $u->harga_master - $u->diskon_rupiah;
-        $feetoko = $harga_diskon - ($harga_diskon * ($u->fee_admin / 100));
-        $sbtotal = round($harga_diskon * $u->qty);
+    //! INSERT TRANSAKSI DETAIL TIDAK ADA VARIANT
+    $harga_diskon = $getproduk->harga_master - $getproduk->diskon_rupiah;
+    $feetoko = $harga_diskon - ($harga_diskon * ($getproduk->fee_admin / 100));
+    $sbtotal = round($harga_diskon * $getproduk->qty);
 
-        $query[] = $conn->query("INSERT INTO transaksi_detail SET 
+    $query[] = $conn->query("INSERT INTO transaksi_detail SET 
         id_transaksi_detail = UUID_SHORT(),
         id_transaksi = '$transaction->id',
-        id_barang = '$u->id_master',
-        id_supplier = '$u->id_supplier',
-        harga_barang = '$u->harga_master',
-        diskon_barang = '$u->diskon_rupiah',
+        id_barang = '$getproduk->id_master',
+        id_supplier = '$getproduk->id_supplier',
+        harga_barang = '$getproduk->harga_master',
+        diskon_barang = '$getproduk->diskon_rupiah',
         harga_diskon = '$harga_diskon',
-        jumlah_beli = '$u->qty',
+        jumlah_beli = '$getproduk->qty',
         berat = '$berat_detail',
         fee_toko = '$feetoko',  
         sub_total = '$sbtotal'");
 
-        //! UPDATE STOK PRODUCT
-        $jml = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
-        $hasiljumlah = $jml['jumlah'] - $u->qty;
+    //! UPDATE STOK PRODUCT
+    $jml = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$getproduk->id_master'")->fetch_assoc();
+    $hasiljumlah = $jml['jumlah'] - $getproduk->qty;
 
-        $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
+    $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$getproduk->id_master'");
 
-        //! UPDATE STOK HISTORY PRODUCT
-        $stokawal = $jml['jumlah'];
-        $query[] = $conn->query("INSERT INTO stok_history SET 
+    //! UPDATE STOK HISTORY PRODUCT
+    $stokawal = $jml['jumlah'];
+    $query[] = $conn->query("INSERT INTO stok_history SET 
         id_history = UUID_SHORT(),
         tanggal_input = NOW(),
-        master_item = '$u->id_master',
-        varian_item = '$u->id_variant',
-        id_warehouse = '$u->id_gudang',
+        master_item = '$getproduk->id_master',
+        varian_item = '$getproduk->id_variant',
+        id_warehouse = '$getproduk->id_gudang',
         keterangan = 'TRANSAKSI MASUK',
         masuk = '0',
-        keluar = '$u->qty',
+        keluar = '$getproduk->qty',
         stok_awal = '$stokawal',  
         stok_sekarang = '$hasiljumlah'");
-    }
 }
 
 //! UPDATE TABLE TRANSAKSI 
