@@ -36,9 +36,9 @@ $data_ongkir_produk = $dataraw2["data_ongkir"]["produk"];
 $data_ongkir_harga = $dataraw2["data_ongkir"]["harga"];
 
 //? LIST PRODUK
-$dataproduk = $dataraw2["produk"];
+$dataproduk = $dataraw2["produk"][0];
 if (empty($dataproduk['id_variant'])) {
-    $getproduk = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
+    $que = "SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
             c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
             a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
             b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
@@ -48,9 +48,9 @@ if (empty($dataproduk['id_variant'])) {
             LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
-            WHERE a.id_barang = '$dataproduk[id_master]'")->fetch_object();
+            WHERE a.id_barang = '$dataproduk[id_master]'";
 } else {
-    $getproduk = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
+    $que = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
             c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
             a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
             b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
@@ -62,6 +62,7 @@ if (empty($dataproduk['id_variant'])) {
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
             WHERE a.id = '$dataproduk[id_master]' AND a.id_variant = '$dataproduk[id_variant]'")->fetch_object();
 }
+$getproduk = $conn->query($que)->fetch_object();
 
 if ($getproduk->status_master_detail == '2') {
     $berat += $getproduk->berat_buku * $getproduk->qty;
@@ -70,6 +71,36 @@ if ($getproduk->status_master_detail == '2') {
     $berat += $getproduk->berat_fisik * $getproduk->qty;
     $berat_detail = $getproduk->berat_fisik * $getproduk->qty;
 }
+
+//! UPDATE TABLE TRANSAKSI 
+$query[] = mysqli_query($conn, "INSERT INTO transaksi SET 
+        id_transaksi = '$transaction->id',
+        pembuat_transaksi = 'F',
+        invoice = '$invoice',
+        id_user = '$dataraw->id_user',
+        tanggal_transaksi = NOW(),
+        catatan_pembeli = '$dataraw->id_user',
+        label_alamat = '$label_alamat',
+        alamat_penerima = '$gabung_alamat',
+        nama_penerima = '$nama_penerima',
+        telepon_penerima = '$telepon_penerima',
+        total_harga_sebelum_diskon = '$dataraw->harga_normal',
+        total_harga_setelah_diskon = '$dataraw->jumlahbayar',
+        total_berat = '$berat',
+        harga_ongkir = '$data_ongkir_harga',
+        voucher_harga = 0,
+        voucher_harga_persen = 0,
+        voucher_ongkir = 0,
+        kurir_pengirim = '$data_ongkir_layanan',
+        kurir_code = '$data_ongkir_kode',
+        kurir_service = '$data_ongkir_produk',
+        id_cabang = '$dataraw->id_cabang',
+        metode_pembayaran = '$dataraw->id_payment'");
+
+// var_dump($conn->error);
+// die();
+
+
 if ($getproduk->id_variant) {
     $diskon = ($getproduk->harga_varian) - ($getproduk->diskon_rupiah_varian);
     $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
@@ -95,13 +126,13 @@ if ($getproduk->id_variant) {
         id_transaksi = '$transaction->id',
         id_barang = '$getproduk->id_variant',
         id_supplier = '$getproduk->id_supplier',
-        harga_barang = '$getproduk->harga_varian',
-        diskon_barang = '$getproduk->diskon_rupiah_varian',
-        harga_diskon = '$harga_diskon',
-        jumlah_beli = '$getproduk->qty',
-        berat = '$berat_detail',
-        fee_toko = '$feetoko',  
-        sub_total = '$sbtotal'");
+        harga_barang = $getproduk->harga_varian,
+        diskon_barang = $getproduk->diskon_rupiah_varian,
+        harga_diskon = $harga_diskon,
+        jumlah_beli = $getproduk->qty,
+        berat = $berat_detail,
+        fee_toko = $feetoko,  
+        sub_total = $sbtotal");
 
     //! UPDATE STOK PRODUCT
     $jml = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$getproduk->id_variant'")->fetch_assoc();
@@ -147,13 +178,13 @@ if ($getproduk->id_variant) {
         id_transaksi = '$transaction->id',
         id_barang = '$getproduk->id_master',
         id_supplier = '$getproduk->id_supplier',
-        harga_barang = '$getproduk->harga_master',
-        diskon_barang = '$getproduk->diskon_rupiah',
-        harga_diskon = '$harga_diskon',
-        jumlah_beli = '$getproduk->qty',
-        berat = '$berat_detail',
-        fee_toko = '$feetoko',  
-        sub_total = '$sbtotal'");
+        harga_barang = $getproduk->harga_master,
+        diskon_barang = $getproduk->diskon_rupiah,
+        harga_diskon = $harga_diskon,
+        jumlah_beli = $getproduk->qty,
+        berat = $berat_detail,
+        fee_toko = $feetoko,  
+        sub_total = $sbtotal");
 
     //! UPDATE STOK PRODUCT
     $jml = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$getproduk->id_master'")->fetch_assoc();
@@ -175,32 +206,6 @@ if ($getproduk->id_variant) {
         stok_awal = '$stokawal',  
         stok_sekarang = '$hasiljumlah'");
 }
-
-//! UPDATE TABLE TRANSAKSI 
-$query[] = mysqli_query($conn, "INSERT INTO transaksi SET 
-        id_transaksi = '$transaction->id',
-        pembuat_transaksi = 'F',
-        invoice = '$invoice',
-        id_user = '$dataraw->id_user',
-        tanggal_transaksi = NOW(),
-        catatan_pembeli = '$dataraw->id_user',
-        label_alamat = '$label_alamat',
-        alamat_penerima = '$gabung_alamat',
-        nama_penerima = '$nama_penerima',
-        telepon_penerima = '$telepon_penerima',
-        total_harga_sebelum_diskon = '$dataraw->harga_normal',
-        total_harga_setelah_diskon = '$dataraw->jumlahbayar',
-        total_berat = $berat,
-        harga_ongkir = $data_ongkir_harga,
-        voucher_harga = 0,
-        voucher_harga_persen = 0,
-        voucher_ongkir = 0,
-        kurir_pengirim = '$data_ongkir_layanan',
-        kurir_code = '$data_ongkir_kode',
-        kurir_service = '$data_ongkir_produk',
-        id_cabang = '$dataraw->id_cabang',
-        metode_pembayaran = '$dataraw->id_payment'");
-
 
 if (in_array(false, $query)) {
     $response->data = mysqli_error($conn);
