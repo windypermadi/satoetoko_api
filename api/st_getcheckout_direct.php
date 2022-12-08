@@ -52,9 +52,9 @@ if ($getproduk->id_variant) {
         'id_master' => $getproduk->id_master,
         'judul_master' => $getproduk->judul_master,
         'image_master' => $getproduk->image_master,
-        'id_variant' => $getproduk->id_variant,
+        'id_variant' => $dataproduk['id_variant'],
         'keterangan_varian' => $getproduk->keterangan_varian != null ? $getproduk->keterangan_varian : "",
-        'qty' => $getproduk->qty,
+        'qty' => $dataraw->qty,
         'harga_produk' => "Rp" . number_format($getproduk->harga_varian, 0, ',', '.'),
         'harga_tampil' => $getproduk->diskon_rupiah_varian != 0 ? ($diskon_format) : $harga_varian
     ];
@@ -67,9 +67,9 @@ if ($getproduk->id_variant) {
         'id_master' => $getproduk->id_master,
         'judul_master' => $getproduk->judul_master,
         'image_master' => $getproduk->image_master,
-        'id_variant' => $getproduk->id_variant,
+        'id_variant' => $dataproduk['id_variant'],
         'keterangan_varian' => $getproduk->keterangan_varian != null ? $getproduk->keterangan_varian : "",
-        'qty' => $getproduk->qty,
+        'qty' => $dataraw->qty,
         'harga_produk' => $getproduk->harga_master,
         'harga_tampil' => $getproduk->diskon_rupiah != 0 ? ($diskon_format) : $harga_master
     ];
