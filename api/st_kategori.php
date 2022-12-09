@@ -8,9 +8,42 @@ $id_kategori = $_GET['id_kategori'] ?? '';
 if (empty($id_kategori)) {
     $q = $_GET['q'] ?? '';
     if (empty($q)) {
-        $query = mysqli_query($conn, "SELECT * FROM kategori WHERE jenis_kategori = '0' AND status_tampil = 'Y' AND status_hapus = 'N' ORDER BY nama_kategori ASC");
+        $query = mysqli_query($conn, "SELECT 
+            c.id_kategori, 
+            c.kode_kategori, 
+            c.nama_kategori 
+            FROM 
+            kategori_sub a 
+            JOIN master_item b ON a.id_sub = b.id_sub_kategori 
+            JOIN kategori c ON a.parent_kategori = c.id_kategori 
+            WHERE 
+            c.jenis_kategori = '0' 
+            AND c.status_tampil = 'Y' 
+            AND c.status_hapus = 'N' 
+            GROUP BY 
+            c.id_kategori 
+            ORDER BY 
+            c.nama_kategori ASC;
+            ");
     } else {
-        $query = mysqli_query($conn, "SELECT * FROM kategori WHERE jenis_kategori = '0' AND status_tampil = 'Y' AND status_hapus = 'N' AND nama_kategori LIKE '%$q%' ORDER BY nama_kategori ASC");
+        $query = mysqli_query($conn, "SELECT 
+            c.id_kategori, 
+            c.kode_kategori, 
+            c.nama_kategori 
+            FROM 
+            kategori_sub a 
+            JOIN master_item b ON a.id_sub = b.id_sub_kategori 
+            JOIN kategori c ON a.parent_kategori = c.id_kategori 
+            WHERE 
+            c.jenis_kategori = '0' 
+            AND c.status_tampil = 'Y' 
+            AND c.status_hapus = 'N'
+            AND c.nama_kategori LIKE '%$q%'
+            GROUP BY 
+            c.id_kategori 
+            ORDER BY 
+            c.nama_kategori ASC;
+            ");
     }
     foreach ($query as $key => $value) {
         $result[] = [
@@ -37,8 +70,8 @@ if (empty($id_kategori)) {
                     (float)$harga_disc = $value['harga_master'];
                 }
 
-                $harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.');
-                $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+                $harga_produk = rupiah($value['harga_master']);
+                $harga_tampil = rupiah($harga_disc);
             } else {
 
                 if ($value['diskon_persen'] != 0) {
@@ -78,7 +111,9 @@ if (empty($id_kategori)) {
             ];
         }
     } else {
-        $query = mysqli_query($conn, "SELECT * FROM kategori_sub WHERE status_tampil = 'Y' AND status_aktif = 'N' AND parent_kategori = '$id_kategori' ORDER BY nama_kategori ASC");
+        $query = mysqli_query($conn, "SELECT a.id_sub, a.kode_kategori, a.nama_kategori FROM kategori_sub a 
+JOIN master_item b ON a.id_sub = b.id_sub_kategori WHERE a.status_tampil = 'Y'
+AND a.status_aktif = 'N' GROUP BY a.id_sub ORDER BY a.nama_kategori ASC;");
         foreach ($query as $key => $value) {
             $result[] = [
                 'id_kategori'    => $value['id_sub'],
