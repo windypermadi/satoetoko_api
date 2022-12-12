@@ -12,7 +12,7 @@ if (isset($id_login)) {
 
     switch ($tag) {
         case 'semua':
-            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi FROM `transaksi` WHERE id_user = '$id_login'");
+            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login'");
 
             foreach ($data as $key) {
 
@@ -46,6 +46,8 @@ if (isset($id_login)) {
                     $status_transaksi = 'Expired';
                 }
 
+                $ambilditempat = $key['kurir_code'] == '00' ? 'Ambil Ditempat' : '';
+
                 $result[] = [
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
@@ -54,6 +56,7 @@ if (isset($id_login)) {
                     'total_format' => rupiah($key['total_harga_setelah_diskon']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
+                    'status_ambil_ditempat' => $ambilditempat
                 ];
             }
 
@@ -66,7 +69,7 @@ if (isset($id_login)) {
             }
             break;
         case 'selesai':
-            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '3'");
+            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '3'");
 
             foreach ($data as $key) {
 
@@ -100,6 +103,8 @@ if (isset($id_login)) {
                     $status_transaksi = 'Expired';
                 }
 
+                $ambilditempat = $key['kurir_code'] == '00' ? 'Ambil Ditempat' : '';
+
                 $result[] = [
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
@@ -108,6 +113,7 @@ if (isset($id_login)) {
                     'total_format' => rupiah($key['total_harga_setelah_diskon']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
+                    'status_ambil_ditempat' => $ambilditempat
                 ];
             }
 
@@ -120,7 +126,7 @@ if (isset($id_login)) {
             }
             break;
         case 'batal':
-            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '9'");
+            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '9'");
 
             foreach ($data as $key) {
 
@@ -154,6 +160,8 @@ if (isset($id_login)) {
                     $status_transaksi = 'Expired';
                 }
 
+                $ambilditempat = $key['kurir_code'] == '00' ? 'Ambil Ditempat' : '';
+
                 $result[] = [
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
@@ -162,11 +170,86 @@ if (isset($id_login)) {
                     'total_format' => rupiah($key['total_harga_setelah_diskon']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
+                    'status_ambil_ditempat' => $ambilditempat
                 ];
             }
 
             if ($result) {
                 $response->data = $result;
+                $response->sukses(200);
+            } else {
+                $response->data = [];
+                $response->sukses(200);
+            }
+            break;
+        case 'detail':
+            $id_transaksi         = $_GET['id_transaksi'];
+            $data = $conn->query("SELECT * FROM `transaksi` WHERE id_user = '$id_login' AND id_transaksi = '$id_transaksi'")->fetch_object();
+
+            $status_transaksi = $data->status_transaksi;
+            $kurir_code = $data->kurir_code;
+
+            // $data->ambil_ditempat;
+            // $data->midtrans_transaction_status;
+            // $data->midtrans_token;
+            // $data->midtrans_redirect_url;
+
+            if ($status_transaksi == '1') {
+                $status = 'Menunggu Pembayaran';
+            } else if ($status_transaksi == '2') {
+                $status = 'Menunggu Verifikasi Pembayaran';
+            } else if ($status_transaksi == '3') {
+                $status = 'Pembayaran Berhasil';
+            } else if ($status_transaksi == '4') {
+                $status = 'Pembayaran Tidak Lengkap';
+            } else if ($status_transaksi == '5') {
+                $status = 'Dikirim';
+            } else if ($status_transaksi == '6') {
+                $status = 'Diterima';
+            } else if ($status_transaksi == '7') {
+                $status = 'Transaksi Selesai';
+            } else if ($status_transaksi == '8') {
+                $status = 'Expired';
+            } else if ($status_transaksi == '9') {
+                $status = 'Dibatalkan';
+            } else if ($status_transaksi == '10') {
+                $status = 'Pembayaran Ditolak';
+            } else if ($status_transaksi == '11') {
+                $status = 'PengembalianBarang';
+            } else {
+                $status = 'Expired';
+            }
+
+            if ($kurir_code == '00') {
+                $status_kurir = $data->kurir_pengirim;
+                $ambil_ditempat = $data->ambil_ditempat;
+            } else {
+                $status_kurir = $data->kurir_pengirim;
+                $ambil_ditempat = "";
+            }
+
+            if ($data->metode_pembayaran == '1') {
+                $metode_pembayaran = 'Pembayaran Manual';
+            } else if ($data->metode_pembayaran == '2') {
+                $metode_pembayaran = 'Pembayaran Otomatis Midtrans';
+            } else {
+                $metode_pembayaran = 'Belum Memilih Metode Pembayaran';
+            }
+
+            $data1['id_transaksi'] = $data->id_transaksi;
+            $data1['invoice'] = $data->invoice;
+            $data1['total_harga'] = $data->total_harga_setelah_diskon + $data->harga_ongkir;
+            $data1['metode_pembayaran'] = $metode_pembayaran;
+            $data1['status_transaksi'] = $status;
+            $data1['tanggal_transaksi'] = $data->tanggal_transaksi;
+            $data1['ambil_ditempat'] = $ambil_ditempat;
+            $data1['midtrans_payment_type'] = $data->midtrans_payment_type;
+            $data1['midtrans_transaction_status'] = $data->midtrans_transaction_status;
+            $data1['midtrans_token'] = $data->midtrans_token;
+            $data1['midtrans_redirect_url'] = $data->midtrans_redirect_url;
+
+            if ($data1) {
+                $response->data = $data1;
                 $response->sukses(200);
             } else {
                 $response->data = [];
