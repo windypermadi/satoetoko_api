@@ -50,42 +50,39 @@ switch ($tag) {
             die();
         }
 
-        $listebook = array();
         $ebooks = $conn->query("SELECT * FROM master_item a LEFT JOIN kategori_sub b ON a.id_sub_kategori = b.id_sub 
         WHERE a.id_master = '$id_master'");
         foreach ($ebooks as $key => $value) {
-            array_push($listebook, array(
+            $listebook[] = [
                 'id_master' => $value['id_master'],
                 'judul_master' => $value['judul_master'],
                 'image_master' => $urlimg . $value['image_master'],
                 'nama_kategori' => $value['nama_kategori'],
-            ));
+            ];
         }
 
-        $listmetode = array();
         $payments = $conn->query("SELECT * FROM metode_pembayaran WHERE status_aktif = 'Y' ORDER BY id_payment ASC");
         foreach ($payments as $key => $value) {
-            array_push($listmetode, array(
+            $listmetode[] = [
                 'id_payment' => $value['id_payment'],
                 'icon_payment' => $geticonpayment . $value['icon_payment'],
                 'metode_pembayaran' => $value['metode_pembayaran'],
                 'nomor_payment' => $value['nomor_payment'],
                 'penerima_payment' => $value['penerima_payment']
-            ));
+            ];
         }
 
-        $listvoucher = array();
         $vouchers = $conn->query("SELECT * FROM voucher_user a 
             JOIN voucher b ON a.idvoucher = b.idvoucher
             WHERE a.iduser = '$iduser' AND a.status_pakai = '0' AND tgl_mulai <= CURRENT_DATE() AND tgl_berakhir >= CURRENT_DATE();");
         foreach ($vouchers as $key => $value) {
-            array_push($listvoucher, array(
+            $listvoucher[] = [
                 'idvoucher' => $value['idvoucher'],
                 'nama_voucher' => $value['nama_voucher'],
                 'deskripsi_voucher' => $value['deskripsi_voucher'],
                 'nilai_voucher' => $value['nilai_voucher'],
-                'minimal_transaksi' => $value['minimal_transaksi'],
-            ));
+                'minimal_transaksi' => $value['minimal_transaksi']
+            ];
         }
 
         // $totalppn = $harga_produk * ((int)$ppn / 100);
@@ -101,7 +98,7 @@ switch ($tag) {
         $data1['ppn_persen'] = $ppn . "%";
         $data1['ppn_rupiah'] = (int)$totalppn;
         $data1['biaya_admin'] = 0;
-        $data1['total'] = (int)$harga_produk + (int)$totalppn;
+        $data1['total'] = ($harga_produk - $diskon_rupiah) + $totalppn;
 
         if ($data) {
             $response->code = 200;

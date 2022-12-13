@@ -240,7 +240,8 @@ if (isset($id_login)) {
             $data1['invoice'] = $data->invoice;
             $data1['total_harga'] = $data->total_harga_setelah_diskon + $data->harga_ongkir;
             $data1['metode_pembayaran'] = $metode_pembayaran;
-            $data1['status_transaksi'] = $status;
+            $data1['status_transaksi_ket'] = $status;
+            $data1['status_transaksi'] = $status_transaksi;
             $data1['tanggal_transaksi'] = $data->tanggal_transaksi;
             $data1['ambil_ditempat'] = $ambil_ditempat;
             $data1['midtrans_payment_type'] = $data->midtrans_payment_type;
