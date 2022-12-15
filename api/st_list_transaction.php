@@ -271,9 +271,7 @@ if (isset($id_login)) {
         case 'detail_product':
             $id_transaksi         = $_GET['id_transaksi'];
 
-            $data = $conn->query("SELECT * FROM `transaksi` WHERE id_user = '$id_login' AND id_transaksi = '$id_transaksi'")->fetch_object();
-
-            $getproduk = $conn->query("SELECT b.total_harga_sebelum_diskon, b.harga_ongkir, b.total_harga_setelah_diskon, b.voucher_harga, c.judul_master, c.image_master, a.jumlah_beli, a.harga_barang, a.diskon_barang, a.harga_diskon, b.invoice, d.id_variant, d.keterangan_varian, d.diskon_rupiah_varian, d.image_varian FROM transaksi_detail a 
+            $getproduk = $conn->query("SELECT b.total_harga_sebelum_diskon, b.harga_ongkir, b.total_harga_setelah_diskon, b.voucher_harga, c.judul_master, c.image_master, a.jumlah_beli, a.harga_barang, a.diskon_barang, a.harga_diskon, b.invoice, d.id_variant, d.keterangan_varian, d.diskon_rupiah_varian, d.image_varian, b.status_transaksi, b.kurir_pengirim, b.kurir_code, b.kurir_service, b.metode_pembayaran, b.ambil_ditempat, b.midtrans_transaction_status, b.midtrans_payment_type, b.midtrans_token, b.midtrans_redirect_url FROM transaksi_detail a 
                 JOIN transaksi b ON a.id_transaksi = b.id_transaksi
                 LEFT JOIN master_item c ON a.id_barang = c.id_master
                 LEFT JOIN variant d ON a.id_barang = d.id_variant WHERE a.id_transaksi = '$id_transaksi';");
@@ -317,7 +315,23 @@ if (isset($id_login)) {
                     'address' => $gabung_alamat,
                 ];
 
+            //?Data transaction
+            $data = $conn->query("SELECT * FROM `transaksi` WHERE id_user = '$id_login' AND id_transaksi = '$id_transaksi'")->fetch_object();
+            $getdatatransaction =
+                [
+                    'status_transaksi' => $value['status_transaksi'],
+                    'kurir_pengirim' => $value['kurir_pengirim'],
+                    'kurir_code' => $value['kurir_code'],
+                    'kurir_service' => $value['kurir_service'],
+                    'metode_pembayaran' => $value['metode_pembayaran'],
+                    'ambil_ditempat' => $value['ambil_ditempat'],
+                    'midtrans_transaction_status' => $value['midtrans_transaction_status'],
+                    'midtrans_payment_type' => $value['midtrans_payment_type'],
+                    'midtrans_token' => $value['midtrans_token'],
+                    'midtrans_redirect_url' => $value['midtrans_redirect_url'],
+                ];
 
+            $data1['data_transaction'] = $getdatatransaction;
             $data1['data_address_buyer'] = $address;
             // $data1['data_address_shipper'] = $address_shipper;
             $data1['data_product'] = $getprodukcoba;
