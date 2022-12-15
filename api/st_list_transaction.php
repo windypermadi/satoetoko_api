@@ -270,7 +270,70 @@ if (isset($id_login)) {
             break;
         case 'detail_product':
             $id_transaksi         = $_GET['id_transaksi'];
+
             $data = $conn->query("SELECT * FROM `transaksi` WHERE id_user = '$id_login' AND id_transaksi = '$id_transaksi'")->fetch_object();
+
+            $getproduk = $conn->query("SELECT b.total_harga_sebelum_diskon, b.harga_ongkir, b.total_harga_setelah_diskon, b.voucher_harga, c.judul_master, c.image_master, a.jumlah_beli, a.harga_barang, a.diskon_barang, a.harga_diskon, b.invoice, d.id_variant, d.keterangan_varian, d.diskon_rupiah_varian, d.image_varian FROM transaksi_detail a 
+                JOIN transaksi b ON a.id_transaksi = b.id_transaksi
+                LEFT JOIN master_item c ON a.id_barang = c.id_master
+                LEFT JOIN variant d ON a.id_barang = d.id_variant WHERE a.id_transaksi = '$id_transaksi';");
+
+            foreach ($getproduk as $key => $value) {
+                if ($value['id_variant'] != NULL) {
+                    $judul_master = $value['keterangan_varian'];
+                    $image = $value['image_varian'];
+                } else {
+                    $judul_master = $value['judul_master'];
+                    $image = $value['image_master'];
+                }
+
+                $getprodukcoba[] = [
+                    'id_transaksi' => $id_transaksi,
+                    'judul_master' => $judul_master,
+                    'image_master' => $image,
+                    'jumlah_beli' => "x" . $value['jumlah_beli'],
+                    'harga_produk' => rupiah($value['harga_barang']),
+                    'harga_tampil' => rupiah($value['harga_barang'])
+                ];
+            }
+
+            $getdatatotal =
+                [
+                    'subtotal_produk' => rupiah($value['total_harga_sebelum_diskon']),
+                    'subtotal_pengiriman' => rupiah($value['harga_ongkir']),
+                    'subtotal_diskon' => rupiah($value['voucher_harga']),
+                    'subtotal' => (rupiah($value['total_harga_sebelum_diskon'] + $value['harga_ongkir'])),
+                ];
+
+            //? ADDRESS
+            $query_alamat = "SELECT * FROM user_alamat WHERE status_alamat_utama = 'Y' AND id_user = '$dataraw[id_user]'";
+            $getalamat = $conn->query($query_alamat);
+            $data_alamat = $getalamat->fetch_object();
+            $gabung_alamat = $data_alamat->nama_penerima . " | " . $data_alamat->telepon_penerima . " " . $data_alamat->alamat
+                . "," . $data_alamat->kelurahan . "," . $data_alamat->kecamatan . "," . $data_alamat->kota . "," . $data_alamat->provinsi . "," . $data_alamat->kodepos;
+            $address =
+                [
+                    'id_address' => $data_alamat->id,
+                    'address' => $gabung_alamat,
+                ];
+
+
+            $data1['data_address_buyer'] = $address;
+            // $data1['data_address_shipper'] = $address_shipper;
+            $data1['data_product'] = $getprodukcoba;
+            // $data1['data_qty_product'] = $getqtyproduk;
+            $data1['data_price'] = $getdatatotal;
+
+            if ($data1) {
+                $response->data = $data1;
+                $response->sukses(200);
+            } else {
+                $response->data = [];
+                $response->sukses(200);
+            }
+            break;
+            die();
+
 
             $status_transaksi = $data->status_transaksi;
             $kurir_code = $data->kurir_code;

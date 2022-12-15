@@ -87,7 +87,7 @@ function random_word($id = 20)
 
 function rupiah($angka)
 {
-	$hasil = 'Rp ' . number_format($angka, 2, ",", ".");
+	$hasil = 'Rp ' . number_format($angka, 0, ",", ".");
 	return $hasil;
 }
 
