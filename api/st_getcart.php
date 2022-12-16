@@ -73,7 +73,7 @@ if (isset($id_login)) {
 
                 array_push($datalist, array(
                     'id' => $key['id'],
-                    'image_master' => $urlimg . $key['image_master'],
+                    'image_master' => $getimagefisik . $key['image_master'],
                     'judul' => $key['judul_master'],
                     'id_varian' => $key['id_variant'],
                     'varian' => $key['keterangan_varian'],
@@ -145,7 +145,7 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
 
                 array_push($datalist, array(
                     'id' => $value['id'],
-                    'image_master' => $urlimg . $value['image_master'],
+                    'image_master' => $getimagefisik . $value['image_master'],
                     'judul' => $value['judul_master'],
                     'varian' => $value['keterangan_varian'],
                     'harga_produk' => $harga_produk,

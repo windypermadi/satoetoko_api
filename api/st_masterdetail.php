@@ -100,26 +100,34 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
             'keterangan' => 'image',
             'url' => $getimagefisik . $key->image_master,
         ));
-        array_push($imageurls, array(
-            'status_url' => '2',
-            'keterangan' => 'video',
-            'url' => $getvideofisik . $key->video_produk,
-        ));
-        array_push($imageurls, array(
-            'status_url' => '1',
-            'keterangan' => 'image',
-            'url' => $getimagefisik . $key->gambar_1,
-        ));
-        array_push($imageurls, array(
-            'status_url' => '1',
-            'keterangan' => 'image',
-            'url' => $getimagefisik . $key->gambar_2,
-        ));
-        array_push($imageurls, array(
-            'status_url' => '1',
-            'keterangan' => 'image',
-            'url' => $getimagefisik . $key->gambar_3,
-        ));
+        if ($key->video_produk != NULL) {
+            array_push($imageurls, array(
+                'status_url' => '2',
+                'keterangan' => 'video',
+                'url' => $getvideofisik . $key->video_produk,
+            ));
+        }
+        if ($key->gambar_1 != NULL) {
+            array_push($imageurls, array(
+                'status_url' => '1',
+                'keterangan' => 'image',
+                'url' => $getimagefisik . $key->gambar_1,
+            ));
+        }
+        if ($key->gambar_2 != NULL) {
+            array_push($imageurls, array(
+                'status_url' => '1',
+                'keterangan' => 'image',
+                'url' => $getimagefisik . $key->gambar_2,
+            ));
+        }
+        if ($key->gambar_3 != NULL) {
+            array_push($imageurls, array(
+                'status_url' => '1',
+                'keterangan' => 'image',
+                'url' => $getimagefisik . $key->gambar_3,
+            ));
+        }
         // if (isset($dataimage->$gambar_3)) {
 
         // } else {
