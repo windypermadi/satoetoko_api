@@ -8,7 +8,7 @@ $offset = $_GET['offset'];
 
 $result2 = array();
 $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
-a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah, a.id_sub_kategori, c.nama_kategori
+a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah, a.id_sub_kategori, c.nama_kategori, a.status_master_detail
 FROM master_item a JOIN stok b ON a.id_master = b.id_barang
 JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' GROUP BY a.id_master ORDER BY a.total_dibeli DESC LIMIT $offset, $limit");
 foreach ($data as $key => $value) {
@@ -50,10 +50,16 @@ foreach ($data as $key => $value) {
 
     $status_jenis_harga = '1';
 
+    if ($value['status_master_detail'] == '2') {
+        $imagegambar = $getimagebukufisik . $value['image_master'];
+    } else {
+        $imagegambar = $getimagefisik . $value['image_master'];
+    }
+    //? yawwww ibooowsyg
     array_push($result2, array(
         'id_master' => $value['id_master'],
         'judul_master' => $value['judul_master'],
-        'image_master' => $getimagefisik . $value['image_master'],
+        'image_master' => $imagegambar,
         'harga_produk' => $harga_produk,
         'harga_tampil' => $harga_tampil,
         'status_diskon' => $status_diskon,

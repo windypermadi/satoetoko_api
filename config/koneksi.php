@@ -61,6 +61,7 @@ $geticonkategori = "https://satoetoko.com/assets/images/icon_kategori/";
 $getimageproduk = "https://satoetoko.com/assets/images/products/ebook/";
 $geticonpayment = "https://satoetoko.com/assets/images/icon-payment/";
 $getimagefisik = "https://satoetoko.com/assets/images/products/fisik/";
+$getimagebukufisik = "https://satoetoko.com/assets/images/products/buku/";
 $getvideofisik = "https://satoetoko.com/assets/images/products/fisik/";
 
 //satoetoko server testing
