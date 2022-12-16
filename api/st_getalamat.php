@@ -7,7 +7,7 @@ $id_login         = $_GET['id_login'];
 
 if (isset($id_login)) {
 
-    $query_alamat = "SELECT * FROM user_alamat WHERE id_user = '$id_login'";
+    $query_alamat = "SELECT * FROM user_alamat WHERE id_user = '$id_login' AND delete_status = 'N'";
     $getalamat = $conn->query($query_alamat);
     if ($getalamat->num_rows < 1) {
         $response->data = null;

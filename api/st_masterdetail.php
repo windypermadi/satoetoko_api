@@ -14,10 +14,16 @@ if (isset($id_master)) {
     switch ($data->status_master_detail) {
         case '2':
             //? buku fisik
-            $datanew = mysqli_fetch_object($conn->query("SELECT b.penulis, b.penerbit, b.isbn, b.deskripsi, b.sinopsis, b.tahun_terbit, b.edisi,
-                    b.halaman, b.berat, a.image_master, b.gambar_1, b.gambar_2, b.gambar_3, a.status_varian FROM master_item a
+            // $datanew = mysqli_fetch_object($conn->query("SELECT a.id_master, a.judul_master, a.slug_judul_master, d.nama_kategori, a.harga_master, a.diskon_rupiah,
+            //         a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.deskripsi_produk, b.status_bahaya, b.merek,
+            //         b.status_garansi, b.berat, b.dimensi, b.masa_garansi, b.konsumsi_daya, b.masa_garansi, b.negara_asal, b.tegangan, b.daya_listrik,
+            //         b.masa_penyimpanan, b.tanggal_kadaluarsa, a.image_master, b.video_produk, b.gambar_1, b.gambar_2, b.gambar_3, a.status_varian FROM master_item a
+            //         LEFT JOIN master_fisik_detail b ON a.id_master = b.id_master
+            //         LEFT JOIN kategori_sub d ON a.id_sub_kategori = d.id_sub
+            //         WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
+
+            $datanew = mysqli_fetch_object($conn->query("SELECT * FROM master_item a
                     LEFT JOIN master_buku_detail b ON a.id_master = b.id_master
-                    LEFT JOIN kategori_sub d ON a.id_sub_kategori = d.id_sub
                     WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
             break;
         case '3':
@@ -52,48 +58,7 @@ if (isset($id_master)) {
 
     $imageurl = $conn->query("SELECT b.image_master, a.video_produk, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_fisik_detail a
 JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
-    // $dataimage = $imageurl->fetch_object();
     $imageurls = array();
-    // foreach ($imageurl as $key => $value) {
-    //     array_push($imageurls, array(
-    //         'status_url' => '1',
-    //         'keterangan' => 'image',
-    //         'url' => $getimagefisik . $value->image_master,
-    //     ));
-    //     array_push($imageurls, array(
-    //         'status_url' => '2',
-    //         'keterangan' => 'video',
-    //         'url' => $getvideofisik . $value->video_produk,
-    //     ));
-    //     array_push($imageurls, array(
-    //         'status_url' => '1',
-    //         'keterangan' => 'image',
-    //         'url' => $getimagefisik . $value->gambar_1,
-    //     ));
-    //     array_push($imageurls, array(
-    //         'status_url' => '1',
-    //         'keterangan' => 'image',
-    //         'url' => $getimagefisik . $value->gambar_2,
-    //     ));
-    //     array_push($imageurls, array(
-    //         'status_url' => '1',
-    //         'keterangan' => 'image',
-    //         'url' => $getimagefisik . $value->gambar_3,
-    //     ));
-    // }
-    //! foreach ($imageurl as $key => $imageurls) {
-    //!     if ($imageurls == NULL) {
-    //!         continue;
-    //!     }
-    //!     $status_url = $imageurls->image_master ? '1' : '2';
-    //!     $keterangan = $imageurls->image_master ? 'image' : 'video';
-    //!     $image = $status_url == '1' ? $imageurls->image_master : $imageurls->video_produk;
-    //!     $res[] = [
-    //!         'status_url' => '',
-    //!         'keterangan' => '',
-    //!         'url' => $image
-    //!     ];
-    //! }
     while ($key = mysqli_fetch_object($imageurl)) {
         array_push($imageurls, array(
             'status_url' => '1',
@@ -128,19 +93,6 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
                 'url' => $getimagefisik . $key->gambar_3,
             ));
         }
-        // if (isset($dataimage->$gambar_3)) {
-
-        // } else {
-        // }
-        // if ($key->$video_produk != null) {
-
-        // }
-        // if ($key->$gambar_1 != null) {
-        // }
-        // if ($key->$gambar_2 != null) {
-        // }
-        // if ($key->$gambar_3 != null) {
-        // }
     }
 
     if ($datanew->status_varian == 'Y') {
@@ -240,54 +192,5 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
     $response->data = null;
     $response->error(400);
 }
-
-// //! untuk varian harga diskon atau enggak
-// $varian_harga = 'N';
-// if ($varian_harga == 'N') {
-
-//     if ($data->diskon_persen != 0) {
-//         $status_diskon = 'Y';
-//         (float)$harga_disc = $data->harga_master - $data->diskon_rupiah;
-//     } else {
-//         $status_diskon = 'N';
-//         (float)$harga_disc = $data->harga_master;
-//     }
-
-//     $harga_produk = "Rp" . number_format($data->harga_master, 0, ',', '.');
-//     $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
-// } else {
-
-//     if ($data->diskon_persen != 0) {
-//         $status_diskon = 'Y';
-//         (float)$harga_disc = $data->harga_master - $data->diskon_rupiah;
-//     } else {
-//         $status_diskon = 'N';
-//         (float)$harga_disc = $data->harga_master;
-//     }
-
-//     $harga_produk = "Rp" . number_format($data->harga_master, 0, ',', '.') . " - " . "Rp" . number_format($data->harga_master, 0, ',', '.');
-//     $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
-// }
-
-// $varian_diskon = 'N';
-// if ($varian_diskon == 'N') {
-//     $status_varian_diskon = 'OFF';
-// } else {
-//     $status_varian_diskon = 'UPTO';
-// }
-
-// $status_jenis_harga = '1';
-
-// $varian['jumlah_varian'] = '0';
-// $varian['data_varian'] = $imageurls;
-
-// a.id_master, a.judul_master, a.slug_judul_master, d.nama_kategori, a.harga_master, a.diskon_rupiah,
-// a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.deskripsi_produk, b.status_bahaya, b.merek,
-// b.status_garansi, b.berat, b.dimensi, b.masa_garansi, b.konsumsi_daya, b.masa_garansi, b.negara_asal, b.tegangan, b.daya_listrik,
-// b.masa_penyimpanan, b.tanggal_kadaluarsa, a.image_master, b.video_produk, b.gambar_1, b.gambar_2, b.gambar_3
-
-
-
-
 
 mysqli_close($conn);
