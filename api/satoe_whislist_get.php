@@ -17,7 +17,7 @@ switch ($tag) {
         b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
         JOIN master_ebook_detail b ON a.id_master = b.id_master
         JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub
-        JOIN whislist_product d ON d.id_master = a.id_master WHERE a.status_master_detail = '1' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
+        JOIN whislist_product d ON d.id_master = a.id_master WHERE d.id_login = '$id_user' AND a.status_master_detail = '1' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
 
         foreach ($data as $key => $value) {
             if ($value['status_ebook'] == '1') {
@@ -94,30 +94,6 @@ switch ($tag) {
             $response->code = 200;
             $response->message = 'Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini';
             $response->data = [];
-            $response->json();
-            die();
-        }
-        break;
-    case "detail":
-        $id_master = $_GET['id_master'];
-        $id_user = $_GET['id_user'];
-
-        $cekdata = $conn->query("SELECT * FROM whislist_product WHERE id_master = '$id_master' AND id_login = '$id_user'")->num_rows;
-        if ($cekdata > 0) {
-            $data = "1";
-        } else {
-            $data = "0";
-        }
-
-        if ($data) {
-            $response->code = 200;
-            $response->message = '';
-            $response->data = $data;
-            $response->json();
-            die();
-        } else {
-            $response->code = 200;
-            $response->data = $data;
             $response->json();
             die();
         }

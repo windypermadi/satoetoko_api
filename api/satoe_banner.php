@@ -26,7 +26,7 @@ $data[] = array(
 	'link_banner'		=> 'default',
 	'tanggal_mulai'		=> '',
 	'tanggal_selesai'	=> 'default',
-	'gambar_banner'     => $urlbanner . 'default.png',
+	'gambar_banner'     => $urlbanner . 'default.jpg',
 );
 
 if (isset($result[0])) {

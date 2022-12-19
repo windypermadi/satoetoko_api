@@ -10,7 +10,7 @@ if (isset($id_login)) {
     $query_alamat = "SELECT * FROM user_alamat WHERE id_user = '$id_login' AND delete_status = 'N'";
     $getalamat = $conn->query($query_alamat);
     if ($getalamat->num_rows < 1) {
-        $response->data = null;
+        $response->data = [];
         $response->error(200);
     }
     // $row = $result->fetch_array(MYSQLI_ASSOC);
