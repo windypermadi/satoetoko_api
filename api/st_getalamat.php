@@ -3,7 +3,7 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$id_login         = $_GET['id_login'];
+$id_login         = $_REQUEST['id_login'];
 
 if (isset($id_login)) {
 
@@ -38,7 +38,7 @@ if (isset($id_login)) {
     $response->sukses(200);
 } else {
     $response->data = null;
-    $response->error(400);
+    $response->error(200);
 }
 die();
 mysqli_close($conn);
