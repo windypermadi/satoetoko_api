@@ -11,7 +11,7 @@ if (isset($id_login)) {
     $getalamat = $conn->query($query_alamat);
     if ($getalamat->num_rows < 1) {
         $response->data = null;
-        $response->error(400);
+        $response->error(200);
     }
     // $row = $result->fetch_array(MYSQLI_ASSOC);
     $rows = array();
@@ -38,7 +38,7 @@ if (isset($id_login)) {
     $response->sukses(200);
 } else {
     $response->data = null;
-    $response->error(200);
+    $response->error(400);
 }
 die();
 mysqli_close($conn);
