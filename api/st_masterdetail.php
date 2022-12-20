@@ -44,16 +44,15 @@ if (isset($id_master)) {
 
     $datastok = mysqli_fetch_object($conn->query("SELECT sum(jumlah) as jumlah, alamat_cabang FROM stok a JOIN cabang b ON a.id_warehouse = b.id_cabang WHERE a.id_barang = '$id_master';"));
     $warehousedata = $conn->query("SELECT * FROM stok a JOIN cabang b ON a.id_warehouse = b.id_cabang WHERE a.id_barang = '$id_master' AND b.status_aktif = 'Y' AND b.status_hapus = 'N'");
-    $warehousedatas = array();
     foreach ($warehousedata as $key => $value) {
-        array_push($warehousedatas, array(
+        $warehousedatas[] = [
             'id_cabang' => $value['id_cabang'],
             'kode_cabang' => $value['kode_cabang'],
             'nama_cabang' => $value['nama_cabang'],
             'alamat_lengkap_cabang' => $value['alamat_lengkap_cabang'],
             'alamat_cabang' => $value['alamat_cabang'],
             'stok' => $value['jumlah']
-        ));
+        ];
     }
 
     $imageurl = $conn->query("SELECT b.image_master, a.video_produk, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_fisik_detail a
@@ -97,9 +96,8 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
 
     if ($datanew->status_varian == 'Y') {
         $variant = $conn->query("SELECT * FROM variant a JOIN stok b ON a.id_variant = b.id_varian WHERE a.id_master = '$id_master'");
-        $variants = array();
         foreach ($variant as $key => $value) {
-            array_push($variants, array(
+            $variants[] = [
                 'id_variant' => $value['id_variant'],
                 'keterangan_varian' => $value['keterangan_varian'],
                 'harga_varian' => $value['harga_varian'],
@@ -107,7 +105,7 @@ JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_m
                 'diskon_persen_varian' => $value['diskon_persen_varian'],
                 'image_varian' => $getimagefisik . $value['image_varian'],
                 'stok' => $value['jumlah'],
-            ));
+            ];
         }
     } else {
         $variants = [];
