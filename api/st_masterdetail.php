@@ -33,27 +33,27 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
                 array_push($imageurls, array(
                     'status_url' => '1',
                     'keterangan' => 'image',
-                    'url' => $getimagefisik . $key->image_master,
+                    'url' => $getimagebukufisik . $key->image_master,
                 ));
                 if ($key->gambar_1 != NULL) {
                     array_push($imageurls, array(
                         'status_url' => '1',
                         'keterangan' => 'image',
-                        'url' => $getimagefisik . $key->gambar_1,
+                        'url' => $getimagebukufisik . $key->gambar_1,
                     ));
                 }
                 if ($key->gambar_2 != NULL) {
                     array_push($imageurls, array(
                         'status_url' => '1',
                         'keterangan' => 'image',
-                        'url' => $getimagefisik . $key->gambar_2,
+                        'url' => $getimagebukufisik . $key->gambar_2,
                     ));
                 }
                 if ($key->gambar_3 != NULL) {
                     array_push($imageurls, array(
                         'status_url' => '1',
                         'keterangan' => 'image',
-                        'url' => $getimagefisik . $key->gambar_3,
+                        'url' => $getimagebukufisik . $key->gambar_3,
                     ));
                 }
             }
