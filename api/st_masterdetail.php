@@ -57,6 +57,29 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
                     ));
                 }
             }
+
+            if ($datanew->status_varian == 'Y') {
+                $variant = $conn->query("SELECT * FROM variant a JOIN stok b ON a.id_variant = b.id_varian WHERE a.id_master = '$id_master'");
+                foreach ($variant as $key => $value) {
+                    $variants[] = [
+                        'id_variant' => $value['id_variant'],
+                        'keterangan_varian' => $value['keterangan_varian'],
+                        'harga_varian' => $value['harga_varian'],
+                        'diskon_rupiah_varian' => $value['diskon_rupiah_varian'],
+                        'diskon_persen_varian' => $value['diskon_persen_varian'],
+                        'image_varian' => $getimagebukufisik . $value['image_varian'],
+                        'stok' => $value['jumlah'],
+                    ];
+
+                    $url_variants[] = [
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'image_varian' => $getimagebukufisik . $value['image_varian']
+                    ];
+                }
+            } else {
+                $variants = [];
+            }
             break;
         case '3':
             //? barang fisik
@@ -106,6 +129,29 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
                     ));
                 }
             }
+
+            if ($datanew->status_varian == 'Y') {
+                $variant = $conn->query("SELECT * FROM variant a JOIN stok b ON a.id_variant = b.id_varian WHERE a.id_master = '$id_master'");
+                foreach ($variant as $key => $value) {
+                    $variants[] = [
+                        'id_variant' => $value['id_variant'],
+                        'keterangan_varian' => $value['keterangan_varian'],
+                        'harga_varian' => $value['harga_varian'],
+                        'diskon_rupiah_varian' => $value['diskon_rupiah_varian'],
+                        'diskon_persen_varian' => $value['diskon_persen_varian'],
+                        'image_varian' => $getimagefisik . $value['image_varian'],
+                        'stok' => $value['jumlah'],
+                    ];
+
+                    $url_variants[] = [
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'image_varian' => $getimagefisik . $value['image_varian']
+                    ];
+                }
+            } else {
+                $variants = [];
+            }
             break;
         default:
             $response->data = Null;
@@ -124,23 +170,6 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
             'alamat_cabang' => $value['alamat_cabang'],
             'stok' => $value['jumlah']
         ];
-    }
-
-    if ($datanew->status_varian == 'Y') {
-        $variant = $conn->query("SELECT * FROM variant a JOIN stok b ON a.id_variant = b.id_varian WHERE a.id_master = '$id_master'");
-        foreach ($variant as $key => $value) {
-            $variants[] = [
-                'id_variant' => $value['id_variant'],
-                'keterangan_varian' => $value['keterangan_varian'],
-                'harga_varian' => $value['harga_varian'],
-                'diskon_rupiah_varian' => $value['diskon_rupiah_varian'],
-                'diskon_persen_varian' => $value['diskon_persen_varian'],
-                'image_varian' => $getimagefisik . $value['image_varian'],
-                'stok' => $value['jumlah'],
-            ];
-        }
-    } else {
-        $variants = [];
     }
 
     $varian_harga = 'N';
@@ -215,6 +244,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
     $data1['status_varian'] = $datanew->status_varian;
     $data1['variant'] = $variants;
     $data1['url'] = $imageurls;
+    $data1['url_variant'] = $imageurls;
 
     $response->data = $data1;
     $response->sukses(200);
