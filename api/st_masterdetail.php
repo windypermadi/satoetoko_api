@@ -25,6 +25,38 @@ if (isset($id_master)) {
             $datanew = mysqli_fetch_object($conn->query("SELECT * FROM master_item a
                     LEFT JOIN master_buku_detail b ON a.id_master = b.id_master
                     WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
+
+            $imageurl = $conn->query("SELECT b.image_master, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_buku_detail a
+LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
+            $imageurls = array();
+            while ($key = mysqli_fetch_object($imageurl)) {
+                array_push($imageurls, array(
+                    'status_url' => '1',
+                    'keterangan' => 'image',
+                    'url' => $getimagefisik . $key->image_master,
+                ));
+                if ($key->gambar_1 != NULL) {
+                    array_push($imageurls, array(
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'url' => $getimagefisik . $key->gambar_1,
+                    ));
+                }
+                if ($key->gambar_2 != NULL) {
+                    array_push($imageurls, array(
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'url' => $getimagefisik . $key->gambar_2,
+                    ));
+                }
+                if ($key->gambar_3 != NULL) {
+                    array_push($imageurls, array(
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'url' => $getimagefisik . $key->gambar_3,
+                    ));
+                }
+            }
             break;
         case '3':
             //? barang fisik
@@ -35,6 +67,45 @@ if (isset($id_master)) {
                     LEFT JOIN master_fisik_detail b ON a.id_master = b.id_master
                     LEFT JOIN kategori_sub d ON a.id_sub_kategori = d.id_sub
                     WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
+
+            $imageurl = $conn->query("SELECT b.image_master, a.video_produk, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_fisik_detail a
+LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
+            $imageurls = array();
+            while ($key = mysqli_fetch_object($imageurl)) {
+                array_push($imageurls, array(
+                    'status_url' => '1',
+                    'keterangan' => 'image',
+                    'url' => $getimagefisik . $key->image_master,
+                ));
+                if ($key->video_produk != NULL) {
+                    array_push($imageurls, array(
+                        'status_url' => '2',
+                        'keterangan' => 'video',
+                        'url' => $getvideofisik . $key->video_produk,
+                    ));
+                }
+                if ($key->gambar_1 != NULL) {
+                    array_push($imageurls, array(
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'url' => $getimagefisik . $key->gambar_1,
+                    ));
+                }
+                if ($key->gambar_2 != NULL) {
+                    array_push($imageurls, array(
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'url' => $getimagefisik . $key->gambar_2,
+                    ));
+                }
+                if ($key->gambar_3 != NULL) {
+                    array_push($imageurls, array(
+                        'status_url' => '1',
+                        'keterangan' => 'image',
+                        'url' => $getimagefisik . $key->gambar_3,
+                    ));
+                }
+            }
             break;
         default:
             $response->data = Null;
@@ -53,45 +124,6 @@ if (isset($id_master)) {
             'alamat_cabang' => $value['alamat_cabang'],
             'stok' => $value['jumlah']
         ];
-    }
-
-    $imageurl = $conn->query("SELECT b.image_master, a.video_produk, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_fisik_detail a
-JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
-    $imageurls = array();
-    while ($key = mysqli_fetch_object($imageurl)) {
-        array_push($imageurls, array(
-            'status_url' => '1',
-            'keterangan' => 'image',
-            'url' => $getimagefisik . $key->image_master,
-        ));
-        if ($key->video_produk != NULL) {
-            array_push($imageurls, array(
-                'status_url' => '2',
-                'keterangan' => 'video',
-                'url' => $getvideofisik . $key->video_produk,
-            ));
-        }
-        if ($key->gambar_1 != NULL) {
-            array_push($imageurls, array(
-                'status_url' => '1',
-                'keterangan' => 'image',
-                'url' => $getimagefisik . $key->gambar_1,
-            ));
-        }
-        if ($key->gambar_2 != NULL) {
-            array_push($imageurls, array(
-                'status_url' => '1',
-                'keterangan' => 'image',
-                'url' => $getimagefisik . $key->gambar_2,
-            ));
-        }
-        if ($key->gambar_3 != NULL) {
-            array_push($imageurls, array(
-                'status_url' => '1',
-                'keterangan' => 'image',
-                'url' => $getimagefisik . $key->gambar_3,
-            ));
-        }
     }
 
     if ($datanew->status_varian == 'Y') {
