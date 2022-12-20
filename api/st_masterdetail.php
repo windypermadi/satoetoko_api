@@ -244,7 +244,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
     $data1['status_varian'] = $datanew->status_varian;
     $data1['variant'] = $variants;
     $data1['url'] = $imageurls;
-    $data1['url_variant'] = $imageurls;
+    $data1['url_variant'] = $url_variants;
 
     $response->data = $data1;
     $response->sukses(200);
