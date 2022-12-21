@@ -17,9 +17,8 @@ $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harg
 foreach ($data as $key => $value) {
 
     //! untuk varian harga diskon atau enggak
-    $varian_harga = 'N';
-    if ($varian_harga == 'N') {
-
+    $cekvariant = $conn->query("SELECT * FROM variant WHERE id_master = '$value[id_master]'")->num_rows;
+    if ($cekvariant > 0) {
         if ($value['diskon_persen'] != 0) {
             $status_diskon = 'Y';
             (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
@@ -28,10 +27,9 @@ foreach ($data as $key => $value) {
             (float)$harga_disc = $value['harga_master'];
         }
 
-        $harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($value['harga_master']) . " - " . rupiah($value['harga_master']);
+        $harga_tampil = rupiah($harga_disc) . " - " . rupiah($harga_disc);
     } else {
-
         if ($value['diskon_persen'] != 0) {
             $status_diskon = 'Y';
             (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
@@ -40,8 +38,8 @@ foreach ($data as $key => $value) {
             (float)$harga_disc = $value['harga_master'];
         }
 
-        $harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.') . " - " . "Rp" . number_format($value['harga_master'], 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($value['harga_master']);
+        $harga_tampil = rupiah($harga_disc);
     }
 
     $varian_diskon = 'N';
