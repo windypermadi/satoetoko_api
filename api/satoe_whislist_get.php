@@ -109,7 +109,7 @@ switch ($tag) {
             $response->sukses(200);
         } else {
             $response->data = "0";
-            $response->error(400);
+            $response->sukses(200);
         }
         break;
 }
