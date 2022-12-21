@@ -98,6 +98,20 @@ switch ($tag) {
             die();
         }
         break;
+    case "detail":
+        $id_user = $_GET['id_user'];
+        $id_master = $_GET['id_master'];
+
+        $query = $conn->query("SELECT * FROM whislist_product WHERE id_login = '$id_user' AND id_master = '$id_master'")->num_rows;
+
+        if ($query > 0) {
+            $response->data = "1";
+            $response->sukses(200);
+        } else {
+            $response->data = "0";
+            $response->error(400);
+        }
+        break;
 }
 
 mysqli_close($conn);
