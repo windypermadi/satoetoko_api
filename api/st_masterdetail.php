@@ -79,6 +79,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
                 }
             } else {
                 $variants = [];
+                $url_variants = [];
             }
             break;
         case '3':
@@ -151,6 +152,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
                 }
             } else {
                 $variants = [];
+                $url_variants = [];
             }
             break;
         default:
