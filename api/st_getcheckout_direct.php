@@ -8,8 +8,50 @@ $dataraw2 = json_decode(file_get_contents('php://input'), true);
 
 //? LIST PRODUK
 $dataproduk = $dataraw2["produk"][0];
-$que =
-    "SELECT 
+// $que =
+//     "SELECT 
+//             b.id_master, 
+//             b.judul_master, 
+//             b.image_master, 
+//             c.keterangan_varian, 
+//             c.harga_varian, 
+//             b.harga_master, 
+//             b.diskon_rupiah, 
+//             c.diskon_rupiah_varian, 
+//             d.berat as berat_buku, 
+//             e.berat as berat_fisik, 
+//             b.status_master_detail, 
+//             f.id_supplier,
+//             c.id_variant,
+//             count(b.id_master) as jumlah_produk
+//             FROM 
+//             master_item b 
+//             LEFT JOIN variant c ON b.id_master = c.id_master 
+//             LEFT JOIN master_buku_detail d ON b.id_master = d.id_master 
+//             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
+//             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
+//             WHERE ";
+
+if (empty($dataproduk['id_variant'])) {
+    $que = "SELECT 
+            b.id_master, 
+            b.judul_master, 
+            b.image_master, 
+            b.harga_master, 
+            b.diskon_rupiah, 
+            d.berat as berat_buku, 
+            e.berat as berat_fisik, 
+            b.status_master_detail, 
+            f.id_supplier,
+            count(b.id_master) as jumlah_produk
+            FROM 
+            master_item b 
+            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master 
+            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
+            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
+            WHERE b.id_master = '$dataproduk[id_produk]'";
+} else {
+    $que = "SELECT 
             b.id_master, 
             b.judul_master, 
             b.image_master, 
@@ -30,12 +72,7 @@ $que =
             LEFT JOIN master_buku_detail d ON b.id_master = d.id_master 
             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
-            WHERE ";
-
-if (empty($dataproduk['id_variant'])) {
-    $que = $que . "b.id_master = '$dataproduk[id_produk]'";
-} else {
-    $que = $que . "b.id_master = '$dataproduk[id_produk]' AND c.id_variant = '$dataproduk[id_variant]'";
+            WHERE b.id_master = '$dataproduk[id_produk]' AND c.id_variant = '$dataproduk[id_variant]'";
 }
 $getproduk = $conn->query($que)->fetch_object();
 
@@ -71,8 +108,8 @@ if ($getproduk->id_variant) {
         'id_master' => $getproduk->id_master,
         'judul_master' => $getproduk->judul_master,
         'image_master' => $getimagefisik . $getproduk->image_master,
-        'id_variant' => $dataproduk['id_variant'],
-        'keterangan_varian' => $getproduk->keterangan_varian != null ? $getproduk->keterangan_varian : "",
+        'id_variant' => "",
+        'keterangan_varian' => "",
         'qty' => $dataraw->qty,
         'harga_produk' => $getproduk->harga_master,
         'harga_tampil' => $getproduk->diskon_rupiah != 0 ? ($diskon_format) : $harga_master
@@ -105,8 +142,8 @@ $address_shipper =
 
 $getdatatotal =
     [
-        'subtotal' => (string) (($dataraw2['total'] * $dataraw2['qty']) + $dataongkir['harga']),
-        'subtotal_produk' => $dataraw2['total'] * $dataraw2['qty'],
+        'subtotal' => (string) ($dataraw2['total'] + $dataongkir['harga']),
+        'subtotal_produk' => $dataraw2['total'],
         'subtotal_pengiriman' => "0",
         'subtotal_diskon' => "0",
     ];
