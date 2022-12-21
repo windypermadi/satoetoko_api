@@ -9,25 +9,56 @@ $dataraw2 = json_decode(file_get_contents('php://input'), true);
 //? LIST PRODUK
 $dataproduk = $dataraw2["produk"][0];
 if (empty($dataproduk['id_variant'])) {
-    $que = "SELECT b.id_master, b.judul_master,b.image_master,
-            c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
-            b.status_master_detail,
-            f.id_supplier FROM master_item b ON a.id_barang = b.id_master
-            LEFT JOIN variant c ON a.id_variant = c.id_variant
-            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
-            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
-            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
-            WHERE a.id_barang = '$dataproduk[id_produk]'";
+    $que =
+        "SELECT 
+            b.id_master, 
+            b.judul_master, 
+            b.image_master, 
+            c.keterangan_varian, 
+            b.harga_master, 
+            b.diskon_rupiah, 
+            c.harga_varian, 
+            c.diskon_rupiah_varian, 
+            c.diskon_rupiah_varian, 
+            d.berat as berat_buku, 
+            e.berat as berat_fisik, 
+            b.status_master_detail, 
+            f.id_supplier 
+            FROM 
+            master_item b 
+            LEFT JOIN variant c ON b.id_master = c.id_master 
+            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master 
+            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
+            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
+            WHERE 
+            b.id_master = '$dataproduk[id_produk]'
+        ";
 } else {
-    $que = "SELECT b.id_master, b.judul_master,b.image_master,
-            c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
-            b.status_master_detail,
-            f.id_supplier FROM master_item b ON a.id_barang = b.id_master
-            LEFT JOIN variant c ON a.id_variant = c.id_variant
-            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
-            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
-            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
-            WHERE a.id = '$dataproduk[id_produk]' AND a.id_variant = '$dataproduk[id_variant]'";
+    $que =
+        "SELECT 
+            b.id_master, 
+            b.judul_master, 
+            b.image_master, 
+            c.keterangan_varian, 
+            b.harga_master, 
+            b.diskon_rupiah, 
+            c.harga_varian, 
+            c.diskon_rupiah_varian, 
+            c.diskon_rupiah_varian, 
+            d.berat as berat_buku, 
+            e.berat as berat_fisik, 
+            b.status_master_detail, 
+            f.id_supplier 
+            FROM 
+            master_item b 
+            LEFT JOIN variant c ON b.id_master = c.id_master 
+            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master 
+            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master 
+            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier 
+            WHERE 
+            b.id_master = '$dataproduk[id_produk]' 
+            AND c.id_variant = '$dataproduk[id_variant]'
+        ";
 }
 $getproduk = $conn->query($que)->fetch_object();
 
