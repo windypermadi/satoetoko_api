@@ -24,7 +24,7 @@ if (isset($id_master) && isset($id_cabang)) {
         $response->data = $variants;
         $response->sukses(200);
     } else {
-        $response->data = null;
+        $response->data = [];
         $response->sukses(200);
     }
 } else {
