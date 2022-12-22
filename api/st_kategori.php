@@ -56,34 +56,37 @@ if (empty($id_kategori)) {
 } else {
     $idsub = $_GET['id_sub'] ?? '';
     if (!empty($idsub)) {
-        $query = mysqli_query($conn, "SELECT *  FROM master_item a JOIN stok b ON a.id_master = b.id_barang WHERE a.id_sub_kategori LIKE '$idsub'");
+        $query = mysqli_query($conn, "SELECT * FROM master_item a 
+            JOIN stok b ON a.id_master = b.id_barang 
+            WHERE a.id_sub_kategori LIKE '$idsub';");
         foreach ($query as $key => $value) {
             //! untuk varian harga diskon atau enggak
             $varian_harga = 'N';
-            if ($varian_harga == 'N') {
+            switch ($varian_harga) {
+                case 'N':
+                    if ($value['diskon_persen'] != 0) {
+                        $status_diskon = 'Y';
+                        (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+                    } else {
+                        $status_diskon = 'N';
+                        (float)$harga_disc = $value['harga_master'];
+                    }
 
-                if ($value['diskon_persen'] != 0) {
-                    $status_diskon = 'Y';
-                    (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
-                } else {
-                    $status_diskon = 'N';
-                    (float)$harga_disc = $value['harga_master'];
-                }
+                    $harga_produk = rupiah($value['harga_master']);
+                    $harga_tampil = rupiah($harga_disc);
+                    break;
+                default:
+                    if ($value['diskon_persen'] != 0) {
+                        $status_diskon = 'Y';
+                        (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+                    } else {
+                        $status_diskon = 'N';
+                        (float)$harga_disc = $value['harga_master'];
+                    }
 
-                $harga_produk = rupiah($value['harga_master']);
-                $harga_tampil = rupiah($harga_disc);
-            } else {
-
-                if ($value['diskon_persen'] != 0) {
-                    $status_diskon = 'Y';
-                    (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
-                } else {
-                    $status_diskon = 'N';
-                    (float)$harga_disc = $value['harga_master'];
-                }
-
-                $harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.') . " - " . "Rp" . number_format($value['harga_master'], 0, ',', '.');
-                $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
+                    $harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.') . " - " . "Rp" . number_format($value['harga_master'], 0, ',', '.');
+                    $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
+                    break;
             }
 
             $varian_diskon = 'N';
@@ -111,31 +114,73 @@ if (empty($id_kategori)) {
             ];
         }
     } else {
-        $query = mysqli_query($conn, "SELECT a.id_sub, a.kode_kategori, a.nama_kategori FROM kategori_sub a 
-JOIN master_item b ON a.id_sub = b.id_sub_kategori WHERE a.status_tampil = 'Y'
-AND a.status_aktif = 'N' GROUP BY a.id_sub ORDER BY a.nama_kategori ASC;");
+        $query = mysqli_query($conn, "SELECT * FROM master_item a 
+            JOIN stok b ON a.id_master = b.id_barang 
+            JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub 
+            JOIN kategori d ON c.parent_kategori = d.id_kategori 
+            WHERE d.id_kategori LIKE '$id_kategori';");
         foreach ($query as $key => $value) {
+            //! untuk varian harga diskon atau enggak
+            $varian_harga = 'N';
+            switch ($varian_harga) {
+                case 'N':
+                    if ($value['diskon_persen'] != 0) {
+                        $status_diskon = 'Y';
+                        (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+                    } else {
+                        $status_diskon = 'N';
+                        (float)$harga_disc = $value['harga_master'];
+                    }
+
+                    $harga_produk = rupiah($value['harga_master']);
+                    $harga_tampil = rupiah($harga_disc);
+                    break;
+                default:
+                    if ($value['diskon_persen'] != 0) {
+                        $status_diskon = 'Y';
+                        (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+                    } else {
+                        $status_diskon = 'N';
+                        (float)$harga_disc = $value['harga_master'];
+                    }
+
+                    $harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.') . " - " . "Rp" . number_format($value['harga_master'], 0, ',', '.');
+                    $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
+                    break;
+            }
+
+            $varian_diskon = 'N';
+            if ($varian_diskon == 'N') {
+                $status_varian_diskon = 'OFF';
+            } else {
+                $status_varian_diskon = 'UPTO';
+            }
+
+            $status_jenis_harga = '1';
+
             $result[] = [
-                'id_kategori'    => $value['id_sub'],
-                'kode_kategori'    => $value['kode_kategori'],
-                'nama_kategori'     => $value['nama_kategori'],
-                'icon_apps'     => $value['icon'],
+                'id_master' => $value['id_master'],
+                'judul_master' => $value['judul_master'],
+                'image_master' => $getimagefisik . $value['image_master'],
+                'harga_produk' => $harga_produk,
+                'harga_tampil' => $harga_tampil,
+                'status_diskon' => $status_diskon,
+                'status_varian_diskon' => $status_varian_diskon,
+                'status_jenis_harga' => $status_jenis_harga,
+                'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
+                'diskon' => $value['diskon_persen'] . "%",
+                'total_dibeli' => $value['total_dibeli'] . " terjual",
+                'rating_item' => 0,
             ];
         }
     }
-}
-
-if (isset($result[0])) {
-    $response->code = 200;
-    $response->message = 'result';
-    $response->data = $result;
-    $response->json();
-    die();
-} else {
-    $response->code = 200;
-    $response->message = 'Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini';
-    $response->data = [];
-    $response->json();
+    if ($result) {
+        $response->data = $result;
+        $response->sukses(200);
+    } else {
+        $response->data = [];
+        $response->sukses(200);
+    }
     die();
 }
 mysqli_close($conn);
