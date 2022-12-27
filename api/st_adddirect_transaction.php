@@ -11,7 +11,7 @@ $exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
 $conn->begin_transaction();
 
 $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
-$idtransaksi = createID('invoice', 'transaksi', 'TR');
+$idtransaksi = createID('in_transaksi', 'transaksi', 'TR');
 $invoice = id_ke_struk_fisik($idtransaksi);
 
 //? ADDRESS
