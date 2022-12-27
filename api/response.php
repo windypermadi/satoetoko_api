@@ -80,7 +80,7 @@ class Response
 			case 500:
 				echo json_encode([
 					'status' => $code,
-					'message' => '"Sorry, we encountered internal server error. We will fix this soon."',
+					'message' => 'Sorry, we encountered internal server error. We will fix this soon.',
 					'data' => $this->data
 				]);
 				http_response_code($code);
