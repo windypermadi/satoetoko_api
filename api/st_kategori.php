@@ -174,13 +174,14 @@ if (empty($id_kategori)) {
             ];
         }
     }
-    if ($result) {
-        $response->data = $result;
-        $response->sukses(200);
-    } else {
-        $response->data = [];
-        $response->sukses(200);
-    }
-    die();
 }
+
+if ($result) {
+    $response->data = $result;
+    $response->sukses(200);
+} else {
+    $response->data = [];
+    $response->sukses(200);
+}
+die();
 mysqli_close($conn);
