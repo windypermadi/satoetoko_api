@@ -33,7 +33,7 @@ if ($cek_email > 0) {
         if ($query) {
 
             $response->code = 200;
-            $response->message = 'Yey registrasi kamu berhasil.\n\nSilahkan untuk verifikasi akun anda terlebih dahulu. Cek di KONTAK MASUK EMAIL atau di SPAM EMAIL.';
+            $response->message = 'Yey registrasi kamu berhasil.\n\nSelamat anda sudah berhasil mendaftar. Silahkan Login menggunakan Email dan Password yang sudah anda daftarkan. Terimakasih.';
             $response->data = '';
             $response->json();
             die();
