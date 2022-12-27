@@ -255,13 +255,13 @@ if (in_array(false, $query)) {
 
         $responses = json_decode($response_curl, true);
 
-        if ($responses) {
-            if (@$responses['error_messages']) {
-                $response->data = null;
-                $response->message = $responses['error_messages'];
-                $response->error(501);
-            }
-        }
+        // if ($responses) {
+        //     if (@$responses['error_messages']) {
+        //         $response->data = null;
+        //         $response->message = $responses['error_messages'];
+        //         $response->error(501);
+        //     }
+        // }
 
         $payment_url = $responses['redirect_url'];
         $payment_token = $responses['token'];
