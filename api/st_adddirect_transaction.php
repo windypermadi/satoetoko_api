@@ -254,6 +254,9 @@ if (in_array(false, $query)) {
 
         $responses = json_decode($response_curl, true);
 
+        var_dump($responses);
+        die;
+
         $payment_url = $responses['redirect_url'];
         $payment_token = $responses['token'];
         $res['token'] = $payment_token;
