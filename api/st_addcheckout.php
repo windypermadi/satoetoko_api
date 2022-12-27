@@ -11,7 +11,7 @@ $exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
 $conn->begin_transaction();
 
 $transaction = mysqli_fetch_object($conn->query("SELECT UUID_SHORT() as id"));
-$idtransaksi = createID('invoice', 'transaksi', 'TR');
+$idtransaksi = createID('in_transaksi', 'transaksi', 'TR');
 $invoice = id_ke_struk_fisik($idtransaksi);
 
 //? ADDRESS
@@ -170,6 +170,7 @@ foreach ($getproduk as $u) {
 $query[] = mysqli_query($conn, "INSERT INTO transaksi SET 
         id_transaksi = '$transaction->id',
         pembuat_transaksi = 'F',
+        in_transaksi = '$idtransaksi',
         invoice = '$invoice',
         id_user = '$dataraw->id_user',
         tanggal_transaksi = NOW(),
@@ -270,6 +271,7 @@ if (in_array(false, $query)) {
 
         $result['batas_pembayaran'] = $exp_date;
         $result['id_transaksi'] = $idtransaksi;
+        $result['in_transaksi'] = $idtransaksi;
         $result['invoice'] = $invoice;
         $result['icon_payment'] = $data_payment->icon_payment;
         $result['metode_pembayaran'] = $data_payment->metode_pembayaran;
