@@ -262,7 +262,7 @@ if (in_array(false, $query)) {
         $query2 = mysqli_query($conn, "UPDATE transaksi SET midtrans_token = '$payment_token', midtrans_redirect_url = '$payment_url' WHERE id_transaksi= '$transaction->id'");
 
         if (!isset($responses['token'])) {
-            $response->data = "Sorry, we encountered internal server error. We will fix this soon.";
+            $response->data = null;
             $response->error(500);
             die();
         }
