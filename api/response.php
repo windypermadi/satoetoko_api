@@ -86,6 +86,15 @@ class Response
 				http_response_code($code);
 				die();
 				break;
+			default:
+				echo json_encode([
+					'status' => 500,
+					'message' => $this->message,
+					'data' => $this->data
+				]);
+				http_response_code(500);
+				die();
+				break;
 		}
 	}
 }
