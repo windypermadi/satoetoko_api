@@ -72,6 +72,10 @@ if ($getproduk->status_master_detail == '2') {
     $berat_detail = $getproduk->berat_fisik * $getproduk->qty;
 }
 
+if (empty(trim($dataraw->catatan_pembeli))) {
+    $dataraw->catatan_pembeli = NULL;
+}
+
 //! UPDATE TABLE TRANSAKSI 
 $query[] = mysqli_query($conn, "INSERT INTO transaksi SET 
         id_transaksi = '$transaction->id',

@@ -166,6 +166,10 @@ foreach ($getproduk as $u) {
     }
 }
 
+if (empty(trim($dataraw->catatan_pembeli))) {
+    $dataraw->catatan_pembeli = NULL;
+}
+
 //! UPDATE TABLE TRANSAKSI 
 $query[] = mysqli_query($conn, "INSERT INTO transaksi SET 
         id_transaksi = '$transaction->id',
