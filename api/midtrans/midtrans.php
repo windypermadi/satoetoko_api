@@ -132,6 +132,7 @@ class MidTrans extends M_Controller
                 'status_transaksi' => $statusTransaksi,
                 'midtrans_transaction_status' => $midtransTransactionStatus,
                 'midtrans_payment_type' => $midtransPaymenType,
+                'tanggal_dibayar' => NOW(),
             ], [
                 'invoice' => $invoice
             ]);
