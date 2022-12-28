@@ -26,7 +26,7 @@ $provinsi = $data_alamat->provinsi;
 $kota = $data_alamat->kota;
 $kecamatan = $data_alamat->kecamatan;
 $kelurahan = $data_alamat->kelurahan;
-$gabung_alamat = $data_alamat->nama_penerima . " | " . $data_alamat->telepon_penerima . " " . $data_alamat->alamat
+$gabung_alamat = $data_alamat->alamat
     . "," . $data_alamat->kelurahan . "," . $data_alamat->kecamatan . "," . $data_alamat->kota . "," . $data_alamat->provinsi . "," . $data_alamat->kodepos;
 
 //? ONGKIR
