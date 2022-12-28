@@ -26,6 +26,7 @@ $provinsi = $data_alamat->provinsi;
 $kota = $data_alamat->kota;
 $kecamatan = $data_alamat->kecamatan;
 $kelurahan = $data_alamat->kelurahan;
+$kodepos = $data_alamat->kodepos;
 $gabung_alamat = $data_alamat->alamat
     . "," . $data_alamat->kelurahan . "," . $data_alamat->kecamatan . "," . $data_alamat->kota . "," . $data_alamat->provinsi . "," . $data_alamat->kodepos;
 
@@ -87,6 +88,7 @@ $query[] = mysqli_query($conn, "INSERT INTO transaksi SET
         catatan_pembeli = '$dataraw->catatan_pembeli',
         label_alamat = '$label_alamat',
         alamat_penerima = '$gabung_alamat',
+        kodepos = '$kodepos',
         nama_penerima = '$nama_penerima',
         telepon_penerima = '$telepon_penerima',
         total_harga_sebelum_diskon = '$dataraw->harga_normal',
