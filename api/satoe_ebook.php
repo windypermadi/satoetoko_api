@@ -90,14 +90,14 @@ switch ($tag) {
 			$data = $conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
 				a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
 				b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
-				JOIN master_ebook_detail b ON a.id_master = b.id_master
-				JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
+				LEFT JOIN master_ebook_detail b ON a.id_master = b.id_master
+				LEFT JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
 		} else {
 			$data = $conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
 				a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
 				b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
-				JOIN master_ebook_detail b ON a.id_master = b.id_master
-				JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.status_approve = '2' AND a.judul_master LIKE '%$q%' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
+				LEFT JOIN master_ebook_detail b ON a.id_master = b.id_master
+				LEFT JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.status_approve = '2' AND a.judul_master LIKE '%$q%' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
 		}
 
 		foreach ($data as $key => $value) {
