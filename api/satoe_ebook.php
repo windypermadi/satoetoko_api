@@ -166,7 +166,7 @@ switch ($tag) {
 		}
 
 		if ($datalist) {
-			$response->data = $result;
+			$response->data = $datalist;
 			$response->sukses(200);
 		} else {
 			$response->data = [];
