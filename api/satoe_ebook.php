@@ -165,13 +165,16 @@ switch ($tag) {
 			];
 		}
 
-		if ($datalist) {
-			$response->data = $datalist;
-			$response->sukses(200);
-		} else {
-			$response->data = [];
-			$response->sukses(200);
-		}
+		$response->data = $datalist;
+		$response->sukses(200);
+
+		// if ($datalist) {
+		// 	$response->data = $datalist;
+		// 	$response->sukses(200);
+		// } else {
+		// 	$response->data = [];
+		// 	$response->sukses(200);
+		// }
 		die;
 		break;
 	case "kategori":
