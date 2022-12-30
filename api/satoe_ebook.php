@@ -165,19 +165,14 @@ switch ($tag) {
 			];
 		}
 
-		if (isset($datalist)) {
-			$response->code = 200;
-			$response->message = 'result';
-			$response->data = $datalist;
-			$response->json();
-			die();
+		if ($datalist) {
+			$response->data = $result;
+			$response->sukses(200);
 		} else {
-			$response->code = 200;
-			$response->message = 'Tidak ada data yang ditampilkan!\nKlik `Mengerti` untuk menutup pesan ini';
 			$response->data = [];
-			$response->json();
-			die();
+			$response->sukses(200);
 		}
+		die;
 		break;
 	case "kategori":
 		$limit = $_GET['limit'];
