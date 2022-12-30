@@ -44,7 +44,7 @@ class Response
 			case 400:
 				echo json_encode([
 					'status' => $code,
-					'message' => 'Permintaan buruk',
+					'message' => $this->message,
 					'data' => $this->data
 				]);
 				http_response_code($code);

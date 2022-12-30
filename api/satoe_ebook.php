@@ -87,14 +87,12 @@ switch ($tag) {
 		$offset = $_GET['offset'];
 		$q = $_GET['q'] ?? '';
 		if (empty($q)) {
-			$datalist = array();
 			$data = $conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
 				a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
 				b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
 				JOIN master_ebook_detail b ON a.id_master = b.id_master
 				JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub WHERE a.status_master_detail = '1' AND a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' ORDER BY a.judul_master ASC LIMIT $offset, $limit");
 		} else {
-			$datalist = array();
 			$data = $conn->query("SELECT a.id_master, a.judul_master, a.image_master, c.nama_kategori, a.harga_master, a.diskon_rupiah, 
 				a.diskon_persen, a.harga_sewa, a.diskon_sewa_rupiah, a.diskon_sewa_persen, b.sinopsis,
 				b.penerbit, b.tahun_terbit, b.tahun_terbit, b.edisi, b.isbn, b.status_ebook, b.lama_sewa FROM master_item a 
@@ -148,7 +146,7 @@ switch ($tag) {
 				$harga_tampil = "Rp" . number_format($value['harga_sewa'], 0, ',', '.') . "-" . "Rp" . number_format($value['harga_master'], 0, ',', '.');
 			}
 
-			array_push($datalist, array(
+			$datalist[] = [
 				'id_master' => $value['id_master'],
 				'judul_master' => $value['judul_master'],
 				'image_master' => $urlimg . $value['image_master'],
@@ -164,10 +162,10 @@ switch ($tag) {
 				'diskon_sewa' => (int)$jumlah_diskon_sewa,
 				'harga_diskon_sewa' => (int)$harga_disc_sewa,
 				'harga_tampil' => $harga_tampil,
-			));
+			];
 		}
 
-		if (isset($datalist[0])) {
+		if (isset($datalist)) {
 			$response->code = 200;
 			$response->message = 'result';
 			$response->data = $datalist;
