@@ -11,6 +11,7 @@ static $user_db = 'satoetoko_user';
 define('HOST', $IP);
 define('USER', $user_db);
 define('PASS', $password_db);
+// define('DB', 'satoetoko_deve_server');
 define('DB', 'satoetoko_deve');
 $conn = mysqli_connect(HOST, USER, PASS, DB) or die('Unable to Connect');
 

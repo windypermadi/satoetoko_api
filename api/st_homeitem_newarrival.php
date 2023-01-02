@@ -29,7 +29,7 @@ foreach ($data as $key => $value) {
         $max = $varian[count($varian) - 1]['harga_varian_final'];
 
         //! varian ada diskon
-        if ($varian->diskon_rupiah_varian != 0) {
+        if ($varian[0]['diskon_rupiah_varian'] != 0) {
             $status_diskon = 'Y';
             (float)$harga_disc = $varian->harga_varian - $varian->diskon_rupiah_varian;
         } else {
