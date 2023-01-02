@@ -2,7 +2,7 @@
 // local
 // static $password_db = '112233';
 // static $IP = 'localhost';
-// static $user_db = 'root';	
+// static $user_db = 'root';
 // server
 static $password_db = 'a123123123b@';
 static $IP = 'localhost';
@@ -11,7 +11,7 @@ static $user_db = 'satoetoko_user';
 define('HOST', $IP);
 define('USER', $user_db);
 define('PASS', $password_db);
-define('DB', 'satoetoko_deve');
+define('DB', 'satoetoko_deve_server');
 $conn = mysqli_connect(HOST, USER, PASS, DB) or die('Unable to Connect');
 
 //database object adi	

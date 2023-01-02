@@ -17,38 +17,40 @@ WHERE a.status_aktif = 'Y' AND a.status_approve = '2' AND a.status_hapus = 'N' A
 foreach ($data as $key => $value) {
 
 	//! untuk varian harga diskon atau enggak
-	$varian_harga = 'N';
-	if ($varian_harga == 'N') {
-
-		if ($value['diskon_persen'] != 0) {
-			$status_diskon = 'Y';
-			(float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
-		} else {
-			$status_diskon = 'N';
-			(float)$harga_disc = $value['harga_master'];
-		}
-
-		$harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.');
-		$harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
-	} else {
-
-		if ($value['diskon_persen'] != 0) {
-			$status_diskon = 'Y';
-			(float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
-		} else {
-			$status_diskon = 'N';
-			(float)$harga_disc = $value['harga_master'];
-		}
-
-		$harga_produk = "Rp" . number_format($value['harga_master'], 0, ',', '.') . " - " . "Rp" . number_format($value['harga_master'], 0, ',', '.');
-		$harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
-	}
-
-	$varian_diskon = 'N';
-	if ($varian_diskon == 'N') {
-		$status_varian_diskon = 'OFF';
-	} else {
+	if ($value['status_varian'] == 'Y') {
 		$status_varian_diskon = 'UPTO';
+		$varian = $conn->query("SELECT *, (harga_varian-diskon_rupiah_varian) as harga_varian_final FROM variant WHERE id_master = '$value[id_master]' ORDER BY harga_varian_final ASC")->fetch_all(MYSQLI_ASSOC);
+		// foreach ($varian as $key => $value) {
+		// }
+		$min_normal = $varian[0]['harga_varian'];
+		$max_normal = $varian[count($varian) - 1]['harga_varian'];
+
+		$min = $varian[0]['harga_varian_final'];
+		$max = $varian[count($varian) - 1]['harga_varian_final'];
+
+		//! varian ada diskon
+		if ($varian->diskon_rupiah_varian != 0) {
+			$status_diskon = 'Y';
+			(float)$harga_disc = $varian->harga_varian - $varian->diskon_rupiah_varian;
+		} else {
+			$status_diskon = 'N';
+			(float)$harga_disc = $varian->diskon_rupiah_varian;
+		}
+
+		$harga_produk = rupiah($min_normal) . " - " . rupiah($max_normal);
+		$harga_tampil = rupiah($min) . " - " . rupiah($max);
+	} else {
+		$status_varian_diskon = 'OFF';
+		if ($value['diskon_persen'] != 0) {
+			$status_diskon = 'Y';
+			(float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+		} else {
+			$status_diskon = 'N';
+			(float)$harga_disc = $value['harga_master'];
+		}
+
+		$harga_produk = rupiah($value['harga_master']);
+		$harga_tampil = rupiah($harga_disc);
 	}
 
 	$status_jenis_harga = '1';

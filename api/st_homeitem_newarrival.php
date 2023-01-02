@@ -8,7 +8,7 @@ $offset = $_GET['offset'];
 
 $result2 = array();
 $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harga_master, a.diskon_rupiah, a.diskon_persen,
-    a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah , a.id_sub_kategori, c.nama_kategori, a.status_master_detail
+    a.total_dibeli, a.total_disukai, SUM(b.jumlah) as jumlah , a.id_sub_kategori, c.nama_kategori, a.status_master_detail, a.status_varian
     FROM master_item a JOIN stok b ON a.id_master = b.id_barang
     JOIN kategori_sub c ON a.id_sub_kategori = c.id_sub
     LEFT JOIN master_buku_detail d ON a.id_master = d.id_master
@@ -17,19 +17,30 @@ $data = $conn->query("SELECT a.id_master, a.image_master, a.judul_master, a.harg
 foreach ($data as $key => $value) {
 
     //! untuk varian harga diskon atau enggak
-    $cekvariant = $conn->query("SELECT * FROM variant WHERE id_master = '$value[id_master]'")->num_rows;
-    if ($cekvariant > 0) {
-        if ($value['diskon_persen'] != 0) {
+    if ($value['status_varian'] == 'Y') {
+        $status_varian_diskon = 'UPTO';
+        $varian = $conn->query("SELECT *, (harga_varian-diskon_rupiah_varian) as harga_varian_final FROM variant WHERE id_master = '$value[id_master]' ORDER BY harga_varian_final ASC")->fetch_all(MYSQLI_ASSOC);
+        // foreach ($varian as $key => $value) {
+        // }
+        $min_normal = $varian[0]['harga_varian'];
+        $max_normal = $varian[count($varian) - 1]['harga_varian'];
+
+        $min = $varian[0]['harga_varian_final'];
+        $max = $varian[count($varian) - 1]['harga_varian_final'];
+
+        //! varian ada diskon
+        if ($varian->diskon_rupiah_varian != 0) {
             $status_diskon = 'Y';
-            (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+            (float)$harga_disc = $varian->harga_varian - $varian->diskon_rupiah_varian;
         } else {
             $status_diskon = 'N';
-            (float)$harga_disc = $value['harga_master'];
+            (float)$harga_disc = $varian->diskon_rupiah_varian;
         }
 
-        $harga_produk = rupiah($value['harga_master']) . " - " . rupiah($value['harga_master']);
-        $harga_tampil = rupiah($harga_disc) . " - " . rupiah($harga_disc);
+        $harga_produk = rupiah($min_normal) . " - " . rupiah($max_normal);
+        $harga_tampil = rupiah($min) . " - " . rupiah($max);
     } else {
+        $status_varian_diskon = 'OFF';
         if ($value['diskon_persen'] != 0) {
             $status_diskon = 'Y';
             (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
@@ -40,13 +51,6 @@ foreach ($data as $key => $value) {
 
         $harga_produk = rupiah($value['harga_master']);
         $harga_tampil = rupiah($harga_disc);
-    }
-
-    $varian_diskon = 'N';
-    if ($varian_diskon == 'N') {
-        $status_varian_diskon = 'OFF';
-    } else {
-        $status_varian_diskon = 'UPTO';
     }
 
     $status_jenis_harga = '1';
