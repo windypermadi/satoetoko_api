@@ -28,6 +28,8 @@ foreach ($data as $key => $value) {
         $min = $varian[0]['harga_varian_final'];
         $max = $varian[count($varian) - 1]['harga_varian_final'];
 
+        $jumlah_diskon = $varian[count($varian) - 1]['diskon_persen_varian'];
+
         //! varian ada diskon
         if ($varian[0]['diskon_rupiah_varian'] != 0) {
             $status_diskon = 'Y';
@@ -40,6 +42,7 @@ foreach ($data as $key => $value) {
         $harga_produk = rupiah($min_normal) . " - " . rupiah($max_normal);
         $harga_tampil = rupiah($min) . " - " . rupiah($max);
     } else {
+        $jumlah_diskon = $value['diskon_persen'];
         $status_varian_diskon = 'OFF';
         if ($value['diskon_persen'] != 0) {
             $status_diskon = 'Y';
@@ -73,7 +76,7 @@ foreach ($data as $key => $value) {
         'status_varian_diskon' => $status_varian_diskon,
         'status_jenis_harga' => $status_jenis_harga,
         'status_stok' => $value['jumlah'] > 0 ? 'Y' : 'N',
-        'diskon' => $value['diskon_persen'] . "%",
+        'diskon' => $jumlah_diskon . "%",
         'total_dibeli' => $value['total_dibeli'] . " terjual",
         'rating_item' => 0,
     ];
