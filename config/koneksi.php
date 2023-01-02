@@ -2,7 +2,7 @@
 // local
 // static $password_db = '112233';
 // static $IP = 'localhost';
-// static $user_db = 'root';
+// static $user_db = 'root';	
 // server
 static $password_db = 'a123123123b@';
 static $IP = 'localhost';

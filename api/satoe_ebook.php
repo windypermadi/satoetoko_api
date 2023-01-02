@@ -277,5 +277,12 @@ switch ($tag) {
 			die();
 		}
 		break;
+	case "jumlah":
+		$data = $conn->query("SELECT count(id_master) as jumlah_produk FROM master_item WHERE status_master_detail = '1'")->fetch_object();
+
+		$response->data = "Sekitar " . $data->jumlah_produk . " hasil";
+		$response->sukses(200);
+		die;
+		break;
 }
 mysqli_close($conn);
