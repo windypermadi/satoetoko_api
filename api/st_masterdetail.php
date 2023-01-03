@@ -136,7 +136,6 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
             }
 
             if ($datanew->status_varian == 'Y') {
-                $status_varian_diskon = 'UPTO';
                 $variant = $conn->query("SELECT * FROM variant a JOIN stok b ON a.id_variant = b.id_varian WHERE a.id_master = '$id_master'");
                 foreach ($variant as $key => $value) {
                     $variants[] = [
@@ -156,7 +155,6 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
                     ];
                 }
             } else {
-                $status_varian_diskon = 'OFF';
                 $variants = [];
                 $url_variants = [];
             }
@@ -181,6 +179,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
     }
 
     if ($datanew->status_varian == 'Y') {
+        $status_varian_diskon = 'UPTO';
         $varian = $conn->query("SELECT *, (harga_varian-diskon_rupiah_varian) as harga_varian_final FROM variant WHERE id_master = '$id_master' ORDER BY harga_varian_final ASC")->fetch_all(MYSQLI_ASSOC);
         // foreach ($varian as $key => $value) {
         // }
@@ -206,6 +205,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
         $harga_tampil = rupiah($min) . " - " . rupiah($max);
     } else {
 
+        $status_varian_diskon = 'OFF';
         $jumlah_diskon = $datanew->diskon_persen;
         if ($datanew->diskon_persen != 0) {
             $status_diskon = 'Y';
