@@ -51,17 +51,15 @@ if (empty($dataproduk['id_variant'])) {
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
             WHERE a.id_barang = '$dataproduk[id_master]'";
 } else {
-    $que = "SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
-            c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
-            a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
-            b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
-            f.id_supplier FROM user_keranjang a
-            JOIN master_item b ON a.id_barang = b.id_master
-            LEFT JOIN variant c ON a.id_variant = c.id_variant
-            LEFT JOIN master_buku_detail d ON b.id_master = d.id_master
-            LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
-            LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
-            WHERE a.id = '$dataproduk[id_master]' AND a.id_variant = '$dataproduk[id_variant]'";
+    $que = "SELECT a.id_master, a.id_variant, b.judul_master, b.image_master, a.keterangan_varian, b.harga_master, b.diskon_rupiah, a.harga_varian, a.diskon_rupiah_varian,
+    b.status_master_detail, e.id_supplier, d.berat as berat_fisik, c.berat as berat_buku, f.id_supplier, f.id_warehouse
+    FROM variant a 
+    JOIN master_item b ON a.id_master = b.id_master 
+    LEFT JOIN master_buku_detail c ON b.id_master = c.id_master
+    LEFT JOIN master_fisik_detail d ON b.id_master = d.id_master
+    LEFT JOIN supplier e ON b.id_supplier = e.id_supplier
+    LEFT JOIN stok f ON a.id_variant = f.id_varian
+    WHERE a.id_variant = '$dataproduk[id_variant]' AND a.id_master = '$dataproduk[id_master]' AND f.id_warehouse = '$dataraw->id_cabang'";
 }
 $getproduk = $conn->query($que)->fetch_object();
 
