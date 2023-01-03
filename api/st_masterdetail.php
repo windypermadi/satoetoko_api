@@ -208,17 +208,17 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
 
         $jumlah_diskon = $value['diskon_persen'];
         $status_varian_diskon = 'OFF';
-        if ($value['diskon_persen'] != 0) {
+        if ($datanew->diskon_persen != 0) {
             $status_diskon = 'Y';
             $varian_diskon = 'Y';
-            (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
+            (float)$harga_disc = $datanew->harga_master - $datanew->diskon_rupiah;
         } else {
             $status_diskon = 'N';
             $varian_diskon = 'N';
-            (float)$harga_disc = $value['harga_master'];
+            (float)$harga_disc = $datanew->harga_master;
         }
 
-        $harga_produk = rupiah($value['harga_master']);
+        $harga_produk = rupiah($datanew->harga_master);
         $harga_tampil = rupiah($harga_disc);
     }
 
