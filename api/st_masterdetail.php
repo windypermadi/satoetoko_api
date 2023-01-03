@@ -205,7 +205,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
         $harga_tampil = rupiah($min) . " - " . rupiah($max);
     } else {
 
-        $jumlah_diskon = $value['diskon_persen'];
+        $jumlah_diskon = $datanew->diskon_persen;
         $status_varian_diskon = 'OFF';
         if ($datanew->diskon_persen != 0) {
             $status_diskon = 'Y';
