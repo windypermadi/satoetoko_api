@@ -26,6 +26,8 @@ if (isset($id_master)) {
                     LEFT JOIN master_buku_detail b ON a.id_master = b.id_master
                     WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
 
+            $deskripsi = $datanew->sinopsis;
+
             $imageurl = $conn->query("SELECT b.image_master, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_buku_detail a
 LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
             $imageurls = array();
@@ -91,6 +93,8 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
                     LEFT JOIN master_fisik_detail b ON a.id_master = b.id_master
                     LEFT JOIN kategori_sub d ON a.id_sub_kategori = d.id_sub
                     WHERE a.status_approve = '2' AND a.status_aktif = 'Y' AND a.status_hapus = 'N' AND a.id_master = '$id_master'"));
+
+            $deskripsi = $datanew->deskripsi_produk;
 
             $imageurl = $conn->query("SELECT b.image_master, a.video_produk, a.gambar_1, a.gambar_2, a.gambar_3 FROM master_fisik_detail a
 LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data->id_master'");
@@ -174,52 +178,65 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
         ];
     }
 
-    $varian_harga = 'N';
-    if ($varian_harga == 'N') {
+    if ($datanew->status_varian == 'Y') {
+        $status_varian_diskon = 'UPTO';
+        $varian = $conn->query("SELECT *, (harga_varian-diskon_rupiah_varian) as harga_varian_final FROM variant WHERE id_master = '$id_master' ORDER BY harga_varian_final ASC")->fetch_all(MYSQLI_ASSOC);
+        // foreach ($varian as $key => $value) {
+        // }
+        $min_normal = $varian[0]['harga_varian'];
+        $max_normal = $varian[count($varian) - 1]['harga_varian'];
 
-        if ($datanew->diskon_persen != 0) {
+        $min = $varian[0]['harga_varian_final'];
+        $max = $varian[count($varian) - 1]['harga_varian_final'];
+
+        $jumlah_diskon = $varian[count($varian) - 1]['diskon_persen_varian'];
+
+        //! varian ada diskon
+        if ($varian[0]['diskon_rupiah_varian'] != 0) {
             $status_diskon = 'Y';
-            (float)$harga_disc = $datanew->harga_master - $datanew->diskon_rupiah;
+            $varian_diskon = 'Y';
+            (float)$harga_disc = $varian->harga_varian - $varian->diskon_rupiah_varian;
         } else {
             $status_diskon = 'N';
-            (float)$harga_disc = $datanew->harga_master;
+            $varian_diskon = 'N';
+            (float)$harga_disc = $varian->diskon_rupiah_varian;
         }
 
-        $harga_produk = "Rp" . number_format($data->harga_master, 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($min_normal) . " - " . rupiah($max_normal);
+        $harga_tampil = rupiah($min) . " - " . rupiah($max);
     } else {
 
-        if ($datanew->diskon_persen != 0) {
+        $jumlah_diskon = $value['diskon_persen'];
+        $status_varian_diskon = 'OFF';
+        if ($value['diskon_persen'] != 0) {
             $status_diskon = 'Y';
-            (float)$harga_disc = $datanew->harga_master - $datanew->diskon_rupiah;
+            $varian_diskon = 'Y';
+            (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
         } else {
             $status_diskon = 'N';
-            (float)$harga_disc = $datanew->harga_master;
+            $varian_diskon = 'N';
+            (float)$harga_disc = $value['harga_master'];
         }
 
-        $harga_produk = "Rp" . number_format($datanew->harga_master, 0, ',', '.') . " - " . "Rp" . number_format($data->harga_master, 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.') . " - " . "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($value['harga_master']);
+        $harga_tampil = rupiah($harga_disc);
     }
 
-    $harga_produk = "Rp" . number_format($datanew->harga_master, 0, ',', '.');
-    $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
-
-    $varian_diskon = 'N';
-    $status_varian_diskon = $varian_diskon == 'N' ? 'OFF' : 'UPTO';
+    $cekwhislist = $conn->query("SELECT * FROM whislist_product WHERE id_master = '$id_master'")->num_rows;
 
     $data1['id_master'] = $datanew->id_master;
     $data1['judul_master'] = $datanew->judul_master;
     $data1['slug_judul_master'] = $datanew->slug_judul_master;
-    $data1['deskripsi_produk'] = $datanew->deskripsi_produk;
+    $data1['deskripsi_produk'] = $deskripsi;
     $data1['harga_produk'] = $harga_produk;
     $data1['harga_tampil'] = $harga_tampil;
     $data1['status_diskon'] = $status_diskon;
     $data1['status_varian_diskon'] = $status_varian_diskon;
     $data1['status_jenis_harga'] = $varian_diskon;
-    $data1['diskon'] = $datanew->diskon_persen . "%";
+    $data1['diskon'] = $jumlah_diskon . "%";
     $data1['total_dibeli'] = $datanew->total_dibeli . " terjual";
     $data1['rating_item'] = 0;
-    $data1['status_whislist'] = $status_whislist;
+    $data1['status_whislist'] = $cekwhislist > 0 ? 'Y' : 'N';
     $data1['stok'] = $datastok->jumlah;
     $data1['warehouse'] = $warehousedatas;
 
