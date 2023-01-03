@@ -194,14 +194,13 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
         //! varian ada diskon
         if ($varian[0]['diskon_rupiah_varian'] != 0) {
             $status_diskon = 'Y';
-            $varian_diskon = 'Y';
             (float)$harga_disc = $varian->harga_varian - $varian->diskon_rupiah_varian;
         } else {
             $status_diskon = 'N';
-            $varian_diskon = 'N';
             (float)$harga_disc = $varian->diskon_rupiah_varian;
         }
 
+        $status_jenis_harga = '2';
         $harga_produk = rupiah($min_normal) . " - " . rupiah($max_normal);
         $harga_tampil = rupiah($min) . " - " . rupiah($max);
     } else {
@@ -210,14 +209,13 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
         $status_varian_diskon = 'OFF';
         if ($datanew->diskon_persen != 0) {
             $status_diskon = 'Y';
-            $varian_diskon = 'Y';
             (float)$harga_disc = $datanew->harga_master - $datanew->diskon_rupiah;
         } else {
             $status_diskon = 'N';
-            $varian_diskon = 'N';
             (float)$harga_disc = $datanew->harga_master;
         }
 
+        $status_jenis_harga = '1';
         $harga_produk = rupiah($datanew->harga_master);
         $harga_tampil = rupiah($harga_disc);
     }
@@ -232,7 +230,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
     $data1['harga_tampil'] = $harga_tampil;
     $data1['status_diskon'] = $status_diskon;
     $data1['status_varian_diskon'] = $status_varian_diskon;
-    $data1['status_jenis_harga'] = $varian_diskon;
+    $data1['status_jenis_harga'] = $status_jenis_harga;
     $data1['diskon'] = $jumlah_diskon . "%";
     $data1['total_dibeli'] = $datanew->total_dibeli . " terjual";
     $data1['rating_item'] = 0;
