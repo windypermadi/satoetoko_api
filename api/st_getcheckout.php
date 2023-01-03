@@ -24,7 +24,7 @@ WHERE a.id = '$key[id_cart]'")->fetch_object();
 foreach ($getproduk as $u) {
 
     $datamaster = "SELECT * FROM master_item WHERE id_master = 
-                '$u[id_master]'";
+                '$u->id_master'";
     $cekitemdata = $conn->query($datamaster);
     $data2 = $cekitemdata->fetch_object();
 
