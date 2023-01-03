@@ -18,6 +18,11 @@ if (isset($id_login)) {
 
             foreach ($data as $key) {
 
+                $datamaster = "SELECT * FROM master_item WHERE id_master = 
+                '$key[id_master]'";
+                $cekitemdata = $conn->query($datamaster);
+                $data2 = $cekitemdata->fetch_object();
+
                 if ($key['status_varian'] == 'Y') {
 
                     $cekstok = $conn->query("SELECT jumlah FROM user_keranjang a 
@@ -73,7 +78,7 @@ if (isset($id_login)) {
 
                 array_push($datalist, array(
                     'id' => $key['id'],
-                    'image_master' => $getimagefisik . $key['image_master'],
+                    'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $key['image_master'] : $getimagefisik . $key['image_master'],
                     'judul' => $key['judul_master'],
                     'id_varian' => $key['id_variant'],
                     'varian' => $key['keterangan_varian'],
