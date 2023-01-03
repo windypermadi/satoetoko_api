@@ -110,6 +110,13 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
 
             foreach ($data as $key => $value) {
 
+
+                $datamaster = "SELECT * FROM master_item WHERE id_master = 
+                '$key[id_master]'";
+                $cekitemdata = $conn->query($datamaster);
+                $data2 = $cekitemdata->fetch_object();
+
+
                 if ($value['diskon_persen'] != 0) {
                     $status_diskon = 'Y';
                     (float)$harga_disc = $value['harga_master'] - $value['diskon_rupiah'];
@@ -150,7 +157,7 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
 
                 array_push($datalist, array(
                     'id' => $value['id'],
-                    'image_master' => $getimagefisik . $value['image_master'],
+                    'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $key['image_master'] : $getimagefisik . $key['image_master'],
                     'judul' => $value['judul_master'],
                     'varian' => $value['keterangan_varian'],
                     'harga_produk' => $harga_produk,

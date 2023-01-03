@@ -22,6 +22,12 @@ LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
 WHERE a.id = '$key[id_cart]'")->fetch_object();
 }
 foreach ($getproduk as $u) {
+
+    $datamaster = "SELECT * FROM master_item WHERE id_master = 
+                '$u[id_master]'";
+    $cekitemdata = $conn->query($datamaster);
+    $data2 = $cekitemdata->fetch_object();
+
     if ($u->status_master_detail == '2') {
         $berat += $u->berat_buku * $u->qty;
     } else if ($u->status_master_detail == '3') {
@@ -35,7 +41,7 @@ foreach ($getproduk as $u) {
             'id_cart' => $key['id_cart'],
             'id_master' => $u->id_master,
             'judul_master' => $u->judul_master,
-            'image_master' => $getimagefisik . $u->image_master,
+            'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $u->image_master : $getimagefisik . $u->image_master,
             'id_variant' => $u->id_variant,
             'keterangan_varian' => $u->keterangan_varian != null ? $u->keterangan_varian : "",
             'qty' => $u->qty,
@@ -50,7 +56,7 @@ foreach ($getproduk as $u) {
             'id_cart' => $key['id_cart'],
             'id_master' => $u->id_master,
             'judul_master' => $u->judul_master,
-            'image_master' => $getimagefisik . $u->image_master,
+            'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $u->image_master : $getimagefisik . $u->image_master,
             'id_variant' => $u->id_variant,
             'keterangan_varian' => $u->keterangan_varian != null ? $u->keterangan_varian : "",
             'qty' => $u->qty,

@@ -50,7 +50,7 @@ if (isset($id)) {
 
     $data1 = [
         'id' => $data2->id,
-        'image_master' => $getimagefisik . $data2->image_master,
+        'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $data2->image_master : $getimagefisik . $data2->image_master,
         'judul' => $data2->judul_master,
         'id_varian' => $data2->id_variant,
         'varian' => $data2->keterangan_varian,
@@ -117,7 +117,7 @@ if (isset($id)) {
 
         $data1 = [
             'id' => $data2->id,
-            'image_master' => $getimagefisik . $data2->image_master,
+            'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $data2->image_master : $getimagefisik . $data2->image_master,
             'judul' => $data2->judul_master,
             'id_varian' => $data2->id_variant,
             'varian' => $data2->keterangan_varian,
