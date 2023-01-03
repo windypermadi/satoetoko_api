@@ -112,7 +112,7 @@ WHERE a.id_user = '$id_login' AND b.diskon_persen != 0");
 
 
                 $datamaster = "SELECT * FROM master_item WHERE id_master = 
-                '$key[id_master]'";
+                            '$key[id_master]'";
                 $cekitemdata = $conn->query($datamaster);
                 $data2 = $cekitemdata->fetch_object();
 
