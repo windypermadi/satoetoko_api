@@ -12,7 +12,7 @@ if (isset($id_login)) {
 
     switch ($tag) {
         case 'semua':
-            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login'");
+            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' ORDER BY tanggal_transaksi DESC");
 
             foreach ($data as $key) {
 
@@ -69,7 +69,7 @@ if (isset($id_login)) {
             }
             break;
         case 'selesai':
-            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '3'");
+            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '3' ORDER BY tanggal_transaksi DESC");
 
             foreach ($data as $key) {
 
@@ -126,7 +126,7 @@ if (isset($id_login)) {
             }
             break;
         case 'batal':
-            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '9'");
+            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' AND status_transaksi = '9' ORDER BY tanggal_transaksi DESC");
 
             foreach ($data as $key) {
 
@@ -235,12 +235,14 @@ if (isset($id_login)) {
                 $ambil_ditempat = "";
             }
 
-            if ($data->metode_pembayaran == '1') {
-                $metode_pembayaran = 'Pembayaran Manual';
-            } else if ($data->metode_pembayaran == '2') {
+            if ($data->metode_pembayaran == '0') {
                 $metode_pembayaran = 'Pembayaran Otomatis Midtrans';
-            } else {
-                $metode_pembayaran = 'Belum Memilih Metode Pembayaran';
+            } else if ($data->metode_pembayaran == '1') {
+                $metode_pembayaran = 'Bank BCA (cek manual)';
+            } else if ($data->metode_pembayaran == '2') {
+                $metode_pembayaran = 'Bank Mandiri (cek mandiri)';
+            } else if ($data->metode_pembayaran == '3') {
+                $metode_pembayaran = 'E-money (cek mandiri)';
             }
 
             $product = $conn->query("SELECT * FROM transaksi_detail td JOIN master_item mi ON td.id_barang = mi.id_master WHERE td.id_transaksi")->fetch_object();
