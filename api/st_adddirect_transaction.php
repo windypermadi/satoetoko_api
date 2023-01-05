@@ -6,7 +6,7 @@ $response = new Response();
 $dataraw = json_decode(file_get_contents('php://input'));
 $dataraw2 = json_decode(file_get_contents('php://input'), true);
 
-$exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
+$exp_date = date("Y-m-d H:i:s", strtotime("+24 hours"));
 
 $conn->begin_transaction();
 
@@ -138,9 +138,15 @@ if ($getproduk->id_variant) {
 
     //! UPDATE STOK PRODUCT
     $jml = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$getproduk->id_variant'")->fetch_assoc();
+    $total_dibeli2 = $jml['jumlah'];
     $hasiljumlah = $jml['jumlah'] - $dataraw->qty;
 
     $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$getproduk->id_variant'");
+
+    //! UPDATE JUMLAH PEMBELIAN BARANG
+    $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$getproduk->id_master'")->fetch_assoc();
+    $total_dibeli3 = $total_dibeli['total_dibeli'];
+    $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$getproduk->id_master'");
 
     //! UPDATE STOK HISTORY PRODUCT
     $stokawal = $jml['jumlah'];
@@ -190,9 +196,15 @@ if ($getproduk->id_variant) {
 
     //! UPDATE STOK PRODUCT
     $jml = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$getproduk->id_master'")->fetch_assoc();
+    $total_dibeli2 = $jml['jumlah'];
     $hasiljumlah = $jml['jumlah'] - $dataraw->qty;
 
     $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$getproduk->id_master'");
+
+    //! UPDATE JUMLAH PEMBELIAN BARANG
+    $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$getproduk->id_master'")->fetch_assoc();
+    $total_dibeli3 = $total_dibeli['total_dibeli'];
+    $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$getproduk->id_master'");
 
     //! UPDATE STOK HISTORY PRODUCT
     $stokawal = $jml['jumlah'];
