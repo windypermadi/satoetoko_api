@@ -12,7 +12,7 @@ if (isset($id_login)) {
 
     switch ($tag) {
         case 'semua':
-            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' ORDER BY tanggal_transaksi DESC");
+            $data = $conn->query("SELECT id_transaksi, invoice, tanggal_transaksi, total_harga_setelah_diskon, harga_ongkir, status_transaksi, kurir_code FROM `transaksi` WHERE id_user = '$id_login' ORDER BY tanggal_transaksi DESC");
 
             foreach ($data as $key) {
 
@@ -52,8 +52,8 @@ if (isset($id_login)) {
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
                     'exp_date' => $exp_date,
-                    'total' => $key['total_harga_setelah_diskon'],
-                    'total_format' => rupiah($key['total_harga_setelah_diskon']),
+                    'total' => $key['total_harga_setelah_diskon'] + $key['harga_ongkir'],
+                    'total_format' => rupiah($key['total_harga_setelah_diskon'] + $key['harga_ongkir']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
                     'status_ambil_ditempat' => $ambilditempat
@@ -109,8 +109,8 @@ if (isset($id_login)) {
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
                     'exp_date' => $exp_date,
-                    'total' => $key['total_harga_setelah_diskon'],
-                    'total_format' => rupiah($key['total_harga_setelah_diskon']),
+                    'total' => $key['total_harga_setelah_diskon'] + $key['harga_ongkir'],
+                    'total_format' => rupiah($key['total_harga_setelah_diskon'] + $key['harga_ongkir']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
                     'status_ambil_ditempat' => $ambilditempat
@@ -166,8 +166,8 @@ if (isset($id_login)) {
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
                     'exp_date' => $exp_date,
-                    'total' => $key['total_harga_setelah_diskon'],
-                    'total_format' => rupiah($key['total_harga_setelah_diskon']),
+                    'total' => $key['total_harga_setelah_diskon'] + $key['harga_ongkir'],
+                    'total_format' => rupiah($key['total_harga_setelah_diskon'] + $key['harga_ongkir']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
                     'status_ambil_ditempat' => $ambilditempat
