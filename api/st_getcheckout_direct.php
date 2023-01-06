@@ -167,6 +167,5 @@ $data1['data_product'] = $getprodukcoba;
 $data1['data_qty_product'] = $getqtyproduk;
 $data1['data_price'] = $getdatatotal;
 
-
 $response->data = $data1;
 $response->sukses(200);
