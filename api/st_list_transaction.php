@@ -264,7 +264,7 @@ if (isset($id_login)) {
 
             $data1['id_transaksi'] = $data->id_transaksi;
             $data1['invoice'] = $data->invoice;
-            $data1['total_harga'] = $data->total_harga_setelah_diskon + $data->harga_ongkir;
+            $data1['total_harga'] = $data->total_harga_setelah_diskon;
             $data1['metode_pembayaran'] = $metode_pembayaran;
             $data1['status_metode_pembayaran'] = $status_metode_pembayaran;
             $data1['status_transaksi'] = $status_transaksi;
