@@ -249,7 +249,7 @@ if (isset($id_login)) {
                 $status_metode_pembayaran = '1';
             }
 
-            $product = $conn->query("SELECT * FROM transaksi_detail td JOIN master_item mi ON td.id_barang = mi.id_master WHERE td.id_transaksi")->fetch_object();
+            $product = $conn->query("SELECT * FROM transaksi_detail td JOIN master_item mi ON td.id_barang = mi.id_master WHERE td.id_transaksi = '$id_transaksi'")->fetch_object();
 
             $data1['id_transaksi'] = $data->id_transaksi;
             $data1['invoice'] = $data->invoice;
