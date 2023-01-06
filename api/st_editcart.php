@@ -45,7 +45,7 @@ if (isset($id)) {
         $harga_produk = rupiah($data2->harga_master);
         $harga_tampil = rupiah($harga_disc);
         $harga_produk_int = $data2->harga_master;
-        $harga_diskon_int = $harga_disc;
+        $harga_tampil_int = $harga_disc;
     }
 
     $data1 = [
@@ -57,7 +57,7 @@ if (isset($id)) {
         'harga_produk' => $harga_produk,
         'harga_tampil' => $harga_tampil,
         'harga_produk_int' => $harga_produk_int,
-        'harga_tampil_int' => $harga_diskon_int,
+        'harga_tampil_int' => $harga_tampil_int,
         'status_diskon' => $status_diskon,
         'qty' => $data2->qty,
         'stok_saatini' => $data2->qty,
