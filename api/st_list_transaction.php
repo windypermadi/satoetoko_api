@@ -52,8 +52,8 @@ if (isset($id_login)) {
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
                     'exp_date' => $exp_date,
-                    'total' => $key['total_harga_setelah_diskon'] + $key['harga_ongkir'],
-                    'total_format' => rupiah($key['total_harga_setelah_diskon'] + $key['harga_ongkir']),
+                    'total' => $key['total_harga_setelah_diskon'],
+                    'total_format' => rupiah($key['total_harga_setelah_diskon']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
                     'status_ambil_ditempat' => $ambilditempat
@@ -109,8 +109,8 @@ if (isset($id_login)) {
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
                     'exp_date' => $exp_date,
-                    'total' => $key['total_harga_setelah_diskon'] + $key['harga_ongkir'],
-                    'total_format' => rupiah($key['total_harga_setelah_diskon'] + $key['harga_ongkir']),
+                    'total' => $key['total_harga_setelah_diskon'],
+                    'total_format' => rupiah($key['total_harga_setelah_diskon']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
                     'status_ambil_ditempat' => $ambilditempat
@@ -166,8 +166,8 @@ if (isset($id_login)) {
                     'id_transaksi' => $key['id_transaksi'],
                     'invoice' => $key['invoice'],
                     'exp_date' => $exp_date,
-                    'total' => $key['total_harga_setelah_diskon'] + $key['harga_ongkir'],
-                    'total_format' => rupiah($key['total_harga_setelah_diskon'] + $key['harga_ongkir']),
+                    'total' => $key['total_harga_setelah_diskon'],
+                    'total_format' => rupiah($key['total_harga_setelah_diskon']),
                     'status' => $key['status_transaksi'],
                     'status_transaksi' => $status_transaksi,
                     'status_ambil_ditempat' => $ambilditempat
