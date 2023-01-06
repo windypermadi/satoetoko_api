@@ -6,7 +6,7 @@ $response = new Response();
 $id_login         = $_GET['id_login'];
 $tag              = $_GET['tag'];
 
-$exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
+$exp_date = date("Y-m-d H:i:s", strtotime("+24 hours"));
 
 if (isset($id_login)) {
 
@@ -410,15 +410,37 @@ if (isset($id_login)) {
                     'midtrans_redirect_url' => $value['midtrans_redirect_url']
                 ];
 
+            if ($status_transaksi == '1') {
+                $status_notif = 'Menunggu Pembayaran';
+                $keterangan = 'Silahkan melakukan pembayaran paling lambat ' . $exp_date . ' dengan ' . $metode_pembayaran;
+            } else if ($status_transaksi == '3'){
+                $status_notif = 'Pesananmu sedang dikemas oleh penjual';
+                $keterangan = 'Penjual harus mengatur pengiriman pesananmu paling lambat NULL';
+            } else if ($status_transaksi == '5'){
+                $status_notif = 'Pesananmu sedang dalam perjalanan';
+                $keterangan = 'Produk diperkirakan akan sampai pada NULL';
+            } else if ($status_transaksi == '7'){
+                $status_notif = 'Pesanan selesai';
+                $keterangan = 'Nilai pesanan sebelum NULL';
+            } else if ($status_transaksi == '9'){
+                $status_notif = 'Pesanan dibatalkan';
+                $keterangan = 'Kamu telah membatalkan pesanan ini. Cek rincian pembatalan untuk informasi lebih lanjut.';
+            }
+
+            $notif = [
+                'status' => $status_notif,
+                'keterangan' => $keterangan,
+            ];
+
             $data1['data_transaction'] = $getdatatransaction;
             $data1['data_address_buyer'] = $address;
-            // $data1['data_address_shipper'] = $address_shipper;
             $data1['data_product'] = $getprodukcoba;
-            // $data1['data_qty_product'] = $getqtyproduk;
             $data1['data_price'] = $getdatatotal;
             $data1['data_payment'] = $metodepem;
             $data1['data_order'] = $informasi_pesanan;
             $data1['data_shipment'] = $informasi_pengiriman;
+            $data1['data_faktur'] = '';
+            $data1['notifikasi'] = $notif;
 
             if ($data1) {
                 $response->data = $data1;
