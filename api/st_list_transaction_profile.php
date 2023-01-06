@@ -6,7 +6,7 @@ $response = new Response();
 $id_login         = $_GET['id_login'];
 $tag              = $_GET['tag'];
 
-$exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
+$exp_date = date("Y-m-d H:i:s", strtotime("+24 hours"));
 
 if (isset($id_login)) {
 
@@ -18,7 +18,7 @@ if (isset($id_login)) {
             JOIN stok d ON c.id_master = d.id_barang 
             JOIN cabang e ON d.id_warehouse = e.id_cabang
             LEFT JOIN variant f ON b.id_barang = f.id_variant
-            WHERE a.id_user = '$id_login' AND a.status_transaksi = '1' GROUP BY a.id_transaksi;");
+            WHERE a.id_user = '$id_login' AND a.status_transaksi = '1' GROUP BY a.id_transaksi ORDER BY a.tanggal_transaksi DESC");
 
             //status transaksi | total produk | batas transaksi
             $status_transaksi = 'Menunggu Pembayaran';
@@ -66,7 +66,7 @@ if (isset($id_login)) {
             JOIN stok d ON c.id_master = d.id_barang 
             JOIN cabang e ON d.id_warehouse = e.id_cabang
             LEFT JOIN variant f ON b.id_barang = f.id_variant
-            WHERE a.id_user = '$id_login' AND a.status_transaksi = '3' GROUP BY a.id_transaksi;");
+            WHERE a.id_user = '$id_login' AND a.status_transaksi = '3' GROUP BY a.id_transaksi ORDER BY a.tanggal_transaksi DESC;");
 
             //status transaksi | total produk | batas transaksi
             $status_transaksi = 'Dikemas';
@@ -114,7 +114,7 @@ if (isset($id_login)) {
             JOIN stok d ON c.id_master = d.id_barang 
             JOIN cabang e ON d.id_warehouse = e.id_cabang
             LEFT JOIN variant f ON b.id_barang = f.id_variant
-            WHERE a.id_user = '$id_login' AND a.status_transaksi = '5' GROUP BY a.id_transaksi;");
+            WHERE a.id_user = '$id_login' AND a.status_transaksi = '5' GROUP BY a.id_transaksi ORDER BY a.tanggal_transaksi DESC");
 
             //status transaksi | total produk | batas transaksi
             $status_transaksi = 'Dikirim';
@@ -162,7 +162,7 @@ if (isset($id_login)) {
             JOIN stok d ON c.id_master = d.id_barang 
             JOIN cabang e ON d.id_warehouse = e.id_cabang
             LEFT JOIN variant f ON b.id_barang = f.id_variant
-            WHERE a.id_user = '$id_login' AND a.status_transaksi = '7' GROUP BY a.id_transaksi;");
+            WHERE a.id_user = '$id_login' AND a.status_transaksi = '7' GROUP BY a.id_transaksi ORDER BY a.tanggal_transaksi DESC;");
 
             //status transaksi | total produk | batas transaksi
             $status_transaksi = 'Transaksi Selesai';
@@ -210,7 +210,7 @@ if (isset($id_login)) {
             JOIN stok d ON c.id_master = d.id_barang 
             JOIN cabang e ON d.id_warehouse = e.id_cabang
             LEFT JOIN variant f ON b.id_barang = f.id_variant
-            WHERE a.id_user = '$id_login' AND a.status_transaksi = '9' GROUP BY a.id_transaksi;");
+            WHERE a.id_user = '$id_login' AND a.status_transaksi = '9' GROUP BY a.id_transaksi ORDER BY a.tanggal_transaksi DESC;");
 
             //status transaksi | total produk | batas transaksi
             $status_transaksi = 'Transaksi Dibatalkan';
@@ -258,7 +258,7 @@ if (isset($id_login)) {
             JOIN stok d ON c.id_master = d.id_barang 
             JOIN cabang e ON d.id_warehouse = e.id_cabang
             LEFT JOIN variant f ON b.id_barang = f.id_variant
-            WHERE a.id_user = '$id_login' AND a.status_transaksi = '11' GROUP BY a.id_transaksi;");
+            WHERE a.id_user = '$id_login' AND a.status_transaksi = '11' GROUP BY a.id_transaksi ORDER BY a.tanggal_transaksi DESC;");
 
             //status transaksi | total produk | batas transaksi
             $status_transaksi = 'Pengembalian';
