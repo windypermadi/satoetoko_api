@@ -3,7 +3,7 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$id         = $_POST['id'];
+$id             = $_POST['id'];
 $jumlah         = $_POST['jumlah'];
 
 if (isset($id)) {
@@ -28,8 +28,8 @@ if (isset($id)) {
             $harga_disc = $data2->harga_varian;
         }
 
-        $harga_produk = "Rp" . number_format($data2->harga_varian, 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($data2->harga_varian);
+        $harga_tampil = rupiah($harga_disc);
         $harga_produk_int = $data2->harga_varian;
         $harga_tampil_int = $harga_disc;
     } else {
@@ -42,10 +42,10 @@ if (isset($id)) {
             $harga_disc = $data2->harga_master;
         }
 
-        $harga_produk = "Rp" . number_format($data2->harga_master, 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($data2->harga_master);
+        $harga_tampil = rupiah($harga_disc);
         $harga_produk_int = $data2->harga_master;
-        $harga_produk_int = $harga_disc;
+        $harga_diskon_int = $harga_disc;
     }
 
     $data1 = [
@@ -57,7 +57,7 @@ if (isset($id)) {
         'harga_produk' => $harga_produk,
         'harga_tampil' => $harga_tampil,
         'harga_produk_int' => $harga_produk_int,
-        'harga_tampil_int' => $harga_produk_int,
+        'harga_tampil_int' => $harga_diskon_int,
         'status_diskon' => $status_diskon,
         'qty' => $data2->qty,
         'stok_saatini' => $data2->qty,
@@ -95,8 +95,8 @@ if (isset($id)) {
                 $harga_disc = $data2->harga_varian;
             }
 
-            $harga_produk = "Rp" . number_format($data2->harga_varian, 0, ',', '.');
-            $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+            $harga_produk = rupiah($data2->harga_varian);
+            $harga_tampil = rupiah($harga_disc);
             $harga_produk_int = $data2->harga_varian;
             $harga_tampil_int = $harga_disc;
         } else {
@@ -109,8 +109,8 @@ if (isset($id)) {
                 $harga_disc = $data2->harga_master;
             }
 
-            $harga_produk = "Rp" . number_format($data2->harga_master, 0, ',', '.');
-            $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+            $harga_produk = rupiah($data2->harga_master);
+            $harga_tampil = rupiah($harga_disc);
             $harga_produk_int = $data2->harga_master;
             $harga_produk_int = $harga_disc;
         }
