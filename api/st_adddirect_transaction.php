@@ -144,9 +144,9 @@ if ($getproduk->id_variant) {
     $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$getproduk->id_variant'");
 
     //! UPDATE JUMLAH PEMBELIAN BARANG
-    $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$getproduk->id_master'")->fetch_assoc();
-    $total_dibeli3 = $total_dibeli['total_dibeli'];
-    $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$getproduk->id_master'");
+    // $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$getproduk->id_master'")->fetch_assoc();
+    // $total_dibeli3 = $total_dibeli['total_dibeli'];
+    // $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$getproduk->id_master'");
 
     //! UPDATE STOK HISTORY PRODUCT
     $stokawal = $jml['jumlah'];
@@ -202,9 +202,9 @@ if ($getproduk->id_variant) {
     $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$getproduk->id_master'");
 
     //! UPDATE JUMLAH PEMBELIAN BARANG
-    $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$getproduk->id_master'")->fetch_assoc();
-    $total_dibeli3 = $total_dibeli['total_dibeli'];
-    $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$getproduk->id_master'");
+    // $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$getproduk->id_master'")->fetch_assoc();
+    // $total_dibeli3 = $total_dibeli['total_dibeli'];
+    // $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$getproduk->id_master'");
 
     //! UPDATE STOK HISTORY PRODUCT
     $stokawal = $jml['jumlah'];

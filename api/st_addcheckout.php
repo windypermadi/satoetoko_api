@@ -101,9 +101,9 @@ foreach ($getproduk as $u) {
         $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
 
         //! UPDATE JUMLAH PEMBELIAN BARANG
-        $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$u->id_master'")->fetch_assoc();
-        $total_dibeli3 = $total_dibeli['total_dibeli'];
-        $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$u->id_master'");
+        // $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$u->id_master'")->fetch_assoc();
+        // $total_dibeli3 = $total_dibeli['total_dibeli'];
+        // $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$u->id_master'");
 
         //! UPDATE STOK HISTORY PRODUCT
         $stokawal = $jml['jumlah'];
@@ -159,9 +159,9 @@ foreach ($getproduk as $u) {
         $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
 
         //! UPDATE JUMLAH PEMBELIAN BARANG
-        $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$u->id_master'")->fetch_assoc();
-        $total_dibeli3 = $total_dibeli['total_dibeli'];
-        $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$U->id_master'");
+        // $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$u->id_master'")->fetch_assoc();
+        // $total_dibeli3 = $total_dibeli['total_dibeli'];
+        // $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$U->id_master'");
 
         //! UPDATE STOK HISTORY PRODUCT
         $stokawal = $jml['jumlah'];
