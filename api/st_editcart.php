@@ -124,7 +124,7 @@ if (isset($id)) {
             'harga_produk' => $harga_produk,
             'harga_tampil' => $harga_tampil,
             'harga_produk_int' => $harga_produk_int,
-            'harga_tampil_int' => $harga_produk_int,
+            'harga_tampil_int' => $harga_tampil_int,
             'status_diskon' => $status_diskon,
             'qty' => $data2->qty,
             'stok_saatini' => $data2->qty,
