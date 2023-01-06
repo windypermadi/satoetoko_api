@@ -253,7 +253,14 @@ if (isset($id_login)) {
             LEFT JOIN master_item mi ON td.id_barang = mi.id_master 
             LEFT JOIN variant v ON td.id_barang = v.id_variant WHERE td.id_transaksi = '$id_transaksi'")->fetch_object();
 
-            $nama_produk = $conn->query("SELECT * FROM master_item WHERE id_master = '$product->id_master'")->fetch_object();
+            if (empty($product->judul_master)) {
+                $nama_produk = $conn->query("SELECT * FROM master_item WHERE id_master = '$product->id_master'")->fetch_object();
+                $produk_nama = $nama_produk->judul_master;
+            } else {
+                $produk_nama = $product->judul_master;
+            }
+
+
 
             $data1['id_transaksi'] = $data->id_transaksi;
             $data1['invoice'] = $data->invoice;
@@ -265,7 +272,7 @@ if (isset($id_login)) {
             $data1['tanggal_transaksi'] = $data->tanggal_transaksi;
             $data1['ambil_ditempat'] = $ambil_ditempat;
             $data1['ambil_ditempat_ket'] = $ambil_ditempat_ket;
-            $data1['nama_produk'] = $nama_produk->judul_master;
+            $data1['nama_produk'] = $produk_nama;
             $data1['midtrans_payment_type'] = $data->midtrans_payment_type;
             $data1['midtrans_transaction_status'] = $data->midtrans_transaction_status;
             $data1['midtrans_token'] = $data->midtrans_token;
