@@ -52,16 +52,16 @@ if (isset($id)) {
 
                         $harga_produk = rupiah($cekstok->harga_varian);
                         $harga_tampil = rupiah($harga_disc);
-                        $harga_produk_int = (int)$cekstok->harga_varian;
-                        $harga_tampil_int = (int)$harga_disc;
+                        $harga_produk_int = $cekstok->harga_varian;
+                        $harga_tampil_int = $harga_disc;
                     } else {
                         $status_diskon = 'N';
                         $harga_disc = $cekstok->harga_varian;
 
                         $harga_produk = rupiah($cekstok->harga_varian);
                         $harga_tampil = rupiah($harga_disc);
-                        $harga_produk_int = (int)$cekstok->harga_varian;
-                        $harga_tampil_int = (int)$harga_disc;
+                        $harga_produk_int = $cekstok->harga_varian;
+                        $harga_tampil_int = $harga_disc;
                     }
 
                     $keterangan_varian = "";
@@ -86,16 +86,16 @@ if (isset($id)) {
 
                         $harga_produk = rupiah($cekstok->harga_master);
                         $harga_tampil = rupiah($harga_disc);
-                        $harga_produk_int = (int)$cekstok->harga_master;
-                        $harga_tampil_int = (int)$harga_disc;
+                        $harga_produk_int = $cekstok->harga_master;
+                        $harga_tampil_int = $harga_disc;
                     } else {
                         $status_diskon = 'N';
                         $harga_disc = $cekstok->harga_master;
 
                         $harga_produk = rupiah($cekstok->harga_master);
                         $harga_tampil = rupiah($harga_disc);
-                        $harga_produk_int = (int)$cekstok->harga_master;
-                        $harga_tampil_int = (int)$harga_disc;
+                        $harga_produk_int = $cekstok->harga_master;
+                        $harga_tampil_int = $harga_disc;
                     }
 
                     $keterangan_varian = $cekstok->keterangan_varian;
