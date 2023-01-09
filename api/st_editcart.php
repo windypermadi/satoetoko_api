@@ -8,69 +8,13 @@ $jumlah         = $_POST['jumlah'];
 
 if (isset($id)) {
 
-    $getdata = $conn->query("SELECT * FROM user_keranjang WHERE id = '$id'");
-    $data = $getdata->fetch_object();
-
-    $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$jumlah' WHERE id = '$data->id'");
-
-    $data2 = $conn->query("SELECT * FROM user_keranjang a
-    JOIN master_item b ON a.id_barang = b.id_master
-    LEFT JOIN variant c ON a.id_variant = c.id_variant
-    WHERE a.id = '$id';")->fetch_object();
-
-    if ($data2->status_varian == 'Y') {
-
-        if ($data2->diskon_rupiah_varian != 0) {
-            $status_diskon = 'Y';
-            $harga_disc = $data2->harga_varian - $data2->diskon_rupiah_varian;
-        } else {
-            $status_diskon = 'N';
-            $harga_disc = $data2->harga_varian;
-        }
-
-        $harga_produk = rupiah($data2->harga_varian);
-        $harga_tampil = rupiah($harga_disc);
-        $harga_produk_int = $data2->harga_varian;
-        $harga_tampil_int = $harga_disc;
-    } else {
-
-        if ($data2->diskon_persen != 0) {
-            $status_diskon = 'Y';
-            $harga_disc = $data2->harga_master - $data2->diskon_rupiah;
-        } else {
-            $status_diskon = 'N';
-            $harga_disc = $data2->harga_master;
-        }
-
-        $harga_produk = rupiah($data2->harga_master);
-        $harga_tampil = rupiah($harga_disc);
-        $harga_produk_int = $data2->harga_master;
-        $harga_tampil_int = $harga_disc;
-    }
-
-    $data1 = [
-        'id' => $data2->id,
-        'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $data2->image_master : $getimagefisik . $data2->image_master,
-        'judul' => $data2->judul_master,
-        'id_varian' => $data2->id_variant,
-        'varian' => $data2->keterangan_varian,
-        'harga_produk' => $harga_produk,
-        'harga_tampil' => $harga_tampil,
-        'harga_produk_int' => $harga_produk_int,
-        'harga_tampil_int' => $harga_tampil_int,
-        'status_diskon' => $status_diskon,
-        'qty' => $data2->qty,
-        'stok_saatini' => $data2->qty,
-        'id_cabang' => $data2->id_gudang,
-    ];
-
     if ($jumlah == 0) {
-
         $getdata = $conn->query("SELECT * FROM user_keranjang WHERE id = '$id'");
         $data = $getdata->fetch_object();
 
         if ($getdata->num_rows == 0) {
-            $response->data = "Nothing data in cart user";
+            $response->data = null;
+            $response->message = 'Data tidak ditemukan.';
             $response->error(400);
         } else {
             $cekitemdata = $conn->query("DELETE FROM user_keranjang WHERE id = '$id'");
@@ -84,51 +28,103 @@ if (isset($id)) {
             }
         }
     } else {
+        $cekcart = $conn->query("SELECT * FROM user_keranjang WHERE id = '$id'")->num_rows;
 
-        if ($data2->status_varian == 'Y') {
+        if ($cekcart > 0) {
+            $data = $conn->query("SELECT * FROM user_keranjang a
+        JOIN master_item b ON a.id_barang = b.id_master
+        WHERE a.id = '$id'")->fetch_object();
 
-            if ($data2->diskon_rupiah_varian != 0) {
-                $status_diskon = 'Y';
-                $harga_disc = $data2->harga_varian - $data2->diskon_rupiah_varian;
+            //! cek stok di varian dan tidak varian
+            if ($data->status_varian == 'Y') {
+                $cekstok = $conn->query("SELECT * FROM user_keranjang a
+            JOIN stok b ON a.id_variant = b.id_varian
+            JOIN variant c ON a.id_variant = c.id_variant
+            WHERE a.id = '$id' GROUP BY a.id")->fetch_object();
+
+                if ($cekstok->jumlah > 0) {
+                    $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$jumlah' WHERE id = '$cekstok->id'");
+
+                    if ($cekstok->diskon_rupiah_varian != 0) {
+
+                        $status_diskon = 'Y';
+                        $harga_disc = $cekstok->harga_varian - $cekstok->diskon_rupiah_varian;
+
+                        $harga_produk = rupiah($cekstok->harga_varian);
+                        $harga_tampil = rupiah($harga_disc);
+                        $harga_produk_int = (int)$cekstok->harga_varian;
+                        $harga_tampil_int = (int)$harga_disc;
+                    } else {
+                        $status_diskon = 'N';
+                        $harga_disc = $cekstok->harga_varian;
+
+                        $harga_produk = rupiah($cekstok->harga_varian);
+                        $harga_tampil = rupiah($harga_disc);
+                        $harga_produk_int = (int)$cekstok->harga_varian;
+                        $harga_tampil_int = (int)$harga_disc;
+                    }
+
+                    $keterangan_varian = "";
+                } else {
+                    $response->data = null;
+                    $response->message = 'Stok untuk barang ini sudah habis.';
+                    $response->error(400);
+                }
             } else {
-                $status_diskon = 'N';
-                $harga_disc = $data2->harga_varian;
-            }
+                $cekstok = $conn->query("SELECT * FROM user_keranjang a
+            JOIN stok b ON a.id_barang = b.id_barang
+            JOIN master_item c ON a.id_barang = c.id_master
+            WHERE a.id = '$id' GROUP BY a.id")->fetch_object();
 
-            $harga_produk = rupiah($data2->harga_varian);
-            $harga_tampil = rupiah($harga_disc);
-            $harga_produk_int = $data2->harga_varian;
-            $harga_tampil_int = $harga_disc;
+                if ($cekstok->jumlah > 0) {
+                    $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$jumlah' WHERE id = '$cekstok->id'");
+
+                    if ($cekstok->diskon_rupiah_varian != 0) {
+
+                        $status_diskon = 'Y';
+                        $harga_disc = $cekstok->harga_master - $cekstok->diskon_rupiah;
+
+                        $harga_produk = rupiah($cekstok->harga_master);
+                        $harga_tampil = rupiah($harga_disc);
+                        $harga_produk_int = (int)$cekstok->harga_master;
+                        $harga_tampil_int = (int)$harga_disc;
+                    } else {
+                        $status_diskon = 'N';
+                        $harga_disc = $cekstok->harga_master;
+
+                        $harga_produk = rupiah($cekstok->harga_master);
+                        $harga_tampil = rupiah($harga_disc);
+                        $harga_produk_int = (int)$cekstok->harga_master;
+                        $harga_tampil_int = (int)$harga_disc;
+                    }
+
+                    $keterangan_varian = $cekstok->keterangan_varian;
+                } else {
+                    $response->data = null;
+                    $response->message = 'Stok untuk barang ini sudah habis.';
+                    $response->error(400);
+                }
+            }
         } else {
-
-            if ($data2->diskon_persen != 0) {
-                $status_diskon = 'Y';
-                $harga_disc = $data2->harga_master - $data2->diskon_rupiah;
-            } else {
-                $status_diskon = 'N';
-                $harga_disc = $data2->harga_master;
-            }
-
-            $harga_produk = rupiah($data2->harga_master);
-            $harga_tampil = rupiah($harga_disc);
-            $harga_produk_int = $data2->harga_master;
-            $harga_produk_int = $harga_disc;
+            $response->data = null;
+            $response->message = 'keranjang ini tidak ditemukan.';
+            $response->error(400);
         }
 
         $data1 = [
-            'id' => $data2->id,
-            'image_master' => $data2->status_master_detail == '2' ? $getimagebukufisik . $data2->image_master : $getimagefisik . $data2->image_master,
-            'judul' => $data2->judul_master,
-            'id_varian' => $data2->id_variant,
-            'varian' => $data2->keterangan_varian,
+            'id' => $cekstok->id,
+            'image_master' => $cekstok->status_master_detail == '2' ? $getimagebukufisik . $cekstok->image_master : $getimagefisik . $cekstok->image_master,
+            'judul' => $cekstok->judul_master,
+            'id_varian' => $cekstok->id_variant,
+            'varian' => $keterangan_varian,
             'harga_produk' => $harga_produk,
             'harga_tampil' => $harga_tampil,
             'harga_produk_int' => $harga_produk_int,
             'harga_tampil_int' => $harga_tampil_int,
             'status_diskon' => $status_diskon,
-            'qty' => $data2->qty,
-            'stok_saatini' => $data2->qty,
-            'id_cabang' => $data2->id_gudang,
+            'qty' => $cekstok->qty,
+            'stok_saatini' => $cekstok->jumlah,
+            'id_cabang' => $cekstok->id_gudang,
         ];
 
         if ($query) {
@@ -141,6 +137,7 @@ if (isset($id)) {
     }
 } else {
     $response->data = null;
+    $response->message = 'id cart tidak ditemukan.';
     $response->error(400);
 }
 die();
