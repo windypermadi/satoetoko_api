@@ -71,6 +71,8 @@ if (isset($id)) {
             WHERE a.id = '$id' GROUP BY a.id")->fetch_object();
 
                 if ($cekstok->jumlah > 0) {
+                    $query = mysqli_query($conn, "UPDATE user_keranjang SET qty = '$jumlah' WHERE id = '$cekstok->id'");
+
                     if ($cekstok->diskon_rupiah_varian != 0) {
 
                         $status_diskon = 'Y';
@@ -113,6 +115,14 @@ if (isset($id)) {
             'stok_saatini' => $cekstok->jumlah,
             'id_cabang' => $cekstok->id_gudang,
         ];
+
+        if ($query) {
+            $response->data = $data1;
+            $response->sukses(200);
+        } else {
+            $response->data = null;
+            $response->error(400);
+        }
     }
 } else {
     $response->data = null;
