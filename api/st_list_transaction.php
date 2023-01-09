@@ -6,7 +6,7 @@ $response = new Response();
 $id_login         = $_GET['id_login'];
 $tag              = $_GET['tag'];
 
-$exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
+$exp_date = date("Y-m-d H:i:s", strtotime("+24 hours"));
 
 if (isset($id_login)) {
 
