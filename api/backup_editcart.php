@@ -13,7 +13,8 @@ if (isset($id)) {
         $data = $getdata->fetch_object();
 
         if ($getdata->num_rows == 0) {
-            $response->data = "Nothing data in cart user";
+            $response->data = null;
+            $response->message = 'Data tidak ditemukan.';
             $response->error(400);
         } else {
             $cekitemdata = $conn->query("DELETE FROM user_keranjang WHERE id = '$id'");
@@ -56,6 +57,11 @@ if (isset($id)) {
                     } else {
                         $status_diskon = 'N';
                         $harga_disc = $cekstok->harga_varian;
+
+                        $harga_produk = rupiah($cekstok->harga_varian);
+                        $harga_tampil = rupiah($harga_disc);
+                        $harga_produk_int = $cekstok->harga_varian;
+                        $harga_tampil_int = $harga_disc;
                     }
 
                     $keterangan_varian = "";
@@ -80,11 +86,16 @@ if (isset($id)) {
 
                         $harga_produk = rupiah($cekstok->harga_master);
                         $harga_tampil = rupiah($harga_disc);
-                        $harga_produk_int = $cekstok->harga_master;
+                        $harga_produk_int = (int)$cekstok->harga_master;
                         $harga_tampil_int = $harga_disc;
                     } else {
                         $status_diskon = 'N';
                         $harga_disc = $cekstok->harga_master;
+
+                        $harga_produk = rupiah($cekstok->harga_master);
+                        $harga_tampil = rupiah($harga_disc);
+                        $harga_produk_int = (int)$cekstok->harga_master;
+                        $harga_tampil_int = $harga_disc;
                     }
 
                     $keterangan_varian = $cekstok->keterangan_varian;
