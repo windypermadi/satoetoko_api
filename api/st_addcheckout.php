@@ -50,7 +50,19 @@ foreach ($dataproduk as $i => $key) {
             LEFT JOIN master_fisik_detail e ON b.id_master = e.id_master
             LEFT JOIN supplier f ON b.id_supplier = f.id_supplier
             WHERE a.id = '$key[id_cart]'")->fetch_object();
+
+    $cekcart = $conn->query("SELECT * FROM user_keranjang WHERE id = '$key[id_cart]'")->fetch_assoc();
 }
+
+if (empty($cekcart['id'])){
+    $response->data = null;
+    $response->message = "Tidak ada stok di dproduk";
+    $response->error(400);
+} else {
+    $response->data = null;
+    $response->sukses(200);
+}
+die();
 
 foreach ($getproduk as $u) {
 
