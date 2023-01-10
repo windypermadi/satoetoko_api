@@ -52,21 +52,8 @@ foreach ($dataproduk as $i => $key) {
             WHERE a.id = '$key[id_cart]'")->fetch_object();
 }
 
-$cekcart = $conn->query("SELECT * FROM user_keranjang WHERE id = '$key[id_cart]'")->fetch_assoc();
-
-if ($cekcart['id'] == null){
-    $response->data = null;
-    $response->message = "Tidak ada stok di dproduk";
-    $response->error(400);
-} else {
-    $response->data = null;
-    $response->sukses(200);
-}
-die();
-
 foreach ($getproduk as $u) {
 
-    if ($u->id_master != null) {
         if ($u->status_master_detail == '2') {
             $berat += $u->berat_buku * $u->qty;
             $berat_detail = $u->berat_buku * $u->qty;
@@ -209,11 +196,6 @@ foreach ($getproduk as $u) {
                 stok_sekarang = '$hasiljumlah'");
             }
         }
-    } else {
-        $response->data = mysqli_error($conn);
-        $response->message = "Keranjang tidak ditemukan";
-        $response->error(400);
-    }
 
 
 if (empty(trim($dataraw->catatan_pembeli))) {
