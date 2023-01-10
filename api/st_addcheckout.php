@@ -54,7 +54,7 @@ foreach ($dataproduk as $i => $key) {
 
 foreach ($getproduk as $u) {
 
-    if (!empty($u->id_master)) {
+    if ($u->id_master != null) {
         if ($u->status_master_detail == '2') {
             $berat += $u->berat_buku * $u->qty;
             $berat_detail = $u->berat_buku * $u->qty;
