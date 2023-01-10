@@ -324,17 +324,19 @@ if (isset($id_login)) {
                         $image = $getimagefisik . $value['image_master'];
                     }
                 }
+
+                $getprodukcoba[] = [
+                    "id_master" => $value['id_master'],
+                    "judul_master" => $judul_master,
+                    "image_master" => $image,
+                    "jumlah_beli" => $value['jumlah_beli'],
+                    "harga_produk" => $value['harga_barang'],
+                    "harga_tampil" => $value['harga_diskon']
+                ];
             }
 
             // $getproduct = $conn->query("");
-            $getprodukcoba[] = [
-                "id_master" => $value['id_master'],
-                "judul_master" => $judul_master,
-                "image_master" => $image,
-                "jumlah_beli" => $value['jumlah_beli'],
-                "harga_produk" => $value['harga_barang'],
-                "harga_tampil" => $value['harga_diskon']
-            ];
+
 
             $informasi_pesanan = [
                 'no_invoice' => $value['invoice'],
