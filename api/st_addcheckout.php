@@ -53,7 +53,6 @@ foreach ($dataproduk as $i => $key) {
 }
 
 foreach ($getproduk as $u) {
-
     if ($u->status_master_detail == '2') {
         $berat += $u->berat_buku * $u->qty;
         $berat_detail = $u->berat_buku * $u->qty;
@@ -62,13 +61,6 @@ foreach ($getproduk as $u) {
         $berat_detail = $u->berat_fisik * $u->qty;
     }
     if ($u->id_variant) {
-        //! Check stok
-        $cekstok = $conn - query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_object;
-        // if ($cekstok->jumlah == 0){
-        //     $response->data = null;
-        //     $response->message = "Tidak ada stok di dproduk";
-        //     $response->error(400);
-        // } else {
         $diskon = ($u->harga_varian) - ($u->diskon_rupiah_varian);
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
         $harga_varian = "Rp" . number_format($u->harga_varian, 0, ',', '.');
@@ -89,17 +81,17 @@ foreach ($getproduk as $u) {
         $sbtotal = round($harga_diskon * $u->qty);
 
         $query[] = $conn->query("INSERT INTO transaksi_detail SET 
-                id_transaksi_detail = UUID_SHORT(),
-                id_transaksi = '$transaction->id',
-                id_barang = '$u->id_variant',
-                id_supplier = '$u->id_supplier',
-                harga_barang = '$u->harga_varian',
-                diskon_barang = '$u->diskon_rupiah_varian',
-                harga_diskon = '$harga_diskon',
-                jumlah_beli = '$u->qty',
-                berat = '$berat_detail',
-                fee_toko = '$feetoko',  
-                sub_total = '$sbtotal'");
+        id_transaksi_detail = UUID_SHORT(),
+        id_transaksi = '$transaction->id',
+        id_barang = '$u->id_variant',
+        id_supplier = '$u->id_supplier',
+        harga_barang = '$u->harga_varian',
+        diskon_barang = '$u->diskon_rupiah_varian',
+        harga_diskon = '$harga_diskon',
+        jumlah_beli = '$u->qty',
+        berat = '$berat_detail',
+        fee_toko = '$feetoko',  
+        sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
         $jml = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
@@ -116,26 +108,17 @@ foreach ($getproduk as $u) {
         //! UPDATE STOK HISTORY PRODUCT
         $stokawal = $jml['jumlah'];
         $query[] = $conn->query("INSERT INTO stok_history SET 
-                id_history = UUID_SHORT(),
-                tanggal_input = NOW(),
-                master_item = '$u->id_master',
-                varian_item = '$u->id_variant',
-                id_warehouse = '$u->id_gudang',
-                keterangan = 'TRANSAKSI MASUK',
-                masuk = '0',
-                keluar = '$u->qty',
-                stok_awal = '$stokawal',  
-                stok_sekarang = '$hasiljumlah'");
+        id_history = UUID_SHORT(),
+        tanggal_input = NOW(),
+        master_item = '$u->id_master',
+        varian_item = '$u->id_variant',
+        id_warehouse = '$u->id_gudang',
+        keterangan = 'TRANSAKSI MASUK',
+        masuk = '0',
+        keluar = '$u->qty',
+        stok_awal = '$stokawal',  
+        stok_sekarang = '$hasiljumlah'");
     } else {
-
-        //! Check stok
-        $cekstok = $conn - query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_object;
-
-        // if ($cekstok->jumlah == 0) {
-        //     $response->data = null;
-        //     $response->message = "Tidak ada stok di dproduk";
-        //     $response->error(400);
-        // } else {
         $diskon = ($u->harga_master) - ($u->diskon_rupiah);
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
         $harga_master = "Rp" . number_format($u->harga_master, 0, ',', '.');
@@ -156,17 +139,17 @@ foreach ($getproduk as $u) {
         $sbtotal = round($harga_diskon * $u->qty);
 
         $query[] = $conn->query("INSERT INTO transaksi_detail SET 
-                id_transaksi_detail = UUID_SHORT(),
-                id_transaksi = '$transaction->id',
-                id_barang = '$u->id_master',
-                id_supplier = '$u->id_supplier',
-                harga_barang = '$u->harga_master',
-                diskon_barang = '$u->diskon_rupiah',
-                harga_diskon = '$harga_diskon',
-                jumlah_beli = '$u->qty',
-                berat = '$berat_detail',
-                fee_toko = '$feetoko',  
-                sub_total = '$sbtotal'");
+        id_transaksi_detail = UUID_SHORT(),
+        id_transaksi = '$transaction->id',
+        id_barang = '$u->id_master',
+        id_supplier = '$u->id_supplier',
+        harga_barang = '$u->harga_master',
+        diskon_barang = '$u->diskon_rupiah',
+        harga_diskon = '$harga_diskon',
+        jumlah_beli = '$u->qty',
+        berat = '$berat_detail',
+        fee_toko = '$feetoko',  
+        sub_total = '$sbtotal'");
 
         //! UPDATE STOK PRODUCT
         $jml = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
@@ -183,19 +166,18 @@ foreach ($getproduk as $u) {
         //! UPDATE STOK HISTORY PRODUCT
         $stokawal = $jml['jumlah'];
         $query[] = $conn->query("INSERT INTO stok_history SET 
-                id_history = UUID_SHORT(),
-                tanggal_input = NOW(),
-                master_item = '$u->id_master',
-                varian_item = '$u->id_variant',
-                id_warehouse = '$u->id_gudang',
-                keterangan = 'TRANSAKSI MASUK',
-                masuk = '0',
-                keluar = '$u->qty',
-                stok_awal = '$stokawal',  
-                stok_sekarang = '$hasiljumlah'");
-
+        id_history = UUID_SHORT(),
+        tanggal_input = NOW(),
+        master_item = '$u->id_master',
+        varian_item = '$u->id_variant',
+        id_warehouse = '$u->id_gudang',
+        keterangan = 'TRANSAKSI MASUK',
+        masuk = '0',
+        keluar = '$u->qty',
+        stok_awal = '$stokawal',  
+        stok_sekarang = '$hasiljumlah'");
+    }
 }
-
 
 if (empty(trim($dataraw->catatan_pembeli))) {
     $dataraw->catatan_pembeli = NULL;
@@ -227,6 +209,7 @@ $query[] = mysqli_query($conn, "INSERT INTO transaksi SET
         kurir_service = '$data_ongkir_produk',
         id_cabang = '$dataraw->id_cabang',
         metode_pembayaran = '$dataraw->id_payment'");
+
 
 if (in_array(false, $query)) {
     $response->data = mysqli_error($conn);
@@ -290,8 +273,6 @@ if (in_array(false, $query)) {
             $response->error(500);
             die();
         }
-
-        $query[] = $conn->query("DELETE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
 
         $conn->commit();
         $response->data = $res;
