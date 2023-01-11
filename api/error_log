@@ -1,0 +1,575 @@
+[24-Oct-2022 14:58:27 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[24-Oct-2022 15:59:08 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/satoetoko/public_html/satoetoko_api/api/satoe_ebook_transaksi.php:326
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/satoe_ebook_transaksi.php on line 326
+[24-Oct-2022 15:59:19 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/satoetoko/public_html/satoetoko_api/api/satoe_ebook_transaksi.php:326
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/satoe_ebook_transaksi.php on line 326
+[24-Oct-2022 15:59:25 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/satoetoko/public_html/satoetoko_api/api/satoe_ebook_transaksi.php:326
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/satoe_ebook_transaksi.php on line 326
+[25-Oct-2022 16:08:45 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[28-Oct-2022 13:39:33 ASIA/JAKARTA] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/satoetoko/public_html/satoetoko_api/api/st_banner.php on line 10
+[01-Nov-2022 19:42:32 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[02-Nov-2022 11:31:17 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[05-Nov-2022 11:27:25 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[07-Nov-2022 09:00:21 ASIA/JAKARTA] PHP Warning:  mysqli_fetch_object() expects parameter 1 to be mysqli_result, bool given in /home/satoetoko/public_html/satoetoko_api/api/st_masterdetail.php on line 19
+[07-Nov-2022 09:01:43 ASIA/JAKARTA] PHP Warning:  mysqli_fetch_object() expects parameter 1 to be mysqli_result, bool given in /home/satoetoko/public_html/satoetoko_api/api/st_masterdetail.php on line 19
+[07-Nov-2022 09:06:23 ASIA/JAKARTA] PHP Warning:  mysqli_fetch_object() expects parameter 1 to be mysqli_result, bool given in /home/satoetoko/public_html/satoetoko_api/api/st_masterdetail.php on line 19
+[08-Nov-2022 02:49:59 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/satoetoko/public_html/satoetoko_api/api/st_masterdetail.php on line 47
+[22-Nov-2022 19:09:33 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 18
+[25-Nov-2022 10:58:15 ASIA/JAKARTA] PHP Warning:  A non-numeric value encountered in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 87
+[25-Nov-2022 10:58:15 ASIA/JAKARTA] PHP Warning:  number_format() expects parameter 1 to be float, string given in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 98
+[25-Nov-2022 11:59:06 ASIA/JAKARTA] PHP Warning:  A non-numeric value encountered in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 87
+[25-Nov-2022 11:59:06 ASIA/JAKARTA] PHP Warning:  number_format() expects parameter 1 to be float, string given in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 98
+[25-Nov-2022 13:05:33 ASIA/JAKARTA] PHP Warning:  A non-numeric value encountered in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 87
+[25-Nov-2022 13:05:33 ASIA/JAKARTA] PHP Warning:  number_format() expects parameter 1 to be float, string given in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 98
+[28-Nov-2022 07:40:45 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[28-Nov-2022 08:22:30 ASIA/JAKARTA] PHP Warning:  A non-numeric value encountered in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 87
+[28-Nov-2022 08:22:30 ASIA/JAKARTA] PHP Warning:  number_format() expects parameter 1 to be float, string given in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 98
+[28-Nov-2022 10:31:07 ASIA/JAKARTA] PHP Warning:  A non-numeric value encountered in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 87
+[28-Nov-2022 10:31:07 ASIA/JAKARTA] PHP Warning:  number_format() expects parameter 1 to be float, string given in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 98
+[28-Nov-2022 11:00:16 ASIA/JAKARTA] PHP Warning:  A non-numeric value encountered in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 87
+[28-Nov-2022 11:00:16 ASIA/JAKARTA] PHP Warning:  number_format() expects parameter 1 to be float, string given in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 98
+[01-Dec-2022 08:18:40 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:01:48 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: [] operator not supported for strings in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php:184
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 184
+[01-Dec-2022 16:18:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:18:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:18:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:18:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:18:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:18:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:18:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:28:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:28:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:28:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:28:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:28:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:28:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:28:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:53:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:53:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:53:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:53:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:53:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:53:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 16:53:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 17:02:09 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 17:02:09 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 17:02:09 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 17:02:09 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 17:02:09 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 17:02:09 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Dec-2022 17:02:09 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 01:56:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 01:56:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 01:56:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 01:56:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 01:56:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 01:56:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 01:56:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Dec-2022 06:21:20 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[06-Dec-2022 10:36:05 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[06-Dec-2022 13:23:16 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout_backup.php on line 90
+[06-Dec-2022 13:23:16 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout_backup.php on line 149
+[06-Dec-2022 13:29:58 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addmultiple_whislist.php on line 10
+[06-Dec-2022 13:29:58 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addmultiple_whislist.php on line 13
+[06-Dec-2022 15:05:40 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 40
+[06-Dec-2022 15:05:40 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 54
+[06-Dec-2022 15:26:22 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_deletemultiple_cart.php on line 10
+[06-Dec-2022 15:31:11 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 13
+[06-Dec-2022 15:31:11 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 24
+[06-Dec-2022 15:36:28 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_newarrival.php on line 12
+[06-Dec-2022 15:41:32 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_terlaris.php on line 12
+[06-Dec-2022 15:46:45 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_unggulan.php on line 12
+[06-Dec-2022 10:41:19 UTC] PHP Fatal error:  Uncaught Error: Class 'Controller' not found in /home/satoetoko/public_html/satoetoko_api/api/st_cek_ongkir.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_cek_ongkir.php on line 3
+[08-Dec-2022 15:38:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 15:38:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 15:38:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 16:07:54 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 16:07:54 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 16:07:54 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 16:10:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 16:10:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[08-Dec-2022 16:10:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 09:06:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 09:06:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 09:06:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:39:32 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:39:32 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:39:32 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:40:04 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:40:04 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:40:04 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:40:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:40:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:40:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:50:32 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:50:32 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 10:50:32 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 11:39:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 11:39:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 11:39:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 13:18:26 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 13:18:26 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[09-Dec-2022 13:18:26 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[11-Dec-2022 03:29:54 UTC] PHP Fatal error:  Uncaught Error: Class 'Controller' not found in /home/satoetoko/public_html/satoetoko_api/api/st_cek_ongkir.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_cek_ongkir.php on line 3
+[12-Dec-2022 01:52:36 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_produk.php on line 281
+[12-Dec-2022 12:54:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 12:54:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 12:54:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 12:54:21 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 12:54:21 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 12:54:21 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:03:02 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:03:02 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:03:02 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:17:15 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:17:15 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:17:15 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:17:41 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:17:41 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:17:41 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:20:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:20:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 13:20:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:11:47 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:11:47 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:11:47 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:12:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:12:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:12:28 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:19:21 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:19:21 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[12-Dec-2022 14:19:21 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:20:42 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:20:42 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:20:42 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:21:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:21:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:21:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:21:37 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:21:37 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:21:37 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:24:45 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:24:45 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:24:45 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:24:48 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:24:48 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:24:48 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:25:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:25:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:25:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:29:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:29:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 09:29:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 16:32:14 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 16:32:14 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[13-Dec-2022 16:32:14 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[14-Dec-2022 19:26:10 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 40
+[14-Dec-2022 19:26:10 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 54
+[15-Dec-2022 15:20:44 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[15-Dec-2022 15:20:44 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[15-Dec-2022 15:20:44 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[15-Dec-2022 15:33:16 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[16-Dec-2022 15:07:18 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[16-Dec-2022 15:07:18 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[16-Dec-2022 15:07:18 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[16-Dec-2022 15:08:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[16-Dec-2022 15:08:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[16-Dec-2022 15:08:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[19-Dec-2022 09:07:18 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[21-Dec-2022 11:39:21 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout_direct.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout_direct.php on line 32
+[21-Dec-2022 11:39:29 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout_direct.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout_direct.php on line 32
+[21-Dec-2022 11:39:32 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout_direct.php:32
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout_direct.php on line 32
+[22-Dec-2022 10:05:16 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[22-Dec-2022 15:06:27 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[23-Dec-2022 20:36:02 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_terlaris.php on line 17
+[26-Dec-2022 02:57:28 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_newarrival.php on line 17
+[27-Dec-2022 08:49:41 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_unggulan.php on line 17
+[27-Dec-2022 13:42:45 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 13:42:45 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 13:42:45 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:13:47 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:13:47 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:13:47 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:13:54 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:13:54 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:13:54 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:16 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:16 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:16 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:24 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:24 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:24 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:30 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:30 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:30 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:51 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:51 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:14:51 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:12 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:12 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:12 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:22 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:22 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:22 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:56 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:56 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:15:56 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:18:50 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:18:50 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:18:50 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:42:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:42:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:42:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:43:31 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:43:31 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:43:31 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:45:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:45:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:45:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:47:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:47:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:47:25 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:49:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:49:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:49:09 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:49:29 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:49:29 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:49:29 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:53:01 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:53:01 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:53:01 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:57:57 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:57:57 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 14:57:57 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:05:53 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:05:53 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:05:53 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:17:35 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:17:35 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:17:35 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:25:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:25:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:25:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:32:39 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:32:39 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:32:39 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 213
+[27-Dec-2022 15:36:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:13 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:13 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:13 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:34 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:34 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:36:34 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:37:30 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:37:30 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:37:30 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:37:52 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:37:52 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:37:52 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:38:36 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:38:36 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:38:36 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:39:27 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:39:27 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:39:27 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:39:29 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:39:29 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:39:29 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:55:44 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:55:44 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 15:55:44 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:02:07 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:02:07 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:02:07 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:09:20 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:09:20 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:09:20 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:13:14 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:13:14 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:13:14 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:34:51 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:34:51 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[27-Dec-2022 16:34:51 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 04:01:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:01:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:01:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:01:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:01:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:01:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:01:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:04:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:04:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:04:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:04:57 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:04:57 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:04:57 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 04:05:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[28-Dec-2022 11:15:20 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:15:20 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:15:20 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:22:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:22:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:22:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:25:55 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:25:55 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 11:25:55 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 214
+[28-Dec-2022 13:40:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[28-Dec-2022 13:40:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[28-Dec-2022 13:40:05 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[30-Dec-2022 16:30:42 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[30-Dec-2022 10:09:30 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[30-Dec-2022 10:09:36 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[30-Dec-2022 10:09:44 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[30-Dec-2022 10:10:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[30-Dec-2022 10:10:05 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[30-Dec-2022 10:10:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[01-Jan-2023 14:20:54 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 13
+[01-Jan-2023 14:20:54 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 24
+[01-Jan-2023 17:31:03 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[02-Jan-2023 14:57:33 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 14:57:33 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 14:57:33 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 15:29:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 15:29:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 15:29:03 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 15:34:55 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 15:34:55 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 15:34:55 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[02-Jan-2023 08:35:12 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:12 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:12 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:16 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:35:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:04 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:04 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:04 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:36:25 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:37:14 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:37:25 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:30 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:34 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:34 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:34 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:36 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:36 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:36 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:41 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:45 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:45 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:45 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:45 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:45 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:54 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:54 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:38:54 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:20 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:21 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:21 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:23 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:49 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:49 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:49 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:39:50 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:03 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:17 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:20 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:22 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:22 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:22 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:24 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:24 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:24 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:32 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:40:40 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:41:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:41:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[02-Jan-2023 08:41:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'satoetoko_user'@'localhost' to database 'satoetoko_deve_server' in /home/satoetoko/public_html/satoetoko_api/config/koneksi.php on line 15
+[03-Jan-2023 08:05:01 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[03-Jan-2023 10:01:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 10:01:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 10:01:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 10:22:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 10:22:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 10:22:49 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 15:04:21 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php:27
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 27
+[03-Jan-2023 15:04:29 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php:27
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 27
+[03-Jan-2023 15:04:38 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php:27
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 27
+[03-Jan-2023 15:23:38 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 15:23:38 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 15:23:38 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 220
+[03-Jan-2023 16:11:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:11:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:11:59 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:13:24 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:13:24 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:13:24 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:26:00 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:26:00 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:26:00 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:29:12 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:29:12 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 16:29:12 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 17:38:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 17:38:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[03-Jan-2023 17:38:23 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[04-Jan-2023 00:36:25 ASIA/JAKARTA] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[04-Jan-2023 04:42:16 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 41
+[04-Jan-2023 04:42:16 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 55
+[04-Jan-2023 04:42:16 ASIA/JAKARTA] PHP Warning:  Creating default object from empty value in /home/satoetoko/public_html/satoetoko_api/api/st_addcheckout.php on line 171
+[04-Jan-2023 07:09:03 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_deletemultiple_cart.php on line 10
+[04-Jan-2023 07:27:49 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 13
+[04-Jan-2023 07:27:49 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_getcheckout.php on line 24
+[04-Jan-2023 07:37:50 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_newarrival.php on line 17
+[04-Jan-2023 07:47:01 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_terlaris.php on line 17
+[04-Jan-2023 08:06:42 ASIA/JAKARTA] PHP Warning:  Invalid argument supplied for foreach() in /home/satoetoko/public_html/satoetoko_api/api/st_homeitem_unggulan.php on line 17
+[04-Jan-2023 11:28:36 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[04-Jan-2023 11:28:36 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218
+[04-Jan-2023 11:28:36 ASIA/JAKARTA] PHP Warning:  Illegal string offset 'id_cart' in /home/satoetoko/public_html/satoetoko_api/api/st_adddirect_transaction.php on line 218

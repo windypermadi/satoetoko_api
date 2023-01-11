@@ -1,0 +1,8 @@
+[10-Dec-2022 23:59:46 UTC] PHP Deprecated:  __autoload() is deprecated, use spl_autoload_register() instead in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/PHPMailerAutoload.php on line 45
+[11-Dec-2022 01:18:50 UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/class.phpmaileroauth.php:26
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/class.phpmaileroauth.php on line 26
+[11-Dec-2022 03:30:08 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/get_oauth_token.php on line 18
+[11-Dec-2022 03:30:08 UTC] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/get_oauth_token.php on line 18
+[11-Dec-2022 03:30:08 UTC] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/satoetoko/public_html/satoetoko_api/api/PHPMailerold/get_oauth_token.php on line 18

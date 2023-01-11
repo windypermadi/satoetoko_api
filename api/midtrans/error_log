@@ -1,0 +1,10 @@
+[10-Dec-2022 13:47:26 ASIA/JAKARTA] PHP Warning:  Use of undefined constant MIDTRANS_SERVER_KEY - assumed 'MIDTRANS_SERVER_KEY' (this will throw an Error in a future version of PHP) in /home/satoetoko/public_html/satoetoko_api/api/midtrans/notif_new.php on line 13
+[10-Dec-2022 13:47:26 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/satoetoko/public_html/satoetoko_api/api/midtrans/notif_new.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/midtrans/notif_new.php on line 17
+[10-Dec-2022 13:57:51 ASIA/JAKARTA] PHP Warning:  Use of undefined constant MIDTRANS_SERVER_KEY - assumed 'MIDTRANS_SERVER_KEY' (this will throw an Error in a future version of PHP) in /home/satoetoko/public_html/satoetoko_api/api/midtrans/notif_new_backup.php on line 14
+[10-Dec-2022 13:57:51 ASIA/JAKARTA] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/satoetoko/public_html/satoetoko_api/api/midtrans/notif_new_backup.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/satoetoko/public_html/satoetoko_api/api/midtrans/notif_new_backup.php on line 18
