@@ -42,7 +42,7 @@ foreach ($dataproduk as $i => $key) {
     $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
             c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
             a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
-            b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk, a.id as id_cart
+            b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk, a.id as id_cart,
             f.id_supplier FROM user_keranjang a
             JOIN master_item b ON a.id_barang = b.id_master
             LEFT JOIN variant c ON a.id_variant = c.id_variant
