@@ -290,7 +290,7 @@ if (in_array(false, $query)) {
         $data_payment = $getpayment->fetch_object();
         $metode_pembayaran = $data_payment->metode_pembayaran;
 
-        $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
+        $total_format = rupiah($jumlahbayar);
 
         $result['batas_pembayaran'] = $exp_date;
         $result['id_transaksi'] = $idtransaksi;
@@ -300,7 +300,7 @@ if (in_array(false, $query)) {
         $result['metode_pembayaran'] = $data_payment->metode_pembayaran;
         $result['nomor_payment'] = $data_payment->nomor_payment;
         $result['penerima_payment'] = $data_payment->penerima_payment;
-        $result['total_harga'] = (int)$jumlahbayar;
+        $result['total_harga'] = (int)$dataraw->jumlahbayar;
         $result['nomor_konfirmasi'] = GETWA;
         $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
             mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
