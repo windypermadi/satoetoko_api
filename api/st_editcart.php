@@ -3,7 +3,7 @@ require_once('../config/koneksi.php');
 include "response.php";
 $response = new Response();
 
-$id         = $_POST['id'];
+$id             = $_POST['id'];
 $jumlah         = $_POST['jumlah'];
 
 if (isset($id)) {
@@ -20,6 +20,11 @@ if (isset($id)) {
 
     if ($data2->status_varian == 'Y') {
 
+        $cekstok = $conn->query("SELECT * FROM user_keranjang a
+            JOIN stok b ON a.id_variant = b.id_varian
+            JOIN variant c ON a.id_variant = c.id_variant
+            WHERE a.id = '$id' GROUP BY a.id")->fetch_object();
+
         if ($data2->diskon_rupiah_varian != 0) {
             $status_diskon = 'Y';
             $harga_disc = $data2->harga_varian - $data2->diskon_rupiah_varian;
@@ -28,11 +33,16 @@ if (isset($id)) {
             $harga_disc = $data2->harga_varian;
         }
 
-        $harga_produk = "Rp" . number_format($data2->harga_varian, 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($data2->harga_varian);
+        $harga_tampil = rupiah($harga_disc);
         $harga_produk_int = $data2->harga_varian;
         $harga_tampil_int = $harga_disc;
     } else {
+
+        $cekstok = $conn->query("SELECT * FROM user_keranjang a
+            JOIN stok b ON a.id_barang = b.id_barang
+            JOIN master_item c ON a.id_barang = c.id_master
+            WHERE a.id = '$id' GROUP BY a.id")->fetch_object();
 
         if ($data2->diskon_persen != 0) {
             $status_diskon = 'Y';
@@ -42,10 +52,10 @@ if (isset($id)) {
             $harga_disc = $data2->harga_master;
         }
 
-        $harga_produk = "Rp" . number_format($data2->harga_master, 0, ',', '.');
-        $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+        $harga_produk = rupiah($data2->harga_master);
+        $harga_tampil = rupiah($harga_disc);
         $harga_produk_int = $data2->harga_master;
-        $harga_produk_int = $harga_disc;
+        $harga_tampil_int = $harga_disc;
     }
 
     $data1 = [
@@ -57,10 +67,10 @@ if (isset($id)) {
         'harga_produk' => $harga_produk,
         'harga_tampil' => $harga_tampil,
         'harga_produk_int' => $harga_produk_int,
-        'harga_tampil_int' => $harga_produk_int,
+        'harga_tampil_int' => $harga_tampil_int,
         'status_diskon' => $status_diskon,
         'qty' => $data2->qty,
-        'stok_saatini' => $data2->qty,
+        'stok_saatini' => $cekstok->jumlah,
         'id_cabang' => $data2->id_gudang,
     ];
 
@@ -87,6 +97,11 @@ if (isset($id)) {
 
         if ($data2->status_varian == 'Y') {
 
+            $cekstok = $conn->query("SELECT * FROM user_keranjang a
+            JOIN stok b ON a.id_variant = b.id_varian
+            JOIN variant c ON a.id_variant = c.id_variant
+            WHERE a.id = '$id' GROUP BY a.id")->fetch_object();
+
             if ($data2->diskon_rupiah_varian != 0) {
                 $status_diskon = 'Y';
                 $harga_disc = $data2->harga_varian - $data2->diskon_rupiah_varian;
@@ -95,11 +110,16 @@ if (isset($id)) {
                 $harga_disc = $data2->harga_varian;
             }
 
-            $harga_produk = "Rp" . number_format($data2->harga_varian, 0, ',', '.');
-            $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+            $harga_produk = rupiah($data2->harga_varian);
+            $harga_tampil = rupiah($harga_disc);
             $harga_produk_int = $data2->harga_varian;
             $harga_tampil_int = $harga_disc;
         } else {
+
+            $cekstok = $conn->query("SELECT * FROM user_keranjang a
+            JOIN stok b ON a.id_barang = b.id_barang
+            JOIN master_item c ON a.id_barang = c.id_master
+            WHERE a.id = '$id' GROUP BY a.id")->fetch_object();
 
             if ($data2->diskon_persen != 0) {
                 $status_diskon = 'Y';
@@ -109,8 +129,8 @@ if (isset($id)) {
                 $harga_disc = $data2->harga_master;
             }
 
-            $harga_produk = "Rp" . number_format($data2->harga_master, 0, ',', '.');
-            $harga_tampil = "Rp" . number_format($harga_disc, 0, ',', '.');
+            $harga_produk = rupiah($data2->harga_master);
+            $harga_tampil = rupiah($harga_disc);
             $harga_produk_int = $data2->harga_master;
             $harga_produk_int = $harga_disc;
         }
@@ -124,10 +144,10 @@ if (isset($id)) {
             'harga_produk' => $harga_produk,
             'harga_tampil' => $harga_tampil,
             'harga_produk_int' => $harga_produk_int,
-            'harga_tampil_int' => $harga_produk_int,
+            'harga_tampil_int' => $harga_tampil_int,
             'status_diskon' => $status_diskon,
             'qty' => $data2->qty,
-            'stok_saatini' => $data2->qty,
+            'stok_saatini' => $cekstok->jumlah,
             'id_cabang' => $data2->id_gudang,
         ];
 

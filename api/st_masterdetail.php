@@ -179,7 +179,7 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
     }
 
     if ($datanew->status_varian == 'Y') {
-        $status_varian_diskon = 'UPTO';
+        $status_varian_diskon = 'UP TO';
         $varian = $conn->query("SELECT *, (harga_varian-diskon_rupiah_varian) as harga_varian_final FROM variant WHERE id_master = '$id_master' ORDER BY harga_varian_final ASC")->fetch_all(MYSQLI_ASSOC);
         // foreach ($varian as $key => $value) {
         // }
@@ -204,7 +204,6 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
         $harga_produk = rupiah($min_normal) . " - " . rupiah($max_normal);
         $harga_tampil = rupiah($min) . " - " . rupiah($max);
     } else {
-
         $status_varian_diskon = 'OFF';
         $jumlah_diskon = $datanew->diskon_persen;
         if ($datanew->diskon_persen != 0) {
@@ -238,7 +237,19 @@ LEFT JOIN master_item b ON a.id_master = b.id_master WHERE a.id_master = '$data-
     $data1['stok'] = $datastok->jumlah;
     $data1['warehouse'] = $warehousedatas;
 
-    $data1['status_bahaya'] = $datanew->status_bahaya;
+    if ($datanew->status_bahaya == '1') {
+        $bahaya = 'Tidak Berbahaya';
+    } else if ($datanew->status_bahaya == '2') {
+        $bahaya = 'Mengandung Baterai';
+    } else if ($datanew->status_bahaya == '3') {
+        $bahaya = 'Mengandung Magnet';
+    } else if ($datanew->status_bahaya == '4') {
+        $bahaya = 'Mengandung Cairan';
+    } else if ($datanew->status_bahaya == '5') {
+        $bahaya = 'Mengandung bahan Mudah Terbakar';
+    }
+
+    $data1['status_bahaya'] = $bahaya;
     $data1['merek'] = $datanew->merek;
     $data1['status_garansi'] = $datanew->status_garansi;
     $data1['negara_asal'] = $datanew->negara_asal;

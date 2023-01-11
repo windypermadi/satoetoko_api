@@ -6,7 +6,7 @@ $response = new Response();
 $dataraw = json_decode(file_get_contents('php://input'));
 $dataraw2 = json_decode(file_get_contents('php://input'), true);
 
-$exp_date = date("Y-m-d H:i:s", strtotime("+72 hours"));
+$exp_date = date("Y-m-d H:i:s", strtotime("+24 hours"));
 
 $conn->begin_transaction();
 
@@ -42,7 +42,7 @@ foreach ($dataproduk as $i => $key) {
     $getproduk[] = $conn->query("SELECT b.id_master, b.judul_master,b.image_master,a.id_variant,
             c.keterangan_varian,b.harga_master, b.diskon_rupiah, c.harga_varian, c.diskon_rupiah_varian, 
             a.qty, c.diskon_rupiah_varian, d.berat as berat_buku, e.berat as berat_fisik, 
-            b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk,
+            b.status_master_detail, a.id_gudang, COUNT(a.id) as jumlah_produk, a.id as id_cart,
             f.id_supplier FROM user_keranjang a
             JOIN master_item b ON a.id_barang = b.id_master
             LEFT JOIN variant c ON a.id_variant = c.id_variant
@@ -95,9 +95,15 @@ foreach ($getproduk as $u) {
 
         //! UPDATE STOK PRODUCT
         $jml = $conn->query("SELECT jumlah FROM stok WHERE id_varian = '$u->id_variant'")->fetch_assoc();
+        $total_dibeli2 = $jml['jumlah'];
         $hasiljumlah = $jml['jumlah'] - $u->qty;
 
         $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_varian = '$u->id_variant'");
+
+        //! UPDATE JUMLAH PEMBELIAN BARANG
+        // $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$u->id_master'")->fetch_assoc();
+        // $total_dibeli3 = $total_dibeli['total_dibeli'];
+        // $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$u->id_master'");
 
         //! UPDATE STOK HISTORY PRODUCT
         $stokawal = $jml['jumlah'];
@@ -112,6 +118,11 @@ foreach ($getproduk as $u) {
         keluar = '$u->qty',
         stok_awal = '$stokawal',  
         stok_sekarang = '$hasiljumlah'");
+
+    //      foreach ($dataproduk as $key => $value) {
+    //     $deleteCart = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id = '$value[id_cart]'");
+    // }
+
     } else {
         $diskon = ($u->harga_master) - ($u->diskon_rupiah);
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
@@ -147,9 +158,15 @@ foreach ($getproduk as $u) {
 
         //! UPDATE STOK PRODUCT
         $jml = $conn->query("SELECT jumlah FROM stok WHERE id_barang = '$u->id_master'")->fetch_assoc();
+        $total_dibeli2 = $jml['jumlah'];
         $hasiljumlah = $jml['jumlah'] - $u->qty;
 
         $query[] = $conn->query("UPDATE stok SET jumlah = '$hasiljumlah' WHERE id_barang = '$u->id_master'");
+
+        //! UPDATE JUMLAH PEMBELIAN BARANG
+        // $total_dibeli = $conn->query("SELECT total_dibeli FROM id_master = '$u->id_master'")->fetch_assoc();
+        // $total_dibeli3 = $total_dibeli['total_dibeli'];
+        // $query[] = $conn->query("UPDATE master_item SET total_dibeli = '$total_dibeli3' + '$total_dibeli2' WHERE id_master = '$U->id_master'");
 
         //! UPDATE STOK HISTORY PRODUCT
         $stokawal = $jml['jumlah'];
@@ -204,8 +221,8 @@ if (in_array(false, $query)) {
     $response->error(400);
 } else {
 
-    foreach ($dataproduk as $key => $value) {
-        $deleteCart = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id = '$value[id_cart]'");
+    foreach ($getproduk as $prod) {
+        $query[] = $conn->query("DELETE FROM user_keranjang WHERE id = '$prod->id_cart'");
     }
 
     $querydata = mysqli_query($conn, "SELECT * FROM transaksi a 
@@ -273,7 +290,7 @@ if (in_array(false, $query)) {
         $data_payment = $getpayment->fetch_object();
         $metode_pembayaran = $data_payment->metode_pembayaran;
 
-        $total_format = "Rp" . number_format($jumlahbayar, 0, ',', '.');
+        $total_format = rupiah($jumlahbayar);
 
         $result['batas_pembayaran'] = $exp_date;
         $result['id_transaksi'] = $idtransaksi;
@@ -283,7 +300,7 @@ if (in_array(false, $query)) {
         $result['metode_pembayaran'] = $data_payment->metode_pembayaran;
         $result['nomor_payment'] = $data_payment->nomor_payment;
         $result['penerima_payment'] = $data_payment->penerima_payment;
-        $result['total_harga'] = (int)$jumlahbayar;
+        $result['total_harga'] = (int)$dataraw->jumlahbayar;
         $result['nomor_konfirmasi'] = GETWA;
         $result['text_konfirmasi'] = "Halo Bapak/Ibu, Silahkan melakukan pembayaran manual dengan 
             mengirimkan bukti transaksi.\n\nBerikut informasi tagihan anda : 
