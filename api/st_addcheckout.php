@@ -123,8 +123,6 @@ foreach ($getproduk as $u) {
     //     $deleteCart = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id = '$value[id_cart]'");
     // }
 
-        $query[] = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id = '$u->id_cart'");
-
     } else {
         $diskon = ($u->harga_master) - ($u->diskon_rupiah);
         $diskon_format = "Rp" . number_format($diskon, 0, ',', '.');
@@ -183,8 +181,6 @@ foreach ($getproduk as $u) {
         keluar = '$u->qty',
         stok_awal = '$stokawal',  
         stok_sekarang = '$hasiljumlah'");
-
-        $query[] = mysqli_query($conn, "DELETE FROM user_keranjang WHERE id = '$u->id_cart'");
     }
 }
 
@@ -224,6 +220,10 @@ if (in_array(false, $query)) {
     $response->data = mysqli_error($conn);
     $response->error(400);
 } else {
+
+    foreach ($dataproduk as $key => $value) {
+        $query[] = $conn->query("DELETE FROM user_keranjang WHERE id = '$value[id_cart]'");
+    }
 
     $querydata = mysqli_query($conn, "SELECT * FROM transaksi a 
             JOIN data_user b ON a.id_user = b.id_login
